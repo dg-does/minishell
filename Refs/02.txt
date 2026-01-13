@@ -1,0 +1,22 @@
+🧪 SUBJECT 2 — fork() Basics
+mini_fork
+
+Goal: Understand process splitting.
+
+Requirements:
+
+Print:
+
+“Parent before fork”
+
+“Child after fork”
+
+“Parent after fork”
+
+Display PIDs of both.
+
+Expected:
+
+Parent before fork (PID 1234)
+Child after fork (PID 1235)
+Parent after fork (PID 1234)

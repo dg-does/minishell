@@ -1,0 +1,24 @@
+🧪 SUBJECT 5 — waitpid() & exit codes
+mini_wait
+
+Goal: Understand exit statuses.
+
+Requirements:
+
+Fork
+
+Child: exit(42)
+
+Parent: print:
+
+exit code
+
+WIFEXITED
+
+WEXITSTATUS
+
+WTERMSIG
+
+Expected:
+
+Child exited normally with code 42

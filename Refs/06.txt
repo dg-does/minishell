@@ -1,0 +1,20 @@
+🧪 SUBJECT 6 — pipe() Fundamentals
+mini_pipe
+
+Goal: Connect two processes with a pipe.
+
+Requirements:
+Pipeline:
+
+ls | wc -l
+
+
+First child: duplicates pipe write end → stdout
+
+Second child: duplicates pipe read end → stdin
+
+Use execve to run both commands
+
+Expected:
+
+17

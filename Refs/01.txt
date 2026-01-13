@@ -1,0 +1,24 @@
+🧪 SUBJECT 1 — read() & write() Warm-up
+mini_readline
+
+Goal: Reimplement a super basic input loop without Readline.
+
+Requirements:
+
+Write a loop that:
+
+prints >
+
+uses read(0, buffer, BUF_SIZE)
+
+stops when user enters “exit\n”
+
+No get_next_line(), no readline.
+
+Expected:
+
+> hello
+You typed: hello
+> test
+You typed: test
+> exit

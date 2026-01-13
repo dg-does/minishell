@@ -1,0 +1,20 @@
+🧪 SUBJECT 8 — Simple Parser
+mini_splitcmd
+
+Goal: Split a command line into tokens respecting quotes.
+
+Requirements:
+Input:
+
+echo "hello world" | grep o
+
+
+Tokens should be:
+
+[WORD: echo]
+[WORD: hello world]
+[PIPE]
+[WORD: grep]
+[WORD: o]
+
+⚠️ Must handle spaces, quotes, empty strings, etc.
