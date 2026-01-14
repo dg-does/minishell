@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_utils.c                                      :+:      :+:    :+:   */
+/*   libft.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/13 12:03:43 by digulraj          #+#    #+#             */
-/*   Updated: 2026/01/14 17:31:19 by digulraj         ###   ########.fr       */
+/*   Created: 2026/01/14 17:29:02 by digulraj          #+#    #+#             */
+/*   Updated: 2026/01/14 17:29:58 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int	is_space(char c)
+int	ft_isalnum(int c)
 {
-	return (c == ' ' || (c >= '\t' && c <= '\r'));
+	if (((c >= 97) && (c <= 122)) || ((c >= 65) && (c <= 90)) || 
+		((c >= 48) && (c <= 57)))
+		return (c);
+	else
+		return (0);
 }
 
-int	is_quote(char c)
-{
-	return (c == '"' || c == '\'');
-}
-
-int	is_special_char(char c)
-{
-	return (c == '|' || c == '<' || c == '>');
-}
-
-int	is_var_char(char c)
-{
-	return (ft_isalnum(c) || c == '_');
-}
