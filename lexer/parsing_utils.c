@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 16:30:16 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/01/16 12:23:24 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/01/16 13:07:32 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	count_pipes(t_token *token)
 {
 	int		pipe_counter;
 
+	pipe_counter = 0;
 	while (token->next)
 	{
 		if (token->type == TOKEN_PIPE)
@@ -58,11 +59,17 @@ int	count_pipes(t_token *token)
 void	print_list(t_args *args_head)
 {
 	t_args	*current;
+	int		i;
 
 	current = args_head;
-	while (current->next != NULL)
+	while (current != NULL)
 	{
-		printf("%s\n", current->args);
+		i = 0;
+		while (current->args[i])
+		{
+			printf("%s ", current->args[i]);
+			i++;
+		}
 		current = current->next;
 	}
 }

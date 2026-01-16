@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 15:57:21 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/01/16 12:25:57 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/01/16 13:06:39 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static void	alloc_args(t_token *token, t_args *args_head)
 			word_count++;
 			curr_token = curr_token->next;
 		}
+		if (curr_token->next == NULL)
+			return ;
 		if (curr_token->type == TOKEN_PIPE)
 			curr_token = curr_token->next;
 		if (curr_token->type != TOKEN_PIPE && curr_token->type != TOKEN_WORD)
@@ -56,7 +58,7 @@ static void	create_args(t_token *token, t_args *args_head)
 		while (curr_token && curr_token->type == TOKEN_WORD)
 		{
 			curr_args->args[i] = curr_token->value;
-			curr_token = curr_args->next;
+			curr_token = curr_token->next;
 			i++;
 		}
 		curr_args->args[i] = NULL;
@@ -68,12 +70,12 @@ static void	create_args(t_token *token, t_args *args_head)
 	}
 }
 
-static int	parsing_tokens(t_token *token)
+int	parsing_tokens(t_token *token)
 {
 	t_args	*args_head;
 
 	args_head = NULL;
-	allocate_nodes(&args_head, token);
+	allocate_nodes(token, &args_head);
 	alloc_args(token, args_head);
 	create_args(token, args_head);
 	print_list(args_head);

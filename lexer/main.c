@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:19:16 by digulraj          #+#    #+#             */
-/*   Updated: 2026/01/16 12:27:23 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/01/16 12:43:24 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,10 @@ int	main(void)
 		else
 		{
 			print_tokens(tokens);
-			free_tokens(tokens);
+			//free_tokens(tokens);
 		}
 		parsing_tokens(tokens);
+		free_tokens(tokens);
 		i++;
 	}
 	return (0);
