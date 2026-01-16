@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 15:57:21 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/01/16 12:03:50 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/01/16 12:25:57 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,4 @@ static int	parsing_tokens(t_token *token)
 	create_args(token, args_head);
 	print_list(args_head);
 	return (0);
-}
-
-int	main(void)
-{
-	parsing_tokens
 }
