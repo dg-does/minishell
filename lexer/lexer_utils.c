@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 12:03:43 by digulraj          #+#    #+#             */
-/*   Updated: 2026/01/14 17:31:19 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/01/16 11:59:10 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,3 @@ int	is_special_char(char c)
 	return (c == '|' || c == '<' || c == '>');
 }
 
-int	is_var_char(char c)
-{
-	return (ft_isalnum(c) || c == '_');
-}

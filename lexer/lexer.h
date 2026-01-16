@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 11:44:07 by digulraj          #+#    #+#             */
-/*   Updated: 2026/01/14 17:39:18 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/01/16 11:59:16 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct s_token
 //lexer_utils.c
 int	is_quote(char c);
 int	is_special_char(char c);
-int	is_var_char(char c);
 
 //libft.c
 int	ft_isalnum(int c);

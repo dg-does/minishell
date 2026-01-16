@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:33:29 by digulraj          #+#    #+#             */
-/*   Updated: 2026/01/14 17:36:50 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/01/16 11:57:44 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	collect_word(char *input, int i, char *buffer, int *has_quotes)
 	int	new_i;
 
 	j = 0;
-	has_quotes = 0;
+	*has_quotes = 0;
 	while (input[i] && !isspace((input[i])) && !is_special_char(input[i]))
 	{
 		if (is_quote(input[i]))
