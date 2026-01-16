@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:19:16 by digulraj          #+#    #+#             */
-/*   Updated: 2026/01/16 14:28:00 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/01/16 15:43:54 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,16 @@ int	main(void)
 	i = 0;
 	while (tests[i])
 	{
-		printf("Input: %s\n", tests[i]);
+		printf("\n\nInput: %s\n", tests[i]);
 		tokens = tokenize(tests[i], & error);
 		if (error)
 			printf("ERROR: Close your quotes!!\n");
 		else
 		{
 			print_tokens(tokens);
-			//free_tokens(tokens);
+			parsing_tokens(tokens);
+			free_tokens(tokens);
 		}
-		parsing_tokens(tokens);
-		free_tokens(tokens);
 		i++;
 	}
 	return (0);

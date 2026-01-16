@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 11:43:33 by digulraj          #+#    #+#             */
-/*   Updated: 2026/01/14 17:40:00 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/01/16 15:37:58 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	print_tokens(t_token *head)
 
 	current = head;
 	i = 0;
-	printf("\n--- TOKENS ---\n");
+	printf("\n--- TOKENS before parsing ---\n");
 	while (current)
 	{
 		printf("[%d] %s | %s | In quotes: %s\n", 
