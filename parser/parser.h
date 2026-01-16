@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:44:12 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/01/16 12:02:51 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/01/16 15:02:32 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#ifndef PARSER_H
+# define PARSER_H
 # include "lexer.h"
 # include <stdio.h>
 # include <unistd.h>
@@ -23,11 +23,11 @@ typedef struct s_args
 	struct s_args	*next;
 }	t_args;
 
-//Parsing Utils
+//parser_utils.c
 void	allocate_nodes(t_token *token, t_args **args_head);
 int		count_pipes(t_token *token);
 
-//main Parsing part
+//parser.c
 int		parsing_tokens(t_token *token);
 
 //debugging
