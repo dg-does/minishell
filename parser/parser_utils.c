@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 16:30:16 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/01/16 15:41:00 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/01/16 16:11:24 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	print_list(t_args *args_head)
 			printf("[%d] %s ", i, current->args[i]);
 			i++;
 		}
+		printf("\n");
 		current = current->next;
 	}
 }

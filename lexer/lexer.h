@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 11:44:07 by digulraj          #+#    #+#             */
-/*   Updated: 2026/01/16 11:59:16 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/01/16 16:10:28 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define LEXER_H
 # include <stdio.h>
 # include <stdlib.h>
-# include <string.h>
-# include <ctype.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 # define TOKEN_BUFFER_SIZE 4096
 
@@ -45,6 +45,7 @@ int	is_special_char(char c);
 
 //libft.c
 int	ft_isalnum(int c);
+int	ft_strcmp(const char *s1, const char *s2);
 
 //tokenizer_utils.c
 int	handle_quote_string(char *input, int i, char *buffer, int *j);

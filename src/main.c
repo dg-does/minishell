@@ -6,12 +6,12 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:19:16 by digulraj          #+#    #+#             */
-/*   Updated: 2026/01/16 15:43:54 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/01/16 16:08:46 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
+/*
 int	main(void)
 {
 	char	*tests[] = {
@@ -39,7 +39,7 @@ int	main(void)
 	while (tests[i])
 	{
 		printf("\n\nInput: %s\n", tests[i]);
-		tokens = tokenize(tests[i], & error);
+		tokens = tokenize(tests[i], &error);
 		if (error)
 			printf("ERROR: Close your quotes!!\n");
 		else
@@ -52,15 +52,38 @@ int	main(void)
 	}
 	return (0);
 }
-/*
-		input = readLine("minishell> ");
-		if (strcmp(input, "exit") == 0)
+//*/
+
+int	main(void)
+{
+	int		error;
+	t_token	*tokens;
+	char	*input;
+
+	while (1)
+	{
+		input = readline("minishell> ");
+		if (!input || ft_strcmp(input, "exit") == 0)
 		{
 			free (input);
 			break ;
 		}
-		tokens = tokenize(input);
+		if (input[0] == '\0')
+		{
+			free(input);
+			continue ;
+		}
+		add_history(input);
+		tokens = tokenize(input, &error);
+		if (error)
+		{
+			printf("ERROR: Close your quotes!!\n");
+			free(input);
+			continue ;
+		}
 		print_tokens(tokens);
-		free(tokens);
+		parsing_tokens(tokens);
+		free_tokens(tokens);
 		free(input);
-*/
+	}
+}
