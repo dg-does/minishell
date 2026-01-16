@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 15:57:21 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/01/15 17:22:27 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/01/16 12:03:50 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,42 +17,70 @@
 //allocate args array for first argument
 //repeat process until end of linked list
 
-void	alloc_args(t_token *token, t_args *args)
+static void	alloc_args(t_token *token, t_args *args_head)
 {
-	int	word_count;
+	int		word_count;
+	t_args	*curr_args;
+	t_token	*curr_token;
 
-	while (token->next)
+	curr_args = args_head;
+	curr_token = token;
+	while (curr_args != NULL)
 	{
 		word_count = 0;
-		while (token->type == TOKEN_WORD)
+		while (curr_token && curr_token->type == TOKEN_WORD)
 		{
 			word_count++;
-			token = token->next;
+			curr_token = curr_token->next;
 		}
-		if (token->type == TOKEN_PIPE)
-			token = token->next;
-		if (token->type != TOKEN_PIPE && token->type != TOKEN_WORD)
-			token = token->next->next;
-		args->args = malloc(sizeof(char *) * (word_count + 1));
-		args = args->next;
+		if (curr_token->type == TOKEN_PIPE)
+			curr_token = curr_token->next;
+		if (curr_token->type != TOKEN_PIPE && curr_token->type != TOKEN_WORD)
+			curr_token = curr_token->next->next;
+		curr_args->args = malloc(sizeof(char *) * (word_count + 1));
+		curr_args = curr_args->next;
 	}
 }
 
-void create_args()
+static void	create_args(t_token *token, t_args *args_head)
 {
-	//traverse until non word token
-	//for every stint of word tokens every word goes into one array of args[][]
-	//of the current args node
-	//null terminate args[]
-	//skip non word tokens and repeat above process until end of string
-	
+	int		i;
+	t_args	*curr_args;
+	t_token	*curr_token;
+
+	curr_args = args_head;
+	curr_token = token;
+	while (curr_args != NULL)
+	{
+		i = 0;
+		while (curr_token && curr_token->type == TOKEN_WORD)
+		{
+			curr_args->args[i] = curr_token->value;
+			curr_token = curr_args->next;
+			i++;
+		}
+		curr_args->args[i] = NULL;
+		if (curr_token->type == TOKEN_PIPE)
+			curr_token = curr_token->next;
+		if (curr_token->type != TOKEN_PIPE && curr_token->type != TOKEN_WORD)
+			curr_token = curr_token->next->next;
+		curr_args = curr_args->next;
+	}
 }
 
-int	parsing_tokens(t_token *token)
+static int	parsing_tokens(t_token *token)
 {
 	t_args	*args_head;
 
 	args_head = NULL;
 	allocate_nodes(&args_head, token);
 	alloc_args(token, args_head);
+	create_args(token, args_head);
+	print_list(args_head);
+	return (0);
+}
+
+int	main(void)
+{
+	parsing_tokens
 }

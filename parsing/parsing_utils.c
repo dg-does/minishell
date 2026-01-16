@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 16:30:16 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/01/15 17:14:35 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/01/16 12:02:35 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,16 @@ int	count_pipes(t_token *token)
 		token = token->next;
 	}
 	return (pipe_counter + 1);
+}
+
+void	print_list(t_args *args_head)
+{
+	t_args	*current;
+
+	current = args_head;
+	while (current->next != NULL)
+	{
+		printf("%s\n", current->args);
+		current = current->next;
+	}
 }
