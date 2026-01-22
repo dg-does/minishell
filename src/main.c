@@ -6,10 +6,11 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:19:16 by digulraj          #+#    #+#             */
-/*   Updated: 2026/01/20 15:15:49 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/01/22 11:41:14 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "lexer.h"
 #include "parser.h"
 /*
 int	main(void)
@@ -65,7 +66,7 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		input = readline("minishell> ");
-		if (!input || ft_strcmp(input, "exit") == 0)
+		if (!input || ft_strncmp(input, "exit", 4) == 0)
 		{
 			free (input);
 			break ;
