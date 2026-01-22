@@ -6,9 +6,10 @@
 #    By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 11:46:07 by digulraj          #+#    #+#              #
-#    Updated: 2026/01/20 15:01:55 by digulraj         ###   ########.fr        #
+#    Updated: 2026/01/22 15:17:01 by digulraj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 NAME = minishell
 
@@ -23,8 +24,9 @@ EXP_DIR = expander
 
 SRC =	$(SRC_DIR)/main.c $(SRC_DIR)/libft.c \
 		$(LEX_DIR)/lexer_utils.c $(LEX_DIR)/tokenizer.c $(LEX_DIR)/tokenizer_utils.c \
-		$(PARSE_DIR)/parser.c $(PARSE_DIR)/parser_utils.c \
+		$(PARSE_DIR)/parser.c $(PARSE_DIR)/parser_utils.c $(PARSE_DIR)/find_paths.c \
 		$(EXP_DIR)/expander.c
+
 
 OBJ = $(SRC:.c=.o)
 

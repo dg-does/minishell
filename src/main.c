@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:19:16 by digulraj          #+#    #+#             */
-/*   Updated: 2026/01/16 16:08:46 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/01/20 15:15:49 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,14 @@ int	main(void)
 }
 //*/
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	int		error;
 	t_token	*tokens;
 	char	*input;
 
+	(void)argc;
+	(void)argv;
 	while (1)
 	{
 		input = readline("minishell> ");
@@ -82,7 +84,7 @@ int	main(void)
 			continue ;
 		}
 		print_tokens(tokens);
-		parsing_tokens(tokens);
+		parsing_tokens(tokens, envp);
 		free_tokens(tokens);
 		free(input);
 	}
