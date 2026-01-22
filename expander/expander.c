@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:00:55 by digulraj          #+#    #+#             */
-/*   Updated: 2026/01/20 15:42:52 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:21:31 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	*get_var_name(char *str, int *index)
 	}
 
 	while (str[start + len] 
-		&& (ft_isalnum(str[start + len])) || str[start + len == '_'])
+		&& (ft_isalnum(str[start + len])) || str[start + len] == '_')
 		len++;
 	if (len == 0)
 		return (NULL);
@@ -35,7 +35,7 @@ static char	*get_var_name(char *str, int *index)
 	if (!var_name)
 		return (NULL);
 	ft_strncpy(var_name, &str[start], len + 1);
-	*inex = start + len;
+	*index = start + len;
 	return (var_name);
 }
 
@@ -44,23 +44,38 @@ char	*get_var_value(char *var_name, int last_exit_status)
 	char	*var_value;
 	char	*exit_str;
 
-/* figure out exit code bita
 	if (ft_strcmp(var_name, "?") == 0)
-	{
-
-	}
-*/
+		return (ft_itoa(last_exit_status));
 	var_value = getenv(var_name);
 	if (!var_value)
 		return (strdup(""));
 	return (strdup(var_value));
 }
 
+static int	copy2buf(char *buffer, char *var_name, int j, int last_exit_status)
+{
+	char	*var_value;
+	int		i;
+
+	var_value = get_var_value(var_name, last_exit_status);
+	if (!var_value)
+		return (j);
+	i = 0;
+	while (var_value[i] && j < TOKEN_BUFER_SIZE - 1)
+	{
+		buffer[j] == var_value[i];
+		j++;
+		i++;
+	}
+	free(var_value);
+	return (j);
+}
+
+
 char	*expand_vars(char *str, int last_exit_status)
 {
-	char	*buffer[TOKEN_BUFFER_SIZE];
+	char	buffer[TOKEN_BUFFER_SIZE];
 	char	*var_name;
-	char	*var_value;
 	int		i;
 	int		j;
 
@@ -72,14 +87,12 @@ char	*expand_vars(char *str, int last_exit_status)
 		{
 			var_name = get_var_name(str, &i);
 			if (!var_name)
-			{
 				buffer[j++] = '$';
-				i++;
-				continue ;
+			else
+			{
+				j = copy2buf(buffer, var_name, j, last_exit_status);
+				free(var_name);
 			}
-			var_value = get_var_value(var_name, last_exit_status);
-			free(var_name);
-			//copy var_value into buffer
 		}
 		else
 			buffer[j++] = str[i++];
