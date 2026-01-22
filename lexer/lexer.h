@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 11:44:07 by digulraj          #+#    #+#             */
-/*   Updated: 2026/01/20 15:27:05 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:16:20 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
+# include "libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <readline/readline.h>

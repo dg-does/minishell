@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:59:42 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/01/20 15:41:47 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/01/22 12:21:32 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ static char	**get_paths(char **envp)
 	if (!envp[i])
 	{
 		//error handeling;
-		return ;
+		return (NULL);
 	}
 	path_str = envp[i] + 5;
 	poss_paths = ft_split(path_str, ':');
-	return (poss_paths);
+	return (poss_paths); //misses free
 }
 
 static char	*find_correct_path(t_args *args, char **poss_paths)
@@ -39,7 +39,8 @@ static char	*find_correct_path(t_args *args, char **poss_paths)
 	t_args	*current;
 
 	current = args;
-	if (!current->args || current->args[0] == '\0')
+	i = 0;
+	if (!current->args || current->args[0] == NULL)
 		return (NULL);
 	while (poss_paths[i])
 	{
@@ -48,8 +49,7 @@ static char	*find_correct_path(t_args *args, char **poss_paths)
 		free(temp);
 		if (access(candidate, X_OK) == 0)
 		{
-			free(candidate);
-			return (poss_paths[i]);
+			return (candidate);
 		}
 		free(candidate);
 		i++;
@@ -64,7 +64,7 @@ void	parse_paths(t_args *args_head, char **envp)
 
 	current = args_head;
 	poss_paths = get_paths(envp);
-	while (current->next != NULL)
+	while (current)
 	{
 		current->path = find_correct_path(current, poss_paths);
 		current = current->next;

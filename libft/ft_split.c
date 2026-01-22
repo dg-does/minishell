@@ -1,48 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.c                                            :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 17:29:02 by digulraj          #+#    #+#             */
-/*   Updated: 2026/01/22 15:17:32 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:15:29 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "libft.h"
 
-int	ft_isalnum(int c)
-{
-	if (((c >= 97) && (c <= 122)) || ((c >= 65) && (c <= 90)) || 
-		((c >= 48) && (c <= 57)))
-		return (c);
-	else
-		return (0);
-}
-
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	size_t	i;
-
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-}
-
-//ft_strlen
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
-
-//ft_split
 static int	ft_wcount(const char *s, char c)
 {
 	size_t	wcount;
@@ -130,42 +99,17 @@ char	**ft_split(const char *s, char c)
 	return (result);
 }
 
-//ft strjoin
-char	*ft_strjoin(const char *s1, const char *s2)
+/* #include <stdio.h>
+
+int	main(void)
 {
-	int		s1len;
-	int		s2len;
-	int		i;
-	int		j;
-	char	*ptr;
+	char	**result = ft_split("hello0world,0how0are0you0!", '0');
+	size_t	i = 0;
 
-	s1len = ft_strlen(s1);
-	s2len = ft_strlen(s2);
-	i = 0;
-	j = 0;
-	ptr = malloc((s1len + s2len + 1) * sizeof(char));
-	if (ptr == NULL)
-		return (NULL);
-	while (i < s1len)
-		ptr[i++] = s1[j++];
-	j = 0;
-	while (i < s1len + s2len)
-		ptr[i++] = s2[j++];
-	ptr[i] = '\0';
-	return (ptr);
-}
-
-//ft_strncmp
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (i < n)
+	while (result[i])
 	{
-		if (s1[i] != s2[i] || s1[i] == '\0' || s2[i] == '\0')
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		printf ("word %zu: %s\n", i, result[i]);
+		free(result[i]);
 		i++;
 	}
-	return (0);
-}
+}*/
