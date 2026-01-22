@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 15:57:21 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/01/20 14:50:26 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/01/22 16:32:28 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static t_token	*skip_separators(t_token *curr_token)
 	else if (curr_token->type != TOKEN_WORD)
 	{
 		if (curr_token->next == NULL)
+			return (NULL);
+		if (curr_token->next->next == NULL)
 			return (NULL);
 		return (curr_token->next->next);
 	}
