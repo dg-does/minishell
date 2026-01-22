@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:44:12 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/01/20 15:16:52 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/01/22 18:23:34 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ int		count_pipes(t_token *token);
 //parser.c
 int		parsing_tokens(t_token *token, char **envp);
 void	parse_paths(t_args *args_head, char **envp);
+
+// expander.c
+char	*expand_vars(char *str, int last_exit_status);
 
 //debugging
 void	print_list(t_args *args_head);

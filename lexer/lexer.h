@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 11:44:07 by digulraj          #+#    #+#             */
-/*   Updated: 2026/01/22 16:16:20 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/01/22 16:29:52 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,6 @@ typedef struct s_token
 //lexer_utils.c
 int	is_quote(char c);
 int	is_special_char(char c);
-
-//libft.c
-int		ft_isalnum(int c);
-int		ft_strcmp(const char *s1, const char *s2);
-size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 
 //tokenizer_utils.c
 int	handle_quote_string(char *input, int i, char *buffer, int *j);

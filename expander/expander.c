@@ -6,11 +6,11 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:00:55 by digulraj          #+#    #+#             */
-/*   Updated: 2026/01/22 16:21:31 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/01/22 18:28:30 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#import "parser.h"
+#include "parser.h"
 
 static char	*get_var_name(char *str, int *index)
 {
@@ -27,24 +27,23 @@ static char	*get_var_name(char *str, int *index)
 	}
 
 	while (str[start + len] 
-		&& (ft_isalnum(str[start + len])) || str[start + len] == '_')
+		&& ((ft_isalnum(str[start + len])) || str[start + len] == '_'))
 		len++;
 	if (len == 0)
 		return (NULL);
 	var_name = malloc(len + 1);
 	if (!var_name)
 		return (NULL);
-	ft_strncpy(var_name, &str[start], len + 1);
+	ft_strlcpy(var_name, &str[start], len + 1);
 	*index = start + len;
 	return (var_name);
 }
 
-char	*get_var_value(char *var_name, int last_exit_status)
+static char	*get_var_value(char *var_name, int last_exit_status)
 {
 	char	*var_value;
-	char	*exit_str;
 
-	if (ft_strcmp(var_name, "?") == 0)
+	if (ft_strncmp(var_name, "?", 1) == 0)
 		return (ft_itoa(last_exit_status));
 	var_value = getenv(var_name);
 	if (!var_value)
@@ -61,16 +60,13 @@ static int	copy2buf(char *buffer, char *var_name, int j, int last_exit_status)
 	if (!var_value)
 		return (j);
 	i = 0;
-	while (var_value[i] && j < TOKEN_BUFER_SIZE - 1)
-	{
-		buffer[j] == var_value[i];
-		j++;
-		i++;
-	}
+	while (var_value[i] && j < TOKEN_BUFFER_SIZE - 1)
+		buffer[j++] = var_value[i++];
 	free(var_value);
 	return (j);
 }
-
+// need to use this function to expand commands from parser
+// with extra logic to handle single vs. double quotes
 
 char	*expand_vars(char *str, int last_exit_status)
 {

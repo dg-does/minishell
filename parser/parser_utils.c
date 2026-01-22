@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 16:30:16 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/01/20 15:17:12 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/01/22 18:24:29 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ void	print_list(t_args *args_head)
 	int		i;
 
 	current = args_head;
-	printf("\n===ARGS after parsing===\n");
+	printf("\n===ARGS after parsing & expansion ===\n");
 	while (current != NULL)
 	{
 		i = 0;
 		while (current->args[i])
 		{
-			printf("[%d] %s ", i, current->args[i]);
+			printf("[%d] %s ", i, expand_vars(current->args[i], 0));
 			i++;
 		}
 		printf("\n");
