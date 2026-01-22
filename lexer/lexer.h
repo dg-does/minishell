@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 11:44:07 by digulraj          #+#    #+#             */
-/*   Updated: 2026/01/16 16:10:28 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/01/20 15:27:05 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef enum e_token_type
 typedef struct s_token
 {
 	char			*value;
-	t_type	type;
+	t_type			type;
 	int				has_quotes;
 	struct s_token	*next;
 }	t_token;
@@ -44,8 +44,9 @@ int	is_quote(char c);
 int	is_special_char(char c);
 
 //libft.c
-int	ft_isalnum(int c);
-int	ft_strcmp(const char *s1, const char *s2);
+int		ft_isalnum(int c);
+int		ft_strcmp(const char *s1, const char *s2);
+size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 
 //tokenizer_utils.c
 int	handle_quote_string(char *input, int i, char *buffer, int *j);
@@ -60,4 +61,5 @@ void		free_tokens(t_token *head);
 void		print_tokens(t_token *head);
 t_token		*tokenize(char *input, int *error);
 const char	*token_type(t_type type);
+
 #endif
