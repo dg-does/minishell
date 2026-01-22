@@ -6,9 +6,10 @@
 #    By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 11:46:07 by digulraj          #+#    #+#              #
-#    Updated: 2026/01/22 12:16:34 by fgreiff          ###   ########.fr        #
+#    Updated: 2026/01/22 16:16:26 by fgreiff          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 NAME = minishell
 
@@ -17,15 +18,19 @@ CFLAGS = -Wall -Wextra -Werror -Isrc -Ilexer -Iparser -g
 LDLIBS = -lreadline
 INCLUDES = -I. -I$(LIBFT_DIR)
 
+SRC_DIR = src
 LEX_DIR = lexer
 PARSE_DIR = parser
 SRC_DIR = src
 LIBFT_DIR = libft
 LIBFT_LIB = $(LIBFT_DIR)/libft.a
+EXP_DIR = expander
 
 SRC =	$(SRC_DIR)/main.c \
 		$(LEX_DIR)/lexer_utils.c $(LEX_DIR)/tokenizer.c $(LEX_DIR)/tokenizer_utils.c \
-		$(PARSE_DIR)/parser.c $(PARSE_DIR)/parser_utils.c $(PARSE_DIR)/find_paths.c
+		$(PARSE_DIR)/parser.c $(PARSE_DIR)/parser_utils.c $(PARSE_DIR)/find_paths.c \
+		$(EXP_DIR)/expander.c
+
 
 OBJ = $(SRC:.c=.o)
 
