@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 16:30:16 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/01/16 16:11:24 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/01/20 15:17:12 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	allocate_nodes(t_token *token, t_args **args_head)
 	if (!args_head)
 		return ;
 	(*args_head)->args = NULL;
+	(*args_head)->path = NULL;
 	(*args_head)->next = NULL;
 	current = *args_head;
 	while (i < num_cmnds)
@@ -37,6 +38,7 @@ void	allocate_nodes(t_token *token, t_args **args_head)
 			return ;
 		current = current->next;
 		current->args = NULL;
+		current->path = NULL;
 		current->next = NULL;
 		i++;
 	}
@@ -72,6 +74,7 @@ void	print_list(t_args *args_head)
 			i++;
 		}
 		printf("\n");
+		printf("%s\n", current->path);
 		current = current->next;
 	}
 }

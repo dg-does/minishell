@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 15:57:21 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/01/16 15:35:36 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/01/20 14:50:26 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static void	create_args(t_token *token, t_args *args_head)
 	}
 }
 
-int	parsing_tokens(t_token *token)
+int	parsing_tokens(t_token *token, char **envp)
 {
 	t_args	*args_head;
 
@@ -104,6 +104,7 @@ int	parsing_tokens(t_token *token)
 	allocate_nodes(token, &args_head);
 	alloc_args(token, args_head);
 	create_args(token, args_head);
+	parse_paths(args_head, envp);
 	print_list(args_head);
 	return (0);
 }
