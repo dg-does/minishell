@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 16:30:16 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/01/22 18:24:29 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/01/23 16:21:47 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 //syntax check
 //free function
 
-void	allocate_nodes(t_token *token, t_args **args_head)
+void	allocate_nodes_arg(t_token *token, t_args **args_head)
 {
 	int		num_cmnds;
-	t_args	*current;
+	t_args	*current_args;
 	int		i;
 
 	i = 0;
@@ -28,18 +28,40 @@ void	allocate_nodes(t_token *token, t_args **args_head)
 	if (!args_head)
 		return ;
 	(*args_head)->args = NULL;
-	(*args_head)->path = NULL;
-	(*args_head)->next = NULL;
-	current = *args_head;
+	current_args = *args_head;
 	while (i < num_cmnds)
 	{
-		current->next = malloc(sizeof(t_args));
-		if (!current->next)
+		current_args->next = malloc(sizeof(t_args));
+		if (!current_args->next)
 			return ;
-		current = current->next;
-		current->args = NULL;
-		current->path = NULL;
-		current->next = NULL;
+		current_args = current_args->next;
+		current_args->args = NULL;
+		current_args->next = NULL;
+		i++;
+	}
+}
+
+void	allocate_nodes_redir(t_token *token, t_redir **redir_head)
+{
+	int		num_cmnds;
+	t_redir	*current_redir;
+	int		i;
+
+	i = 0;
+	num_cmnds = count_pipes(token);
+	*redir_head = malloc(sizeof(t_args));
+	if (!redir_head)
+		return ;
+	(*redir_head)->target = NULL;
+	current_redir = *redir_head;
+	while (i < num_cmnds)
+	{
+		current_redir->next = malloc(sizeof(t_args));
+		if (!current_redir->next)
+			return ;
+		current_redir = current_redir->next;
+		current_redir->target = NULL;
+		current_redir->next = NULL;
 		i++;
 	}
 }
@@ -65,7 +87,7 @@ void	print_list(t_args *args_head)
 
 	current = args_head;
 	printf("\n===ARGS after parsing & expansion ===\n");
-	while (current != NULL)
+	while (current->next != NULL)
 	{
 		i = 0;
 		while (current->args[i])
@@ -74,7 +96,6 @@ void	print_list(t_args *args_head)
 			i++;
 		}
 		printf("\n");
-		printf("%s\n", current->path);
 		current = current->next;
 	}
 }

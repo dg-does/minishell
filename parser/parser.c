@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 15:57:21 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/01/22 16:32:28 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/01/23 16:23:52 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ static void	alloc_args(t_token *token, t_args *args_head)
 static void	create_args(t_token *token, t_args *args_head)
 {
 	int		i;
+	int		expect_filename;
 	t_args	*curr_args;
 	t_token	*curr_token;
 
@@ -98,15 +99,17 @@ static void	create_args(t_token *token, t_args *args_head)
 	}
 }
 
-int	parsing_tokens(t_token *token, char **envp)
+int	parsing_tokens(t_token *token)
 {
 	t_args	*args_head;
+	t_redir	*redir_head;
 
 	args_head = NULL;
-	allocate_nodes(token, &args_head);
+	redir_head = NULL;
+	allocate_nodes_arg(token, &args_head);
+	allocate_nodes_redir(token, &redir_head);
 	alloc_args(token, args_head);
 	create_args(token, args_head);
-	parse_paths(args_head, envp);
 	print_list(args_head);
 	return (0);
 }

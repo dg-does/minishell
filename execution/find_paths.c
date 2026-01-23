@@ -6,11 +6,11 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:59:42 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/01/22 12:21:32 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/01/23 14:59:43 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+
 
 static char	**get_paths(char **envp)
 {
