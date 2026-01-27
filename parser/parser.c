@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 15:57:21 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/01/23 16:23:52 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/01/27 16:34:43 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 //allocate args array for first argument
 //repeat process until end of linked list
 
-static void	free_args(t_args *args_head)
+/*static void	free_args(t_args *args_head)
 {
 	t_args	*curr;
 
@@ -28,88 +28,84 @@ static void	free_args(t_args *args_head)
 			free(curr->args);
 		curr = curr->next;
 	}
-}
+}*/
 
-static t_token	*skip_separators(t_token *curr_token)
-{
-	if (curr_token == NULL)
-		return (NULL);
-	if (curr_token->type == TOKEN_PIPE)
-		curr_token = curr_token->next;
-	else if (curr_token->type != TOKEN_WORD)
-	{
-		if (curr_token->next == NULL)
-			return (NULL);
-		if (curr_token->next->next == NULL)
-			return (NULL);
-		return (curr_token->next->next);
-	}
-	return (curr_token);
-}
-
-
-static void	alloc_args(t_token *token, t_args *args_head)
-{
-	int		word_count;
-	t_args	*curr_args;
-	t_token	*curr_token;
-
-	curr_args = args_head;
-	curr_token = token;
-	while (curr_args != NULL)
-	{
-		word_count = 0;
-		while (curr_token && curr_token->type == TOKEN_WORD)
-		{
-			word_count++;
-			curr_token = curr_token->next;
-		}
-		curr_args->args = malloc(sizeof(char *) * (word_count + 1));
-		if (!curr_args->args)
-		{
-			free_args(args_head);
-			perror("malloc fail");
-			return ;
-		}
-		curr_args = curr_args->next;
-		curr_token = skip_separators(curr_token);
-	}
-}
-
-static void	create_args(t_token *token, t_args *args_head)
+void	add_arg(t_args *cmd, char *value)
 {
 	int		i;
-	int		expect_filename;
-	t_args	*curr_args;
-	t_token	*curr_token;
+	int		j;
+	char	**new_argv;
 
-	curr_args = args_head;
-	curr_token = token;
-	while (curr_args != NULL)
+	i = 0;
+	j = 0;
+	if (cmd->args)
+		while (cmd->args[i])
+			i++;
+	new_argv = malloc(sizeof(char *) * (i + 2));
+	if (!new_argv)
+		return ;
+	while (j < i)
 	{
-		i = 0;
-		while (curr_token && curr_token->type == TOKEN_WORD)
-		{
-			curr_args->args[i++] = curr_token->value;
-			curr_token = curr_token->next;
-		}
-		curr_args->args[i] = NULL;
-		curr_args = curr_args->next;
-		curr_token = skip_separators(curr_token);
+		new_argv[j] = cmd->args[j];
+		j++;
 	}
+	new_argv[j] = value;
+	new_argv[j + 1] = NULL;
+	free(cmd->args);
+	cmd->args = new_argv;
 }
 
-int	parsing_tokens(t_token *token)
+void	parse_redirections(t_token	**token, t_args *cmd)
 {
-	t_args	*args_head;
-	t_redir	*redir_head;
+	t_redir	*redir;
+	t_token	*next;
+	t_redir	*tmp;
 
-	args_head = NULL;
-	redir_head = NULL;
-	allocate_nodes_arg(token, &args_head);
-	allocate_nodes_redir(token, &redir_head);
-	alloc_args(token, args_head);
-	create_args(token, args_head);
-	print_list(args_head);
-	return (0);
+	redir = malloc(sizeof(t_redir));
+	if (!redir)
+		return ;
+	redir->redir = token_to_redir_type((*token)->type);
+	redir->next = NULL;
+	next = (*token)->next;
+	if (!next || next->type != TOKEN_WORD)
+		return (free(redir));
+	redir->target = next->value;
+	if (!cmd->redirs)
+		cmd->redirs = redir;
+	else
+	{
+		tmp = cmd->redirs;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = redir;
+	}
+	*token = next->next;
+}
+
+t_args	*parsing_tokens(t_token *token)
+{
+	t_args	*cmd_head;
+	t_args	*current_cmd;
+	t_token	*current_token;
+
+	cmd_head = NULL;
+	allocate_nodes_arg(token, &cmd_head);
+	current_cmd = cmd_head;
+	current_token = token;
+	while (current_token)
+	{
+		if (current_token->type == TOKEN_WORD)
+		{
+			add_arg(current_cmd, current_token->value);
+			current_token = current_token->next;
+		}
+		else if (is_redirection(current_token->type))
+			parse_redirections(&current_token, current_cmd);
+		else if (current_token->type == TOKEN_PIPE)
+		{
+			current_cmd = current_cmd->next;
+			current_token = current_token->next;
+		}
+	}
+	return (cmd_head);
 }

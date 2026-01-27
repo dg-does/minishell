@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:44:12 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/01/23 16:01:12 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/01/27 15:37:14 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,6 @@ typedef enum e_redir_type
 	REDIR_HEREDOC
 }	t_redir_type;
 
-typedef struct s_args
-{
-	char			**args;
-	struct s_args	*next;
-}	t_args;
-
 typedef struct s_redir
 {
 	char			*target;
@@ -38,17 +32,26 @@ typedef struct s_redir
 	struct s_redir	*next;
 }	t_redir;
 
+typedef struct s_args
+{
+	char			**args;
+	t_redir			*redirs;
+	struct s_args	*next;
+}	t_args;
+
 //parser_utils.c
-void	allocate_nodes_arg(t_token *token, t_args **args_head);
-int		count_pipes(t_token *token);
+void			allocate_nodes_arg(t_token *token, t_args **args_head);
+int				count_pipes(t_token *token);
+int				is_redirection(t_type type);
+t_redir_type	token_to_redir_type(t_type type);
 
 //parser.c
-int		parsing_tokens(t_token *token);
-
+t_args			*parsing_tokens(t_token *token);
+void			parse_redirections(t_token	**token, t_args *cmd);
+void			add_arg(t_args *cmd, char *value);
 // expander.c
-char	*expand_vars(char *str, int last_exit_status);
-
+char			*expand_vars(char *str, int last_exit_status);
 //debugging
-void	print_list(t_args *args_head);
+void			print_list(t_args *args_head);
 
 #endif
