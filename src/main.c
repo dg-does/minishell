@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:19:16 by digulraj          #+#    #+#             */
-/*   Updated: 2026/01/27 15:38:12 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/01/29 17:24:35 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ int	main(void)
 	t_token	*tokens;
 	char	*input;
 	t_args	*cmds;
+	int		last_exit_status;
 
+	last_exit_status = 0;
 	while (1)
 	{
 		input = readline("minishell> ");
@@ -83,11 +85,19 @@ int	main(void)
 			free(input);
 			continue ;
 		}
-		//expand_vars(*str, int last_exit_status); -- returns expanded string
 		print_tokens(tokens);
 		cmds = parsing_tokens(tokens);
+		if (!cmds)
+		{
+			free_tokens(tokens);
+			free(input);
+			continue ;
+		}
+		expand_commands(cmds, last_exit_status);
 		print_list(cmds);
 		free_tokens(tokens);
 		free(input);
 	}
+	return (last_exit_status);
 }
+

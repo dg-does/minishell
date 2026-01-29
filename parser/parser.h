@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:44:12 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/01/27 15:37:14 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/01/29 15:54:49 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ t_redir_type	token_to_redir_type(t_type type);
 t_args			*parsing_tokens(t_token *token);
 void			parse_redirections(t_token	**token, t_args *cmd);
 void			add_arg(t_args *cmd, char *value);
-// expander.c
+// expander
 char			*expand_vars(char *str, int last_exit_status);
+void			expand_commands(t_args *commands, int last_exit_status);
 //debugging
 void			print_list(t_args *args_head);
 
