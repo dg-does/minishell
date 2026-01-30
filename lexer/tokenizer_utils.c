@@ -40,7 +40,7 @@ int	collect_word(char *input, int i, char *buffer, int *has_quotes)
 
 	j = 0;
 	*has_quotes = 0;
-	while (input[i] && !isspace((input[i])) && !is_special_char(input[i]))
+	while (input[i] && !ft_isspace((input[i])) && !is_special_char(input[i]))
 	{
 		if (is_quote(input[i]))
 		{
