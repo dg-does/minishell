@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 16:30:16 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/01/27 15:34:47 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/01/29 15:54:06 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void print_list(t_args *args_head)
             printf("ARGV: ");
             while (current->args[i])
             {
-                printf("[%d]%s ", i, expand_vars(current->args[i], 0));
+                printf("[%d]%s ", i, current->args[i]);
                 i++;
             }
             printf("\n");
@@ -107,12 +107,17 @@ void print_list(t_args *args_head)
         while (redir)
         {
             printf("REDIR: ");
-            if (redir->redir == REDIR_IN)      printf("< ");
-            else if (redir->redir == REDIR_OUT) printf("> ");
-            else if (redir->redir == REDIR_APPEND) printf(">> ");
-            else if (redir->redir == REDIR_HEREDOC) printf("<< ");
+            if (redir->redir == REDIR_IN)
+                printf("< ");
+            else if (redir->redir == REDIR_OUT)
+                printf("> ");
+            else if (redir->redir == REDIR_APPEND)
+                printf(">> ");
+            else if (redir->redir == REDIR_HEREDOC)
+                printf("<< ");
 
-            printf("%s\n", expand_vars(redir->target, 0));
+            // No expansion needed - already done!
+            printf("%s\n", redir->target);
             redir = redir->next;
         }
 

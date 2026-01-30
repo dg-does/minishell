@@ -5,94 +5,63 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/20 15:00:55 by digulraj          #+#    #+#             */
-/*   Updated: 2026/01/22 18:28:30 by digulraj         ###   ########.fr       */
+/*   Created: 2026/01/29 14:23:33 by digulraj          #+#    #+#             */
+/*   Updated: 2026/01/29 16:01:57 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static char	*get_var_name(char *str, int *index)
+static void	expand_args(char **args, int last_exit_status)
 {
-	char	*var_name;
-	int		start;
-	int		len;
-
-	start = *index + 1;
-	len = 0;
-	if (str[start] == '?')
-	{
-		*index = start + 1;
-		return (strdup("?"));
-	}
-
-	while (str[start + len] 
-		&& ((ft_isalnum(str[start + len])) || str[start + len] == '_'))
-		len++;
-	if (len == 0)
-		return (NULL);
-	var_name = malloc(len + 1);
-	if (!var_name)
-		return (NULL);
-	ft_strlcpy(var_name, &str[start], len + 1);
-	*index = start + len;
-	return (var_name);
-}
-
-static char	*get_var_value(char *var_name, int last_exit_status)
-{
-	char	*var_value;
-
-	if (ft_strncmp(var_name, "?", 1) == 0)
-		return (ft_itoa(last_exit_status));
-	var_value = getenv(var_name);
-	if (!var_value)
-		return (strdup(""));
-	return (strdup(var_value));
-}
-
-static int	copy2buf(char *buffer, char *var_name, int j, int last_exit_status)
-{
-	char	*var_value;
+	char	*expanded;
 	int		i;
 
-	var_value = get_var_value(var_name, last_exit_status);
-	if (!var_value)
-		return (j);
+	if (!args)
+		return ;
 	i = 0;
-	while (var_value[i] && j < TOKEN_BUFFER_SIZE - 1)
-		buffer[j++] = var_value[i++];
-	free(var_value);
-	return (j);
-}
-// need to use this function to expand commands from parser
-// with extra logic to handle single vs. double quotes
-
-char	*expand_vars(char *str, int last_exit_status)
-{
-	char	buffer[TOKEN_BUFFER_SIZE];
-	char	*var_name;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	while (str[i])
+	while (args[i])
 	{
-		if (str[i] == '$')
+		if (ft_strchr(args[i], '$'))
 		{
-			var_name = get_var_name(str, &i);
-			if (!var_name)
-				buffer[j++] = '$';
-			else
+			expanded = expand_vars(args[i], last_exit_status);
+			free(args[i]);
+			args[i] = expanded;
+		}
+		i++;
+	}
+}
+
+static void	expand_redirs(t_redir *redirs, int last_exit_status)
+{
+	t_redir		*current;
+	char		*expanded;
+
+	current = redirs;
+	while (current)
+	{
+		if (current->redir != REDIR_HEREDOC)
+		{
+			if (ft_strchr(current->target, '$'))
 			{
-				j = copy2buf(buffer, var_name, j, last_exit_status);
-				free(var_name);
+				expanded = expand_vars(current->target, last_exit_status);
+				free(current->target);
+				current->target = expanded;
 			}
 		}
-		else
-			buffer[j++] = str[i++];
+		current = current->next;
 	}
-	buffer[j] = '\0';
-	return (strdup(buffer));
+}
+
+void	expand_commands(t_args *commands, int last_exit_status)
+{
+	t_args	*current;
+
+	current = commands;
+	while (current)
+	{
+		expand_args(current->args, last_exit_status);
+		expand_redirs(current->redirs, last_exit_status);
+		current = current->next;
+	}
 }
