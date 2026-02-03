@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:44:12 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/02/03 14:26:49 by felixgreiff      ###   ########.fr       */
+/*   Updated: 2026/02/03 16:32:33 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void			add_arg(t_args *cmd, char *value, t_quote quote_type);
 // expander
 char			*expand_vars(char *str, int last_exit_status);
 void			expand_commands(t_args *cmds, int last_exit_status);
+char			**args_to_argv(t_arg *args);
 //debugging
 void			print_list(t_args *args_head);
 

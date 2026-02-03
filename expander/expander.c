@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 14:23:33 by digulraj          #+#    #+#             */
-/*   Updated: 2026/02/03 13:59:30 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/03 16:26:43 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,3 +50,31 @@ void	expand_commands(t_args *cmds, int last_exit_status)
 		cmds = cmds->next;
 	}
 }
+
+char	**args_to_argv(t_arg *args)
+{
+	t_arg	*current;
+	char	**argv;
+	int		i;
+
+	i = 0;
+	current = args;
+	while (current)
+	{
+		i++;
+		current = current->next;
+	}
+	argv = malloc(sizeof(char *) * (i + 1));
+	if (!argv)
+		return (NULL);
+	i = 0;
+	current = args;
+	while (current)
+	{
+		argv[i++] = current->value;
+		current = current->next;
+	}
+	argv[i] = NULL;
+	return (argv);
+}
+
