@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 11:44:07 by digulraj          #+#    #+#             */
-/*   Updated: 2026/02/03 12:24:32 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/03 16:25:03 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,18 @@ typedef struct s_token
 // need to figure out which ones can be static and not needed here
 
 //lexer_utils.c
-int	is_quote(char c);
-int	is_special_char(char c);
+int			is_quote(char c);
+int			is_special_char(char c);
 
 //tokenizer_utils.c
-int	handle_quote_string(char *input, int i, char *buffer, int *j);
-int	collect_word(char *input, int i, char *buffer, t_quote *quote_type);
-int	get_operator_type(char *input, int i, t_type *type);
-int	process_operator(char *input, int i, t_token **head);
-int	process_word(char *input, int i, t_token **head, int *error);
+int			handle_quote_string(char *input, int i, char *buffer, int *j);
+int			collect_word(char *input, int i, char *buffer, t_quote *quote_type);
+int			get_operator_type(char *input, int i, t_type *type);
+int			process_operator(char *input, int i, t_token **head);
+int			process_word(char *input, int i, t_token **head, int *error);
 
 //tokenizer.c
-void		add_token(t_token **head, char *value, t_type type, t_quote quote_type);
+void		add_token(t_token **head, char *value, t_type type, t_quote quote);
 void		free_tokens(t_token *head);
 void		print_tokens(t_token *head);
 t_token		*tokenize(char *input, int *error);
