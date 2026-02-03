@@ -6,45 +6,42 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:33:29 by digulraj          #+#    #+#             */
-/*   Updated: 2026/01/16 11:57:44 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/03 12:36:21 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-// *j is the pointer to the current index of buffer (word being built)
 int	handle_quote_string(char *input, int i, char *buffer, int *j)
 {
 	char	quote_char;
 
 	quote_char = input[i++];
 	while (input[i] && input[i] != quote_char)
-	{
-		if (quote_char == '"' && input[i] == '$')
-		{
-			//TODO: Add $VAR expansion logic
-			buffer[(*j)++] = input[i++];
-		}
-		else
-			buffer[(*j)++] = input[i++];
-	}
+		buffer[(*j)++] = input[i++];
 	if (input[i] != quote_char)
 		return (-1);
 	return (i + 1);
 }
 
-int	collect_word(char *input, int i, char *buffer, int *has_quotes)
+int	collect_word(char *input, int i, char *buffer, t_quote *quote_type)
 {
-	int	j;
-	int	new_i;
+	int		j;
+	int		new_i;
 
 	j = 0;
-	*has_quotes = 0;
+	*quote_type = NO_QUOTE;
 	while (input[i] && !isspace((input[i])) && !is_special_char(input[i]))
 	{
 		if (is_quote(input[i]))
 		{
-			*has_quotes = 1;
+			if (*quote_type == NO_QUOTE)
+			{
+				if (input[i] == '\'')
+					*quote_type = SINGLE_QUOTE;
+				else if (input[i] == '"')
+					*quote_type = DOUBLE_QUOTE;
+			}
 			new_i = handle_quote_string(input, i, buffer, &j);
 			if (new_i == -1)
 				return (-1);
@@ -92,17 +89,17 @@ int	process_operator(char *input, int i, t_token **head)
 
 int	process_word(char *input, int i, t_token **head, int *error)
 {
-	char	buffer[TOKEN_BUFFER_SIZE];
-	int		has_quotes;
-	int		new_i;
+	char		buffer[TOKEN_BUFFER_SIZE];
+	t_quote		quote_type;
+	int			new_i;
 
-	new_i = collect_word(input, i, buffer, &has_quotes);
-	if (new_i == 1)
+	new_i = collect_word(input, i, buffer, &quote_type);
+	if (new_i == -1)
 	{
 		*error = 1;
 		return (-1);
 	}
 	if (buffer[0] != '\0')
-		add_token(head, buffer, TOKEN_WORD, has_quotes);
+		add_token(head, buffer, TOKEN_WORD, quote_type);
 	return (new_i);
 }

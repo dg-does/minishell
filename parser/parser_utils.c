@@ -6,15 +6,11 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 16:30:16 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/01/29 15:54:06 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/03 14:15:26 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-//missing
-//syntax check
-//free function
 
 t_redir_type	token_to_redir_type(t_type type)
 {
@@ -79,50 +75,60 @@ int	count_pipes(t_token *token)
 	return (pipe_counter + 1);
 }
 
-void print_list(t_args *args_head)
+// print functions to delete later
+
+const char	*quote_type_str(t_quote quote)
 {
-    t_args  *current;
-    t_redir *redir;
-    int     i;
+	if (quote == NO_QUOTE)
+		return ("NO_QUOTE");
+	if (quote == SINGLE_QUOTE)
+		return ("SINGLE_QUOTE");
+	if (quote == DOUBLE_QUOTE)
+		return ("DOUBLE_QUOTE");
+	return ("UNKNOWN_QUOTE");
+}
 
-    current = args_head;
-    printf("\n=== ARGS + REDIRS ===\n");
-    while (current != NULL)
-    {
-        // Print argv
-        i = 0;
-        if (current->args)
-        {
-            printf("ARGV: ");
-            while (current->args[i])
-            {
-                printf("[%d]%s ", i, current->args[i]);
-                i++;
-            }
-            printf("\n");
-        }
+const char *redir_type_str(t_redir_type type)
+{
+	if (type == REDIR_IN)
+		return ("REDIR_IN");
+	if (type == REDIR_OUT)
+		return ("REDIR_OUT");
+	if (type == REDIR_APPEND)
+		return ("REDIR_APPEND");
+	if (type == REDIR_HEREDOC)
+		return ("REDIR_HEREDOC");
+	return ("UNKNOWN_REDIR");
+}
 
-        // Print redirections
-        redir = current->redirs;
-        while (redir)
-        {
-            printf("REDIR: ");
-            if (redir->redir == REDIR_IN)
-                printf("< ");
-            else if (redir->redir == REDIR_OUT)
-                printf("> ");
-            else if (redir->redir == REDIR_APPEND)
-                printf(">> ");
-            else if (redir->redir == REDIR_HEREDOC)
-                printf("<< ");
+void	print_list(t_args *cmds)
+{
+	t_arg	*arg;
+	t_redir	*redir;
+	int		i;
 
-            // No expansion needed - already done!
-            printf("%s\n", redir->target);
-            redir = redir->next;
-        }
-
-        current = current->next;
-    }
-    printf("====================\n");
+	while (cmds)
+	{
+		arg = cmds->args;
+		i = 0;
+		if (arg)
+			printf("\n--- ARGS ---\n");
+		while (arg)
+		{
+			printf("[%d] %s | WORD | Quote Type: %s\n", i++, arg->value,
+				quote_type_str(arg->quote_type));
+			arg = arg->next;
+		}
+		redir = cmds->redirs;
+		if (redir)
+			printf("--- REDIRECTONS ---\n");
+		while (redir)
+		{
+			printf("[%s] %s\n", redir_type_str(redir->redir), redir->target);
+			redir = redir->next;
+		}
+		printf("===============\n");
+		cmds = cmds->next;
+	}
 }
 

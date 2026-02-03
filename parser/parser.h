@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:44:12 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/01/29 15:54:49 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/03 13:57:37 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,16 @@ typedef struct s_redir
 	struct s_redir	*next;
 }	t_redir;
 
+typedef struct s_arg
+{
+	char			*value;
+	t_quote			quote_type;
+	struct s_arg	*next;
+}	t_arg;
+
 typedef struct s_args
 {
-	char			**args;
+	t_arg			*args;
 	t_redir			*redirs;
 	struct s_args	*next;
 }	t_args;
@@ -48,10 +55,10 @@ t_redir_type	token_to_redir_type(t_type type);
 //parser.c
 t_args			*parsing_tokens(t_token *token);
 void			parse_redirections(t_token	**token, t_args *cmd);
-void			add_arg(t_args *cmd, char *value);
+void			add_arg(t_args *cmd, char *value, t_quote quote_type);
 // expander
 char			*expand_vars(char *str, int last_exit_status);
-void			expand_commands(t_args *commands, int last_exit_status);
+void			expand_commands(t_args *cmds, int last_exit_status);
 //debugging
 void			print_list(t_args *args_head);
 

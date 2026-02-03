@@ -6,7 +6,7 @@
 #    By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 11:46:07 by digulraj          #+#    #+#              #
-#    Updated: 2026/01/29 17:18:40 by digulraj         ###   ########.fr        #
+#    Updated: 2026/02/03 12:52:16 by digulraj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ $(LIBFT_LIB):
 	
 $(NAME): $(OBJ) $(LIBFT_LIB)
 	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJ) $(LIBFT_LIB) -o $(NAME) $(LDLIBS)
-	@echo "Executable called $(NAME) created"
+	@echo "Executable called $(NAME) created. Run with ./minishell"
 
 %.o: %.c
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@

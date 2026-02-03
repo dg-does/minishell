@@ -6,13 +6,13 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 11:43:33 by digulraj          #+#    #+#             */
-/*   Updated: 2026/01/16 15:37:58 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/03 12:26:01 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-void	add_token(t_token **head, char *value, t_type type, int has_quotes)
+void	add_token(t_token **head, char *value, t_type type, t_quote quote_type)
 {
 	t_token	*new_token;
 	t_token	*current;
@@ -27,7 +27,7 @@ void	add_token(t_token **head, char *value, t_type type, int has_quotes)
 		return ;
 	}
 	new_token->type = type;
-	new_token->has_quotes = has_quotes;
+	new_token->quote_type = quote_type;
 	new_token->next = NULL;
 	if (*head == NULL)
 		*head = new_token;
@@ -109,9 +109,9 @@ void	print_tokens(t_token *head)
 	printf("\n--- TOKENS before parsing ---\n");
 	while (current)
 	{
-		printf("[%d] %s | %s | In quotes: %s\n", 
+		printf("[%d] %s | %s | Quote Type: %d\n", 
 			i++, current->value, token_type(current->type), 
-			current->has_quotes? "Yes" : "No");
+			current->quote_type);
 		current = current->next;
 	}
 }

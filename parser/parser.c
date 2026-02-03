@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 15:57:21 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/01/27 16:34:43 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/02/03 13:55:05 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,26 @@
 	}
 }*/
 
-void	add_arg(t_args *cmd, char *value)
+void	add_arg(t_args *cmd, char *value, t_quote quote_type)
 {
-	int		i;
-	int		j;
-	char	**new_argv;
+	t_arg	*new;
+	t_arg	*tmp;
 
-	i = 0;
-	j = 0;
-	if (cmd->args)
-		while (cmd->args[i])
-			i++;
-	new_argv = malloc(sizeof(char *) * (i + 2));
-	if (!new_argv)
+	new = malloc(sizeof(t_arg));
+	if (!new)
 		return ;
-	while (j < i)
+	new->value = value;
+	new->quote_type = quote_type;
+	new->next = NULL;
+	if (!cmd->args)
+		cmd->args = new;
+	else
 	{
-		new_argv[j] = cmd->args[j];
-		j++;
+		tmp = cmd->args;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
 	}
-	new_argv[j] = value;
-	new_argv[j + 1] = NULL;
-	free(cmd->args);
-	cmd->args = new_argv;
 }
 
 void	parse_redirections(t_token	**token, t_args *cmd)
@@ -96,7 +93,8 @@ t_args	*parsing_tokens(t_token *token)
 	{
 		if (current_token->type == TOKEN_WORD)
 		{
-			add_arg(current_cmd, current_token->value);
+			add_arg(current_cmd, current_token->value,
+				current_token->quote_type);
 			current_token = current_token->next;
 		}
 		else if (is_redirection(current_token->type))
