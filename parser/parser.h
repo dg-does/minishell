@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:44:12 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/02/03 13:57:37 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/03 14:26:49 by felixgreiff      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

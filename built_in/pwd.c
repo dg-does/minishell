@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 17:20:12 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/01/29 18:00:47 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/02/03 12:32:23 by felixgreiff      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+//never execute in fork always in partent process
+
 #include "built_in.h"
 
-char	*pwd(void)
+int pwd(void)
 {
 	char	*path;
 	size_t	size;
@@ -21,15 +23,23 @@ char	*pwd(void)
 	size = 256;
 	path = malloc(size);
 	getcwd(path, size);
-	if (errno == ERANGE)
+	if (path == NULL)
 	{
-		while (path == NULL)
+		if (errno != ERANGE)
 		{
-			free(path);
-			size *= 2;
-			path = malloc(size);
-			getcwd(path, size);
+			perror(errno);
+			return (1);
+		}
+		else if (errno == ERANGE)
+		{
+			while (errno == ERANGE)
+			{
+				size *= 2;
+				path = malloc(size);
+				getcwd(path, size);
+			}
 		}
 	}
-	return (path);
+	write (1, &path, ft_strlen(path));
+	return (0);
 }
