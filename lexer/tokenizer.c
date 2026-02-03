@@ -20,7 +20,7 @@ void	add_token(t_token **head, char *value, t_type type, t_quote quote_type)
 	new_token = malloc(sizeof(t_token));
 	if (!new_token)
 		return ;
-	new_token->value = strdup(value);
+	new_token->value = ft_strdup(value);
 	if (!new_token->value)
 	{
 		free(new_token);
@@ -64,7 +64,7 @@ t_token	*tokenize(char *input, int *error)
 	*error = 0;
 	while (input[i])
 	{
-		while (input[i] && isspace(input[i]))
+		while (input[i] && ft_isspace(input[i]))
 			i++;
 		if (!input[i])
 			break ;

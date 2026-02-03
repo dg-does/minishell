@@ -23,7 +23,7 @@ static char	*get_var_name(char *str, int *index)
 	if (str[start] == '?')
 	{
 		*index = start + 1;
-		return (strdup("?"));
+		return (ft_strdup("?"));
 	}
 
 	while (str[start + len] 
@@ -47,8 +47,8 @@ static char	*get_var_value(char *var_name, int last_exit_status)
 		return (ft_itoa(last_exit_status));
 	var_value = getenv(var_name);
 	if (!var_value)
-		return (strdup(""));
-	return (strdup(var_value));
+		return (ft_strdup(""));
+	return (ft_strdup(var_value));
 }
 
 static int	copy2buf(char *buffer, char *var_name, int j, int last_exit_status)
@@ -92,5 +92,5 @@ char	*expand_vars(char *str, int last_exit_status)
 			buffer[j++] = str[i++];
 	}
 	buffer[j] = '\0';
-	return (strdup(buffer));
+	return (ft_strdup(buffer));
 }
