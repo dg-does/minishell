@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:33:29 by digulraj          #+#    #+#             */
-/*   Updated: 2026/02/03 14:18:22 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/03 14:40:51 by felixgreiff      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	collect_word(char *input, int i, char *buffer, t_quote *quote_type)
 
 	j = 0;
 	*quote_type = NO_QUOTE;
-	while (input[i] && !isspace((input[i])) && !is_special_char(input[i]))
+	while (input[i] && !ft_isspace((input[i])) && !is_special_char(input[i]))
 	{
 		if (is_quote(input[i]))
 		{
