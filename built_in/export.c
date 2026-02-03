@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/03 11:06:29 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/03 15:47:41 by felixgreiff      ###   ########.fr       */
+/*   Created: 2026/02/03 17:21:58 by felixgreiff       #+#    #+#             */
+/*   Updated: 2026/02/03 17:31:21 by felixgreiff      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//never execute in fork always in parent process 
+#include "minishell.h"
 
-#include "built_in.h"
-#include <unistd.h>
-
-int cd(const char *path)
+int export(t_minishell *shell, char *export_value)
 {
-    //maybe pass argv instead and use argv[1] also needs safety checks
-    if (chdir(path) != 0)
-    {
-        perror("cd");
-        return (1);
-    }
-    else 
-        return (0);
+    int i;
+
+    i = 0;
+    while (export_value[i] != "=")
+        i++;
+    
 }

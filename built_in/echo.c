@@ -6,11 +6,11 @@
 /*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 11:39:57 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/03 12:27:25 by felixgreiff      ###   ########.fr       */
+/*   Updated: 2026/02/03 15:48:07 by felixgreiff      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "built_in.h"
 
 int echo(char **argv)
 {

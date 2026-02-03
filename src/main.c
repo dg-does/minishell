@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:19:16 by digulraj          #+#    #+#             */
-/*   Updated: 2026/02/03 12:48:20 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/03 16:54:16 by felixgreiff      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 #include "parser.h"
+#include "minishell.h"
 /*
 int	main(void)
 {
@@ -55,14 +56,43 @@ int	main(void)
 }
 //*/
 
-int	main(void)
+t_minishell *init_shell(char **envp)
+{
+	t_minishell *shell;
+	int			i;
+
+	i = 0;
+	shell = malloc(sizeof(t_minishell));
+	if (!shell)
+		return (NULL);
+	while (envp[i])
+		i++;
+	shell->env = malloc(sizeof(char *) * i + 1);
+	if (!shell->env)
+		return (NULL);
+	i = 0;
+	while (envp[i])
+	{
+		shell->env[i] = ft_strdup(envp[i]);
+		i++;
+	}
+	shell->env[i] = NULL;
+	shell->last_status = 0;
+	return (shell);
+	
+}
+
+int	main(int argc, char **argv, char **envp)
 {
 	int		error;
 	t_token	*tokens;
 	char	*input;
 	t_args	*cmds;
 	int		last_exit_status;
-
+	t_minishell	*shell;
+	
+	(void)argc;
+	(void)argv;
 	last_exit_status = 0;
 	while (1)
 	{
@@ -78,6 +108,7 @@ int	main(void)
 			continue ;
 		}
 		add_history(input);
+		shell = init_shell(envp);
 		tokens = tokenize(input, &error);
 		if (error)
 		{

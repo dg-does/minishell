@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/03 11:06:29 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/03 15:47:41 by felixgreiff      ###   ########.fr       */
+/*   Created: 2026/02/03 15:45:38 by felixgreiff       #+#    #+#             */
+/*   Updated: 2026/02/03 16:53:49 by felixgreiff      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//never execute in fork always in parent process 
+#ifndef MINISHELL_H
+# define MINISHELL_H
+# include <parser.h>
+# include <lexer.h>
+# include <built_in.h>
 
-#include "built_in.h"
-#include <unistd.h>
-
-int cd(const char *path)
+typedef struct s_minishell
 {
-    //maybe pass argv instead and use argv[1] also needs safety checks
-    if (chdir(path) != 0)
-    {
-        perror("cd");
-        return (1);
-    }
-    else 
-        return (0);
-}
+    char    **env;
+    int     last_status;
+}   t_minishell;
+
+#endif
