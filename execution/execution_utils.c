@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in.h                                         :+:      :+:    :+:   */
+/*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/29 17:21:35 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/02/17 15:01:22 by felixgreiff      ###   ########.fr       */
+/*   Created: 2026/02/17 13:23:41 by felixgreiff       #+#    #+#             */
+/*   Updated: 2026/02/17 14:26:06 by felixgreiff      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_IN_H
-# define BUILT_IN_H
-# include "parser.h"
-# include "errno.h"
+#include "minishell.h"
 
-int     unset(t_minishell *shell, char *unset_value);
-int     pwd(void);
-int     export(t_minishell *shell, char *export_value);
-void    exit(t_minishell *shell);
-int		env(char **envp);
-int 	echo(char **argv);
-int		cd(const char *path);
-
-
-#endif
+int	check_built_in(t_arg *cmd)
+{
+	if (cmd->value == "cd" || cmd->value == "unset" || cmd->value == "export"
+		|| cmd->value == "exit")
+		return (1);
+	else 
+		return (0);
+}

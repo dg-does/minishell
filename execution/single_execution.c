@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in.h                                         :+:      :+:    :+:   */
+/*   single_execution.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/29 17:21:35 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/02/17 15:01:22 by felixgreiff      ###   ########.fr       */
+/*   Created: 2026/02/17 13:17:04 by felixgreiff       #+#    #+#             */
+/*   Updated: 2026/02/17 14:49:12 by felixgreiff      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_IN_H
-# define BUILT_IN_H
-# include "parser.h"
-# include "errno.h"
+#include "minishell.h"
 
-int     unset(t_minishell *shell, char *unset_value);
-int     pwd(void);
-int     export(t_minishell *shell, char *export_value);
-void    exit(t_minishell *shell);
-int		env(char **envp);
-int 	echo(char **argv);
-int		cd(const char *path);
-
-
-#endif
+int single_execution(t_minishell *shell, t_args *cmd)
+{
+	if (check_built_in(cmd->args))
+		execute_parent(shell, cmd);
+	else 
+		execute_child(shell, cmd);
+	
+}

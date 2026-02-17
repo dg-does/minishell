@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   find_paths.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:59:42 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/01/23 14:59:43 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/02/17 13:47:53 by felixgreiff      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 
 
 static char	**get_paths(char **envp)

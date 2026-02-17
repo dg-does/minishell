@@ -6,7 +6,7 @@
 /*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:21:58 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/05 14:26:26 by felixgreiff      ###   ########.fr       */
+/*   Updated: 2026/02/17 12:43:50 by felixgreiff      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,3 +80,7 @@ int export(t_minishell *shell, char *export_value)
 	}    
     return (0);
 }
+
+
+
+
