@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:19:16 by digulraj          #+#    #+#             */
-/*   Updated: 2026/02/03 16:54:16 by felixgreiff      ###   ########.fr       */
+/*   Updated: 2026/02/17 10:29:19 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	main(int argc, char **argv, char **envp)
 	t_args	*cmds;
 	int		last_exit_status;
 	t_minishell	*shell;
-	
+
 	(void)argc;
 	(void)argv;
 	last_exit_status = 0;

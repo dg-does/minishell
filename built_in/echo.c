@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 11:39:57 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/03 15:48:07 by felixgreiff      ###   ########.fr       */
+/*   Updated: 2026/02/17 10:30:19 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built_in.h"
 
-int echo(char **argv)
+int	echo(char **argv)
 {
     int n;
     int i;

@@ -6,17 +6,12 @@
 #    By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 11:46:07 by digulraj          #+#    #+#              #
-#    Updated: 2026/02/03 12:52:16 by digulraj         ###   ########.fr        #
+#    Updated: 2026/02/17 10:25:05 by digulraj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = minishell
-
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -Isrc -Ilexer -Iparser -g
-LDLIBS = -lreadline
-INCLUDES = -I. -I$(LIBFT_DIR)
 
 SRC_DIR = src
 LEX_DIR = lexer
@@ -24,11 +19,19 @@ PARSE_DIR = parser
 LIBFT_DIR = libft
 LIBFT_LIB = $(LIBFT_DIR)/libft.a
 EXP_DIR = expander
+BI_DIR = built_in
+
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -I$(SRC_DIR) -I$(LEX_DIR) -I$(PARSE_DIR) -I$(EXP_DIR) -I$(BI_DIR) -I -g
+LDLIBS = -lreadline
+INCLUDES = -I. -I$(LIBFT_DIR)
 
 SRC =	$(SRC_DIR)/main.c \
 		$(LEX_DIR)/lexer_utils.c $(LEX_DIR)/tokenizer.c $(LEX_DIR)/tokenizer_utils.c \
 		$(PARSE_DIR)/parser.c $(PARSE_DIR)/parser_utils.c \
-		$(EXP_DIR)/expander.c $(EXP_DIR)/expander_utils.c
+		$(EXP_DIR)/expander.c $(EXP_DIR)/expander_utils.c \
+		$(BI_DIR)/cd.c $(BI_DIR)/echo.c $(BI_DIR)/env.c $(BI_DIR)/exit.c $(BI_DIR)/export.c \
+		$(BI_DIR)/pwd.c $(BI_DIR)/unset.c
 
 
 OBJ = $(SRC:.c=.o)

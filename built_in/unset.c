@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:33:04 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/05 16:25:56 by felixgreiff      ###   ########.fr       */
+/*   Updated: 2026/02/17 10:32:44 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int check_validity(char *export_value)
+static int	check_validity(char *export_value)
 {
     int i;
 
@@ -28,7 +28,7 @@ int check_validity(char *export_value)
 	return (0);
 }
 
-int unset(t_minishell *shell, char *unset_value)
+int	unset(t_minishell *shell, char *unset_value)
 {
 	int		i;
 	int		j;
@@ -66,7 +66,6 @@ int unset(t_minishell *shell, char *unset_value)
 		free(shell->env);
 		shell->env = temp_env;
 		array_free(temp_env);
-		
 	}
 	return (0);
 }
