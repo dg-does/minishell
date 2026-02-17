@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 11:06:29 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/03 15:47:41 by felixgreiff      ###   ########.fr       */
+/*   Updated: 2026/02/17 10:30:05 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "built_in.h"
 #include <unistd.h>
 
-int cd(const char *path)
+int	cd(const char *path)
 {
     //maybe pass argv instead and use argv[1] also needs safety checks
     if (chdir(path) != 0)

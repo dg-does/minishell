@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 12:42:21 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/03 15:47:53 by felixgreiff      ###   ########.fr       */
+/*   Updated: 2026/02/17 10:30:38 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "built_in.h"
 
-int env(char **envp)
+int	env(char **envp)
 {
     int i;
     

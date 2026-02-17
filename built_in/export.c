@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:21:58 by felixgreiff       #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/02/17 12:43:50 by felixgreiff      ###   ########.fr       */
+=======
+/*   Updated: 2026/02/17 10:31:45 by digulraj         ###   ########.fr       */
+>>>>>>> bd63addbb170540b489281cf36763fa93804578e
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +23,7 @@
 //if thats the case free the poionter and strdup export value
 //if not at the end of ENV allocate strlen(export_value) new array and strdup with "KEY=VALUE"
 
-int check_validity(char *export_value)
+static int	check_validity(char *export_value)
 {
     int i;
 
@@ -36,7 +40,7 @@ int check_validity(char *export_value)
 }
 
 
-int export(t_minishell *shell, char *export_value)
+int	export(t_minishell *shell, char *export_value)
 {
     int		key_len;
     int		i;
