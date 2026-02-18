@@ -6,7 +6,7 @@
 #    By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 11:46:07 by digulraj          #+#    #+#              #
-#    Updated: 2026/02/17 10:25:05 by digulraj         ###   ########.fr        #
+#    Updated: 2026/02/18 17:51:14 by digulraj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ LIBFT_DIR = libft
 LIBFT_LIB = $(LIBFT_DIR)/libft.a
 EXP_DIR = expander
 BI_DIR = built_in
+EXEC_DIR = exec
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I$(SRC_DIR) -I$(LEX_DIR) -I$(PARSE_DIR) -I$(EXP_DIR) -I$(BI_DIR) -I -g
@@ -31,8 +32,8 @@ SRC =	$(SRC_DIR)/main.c \
 		$(PARSE_DIR)/parser.c $(PARSE_DIR)/parser_utils.c \
 		$(EXP_DIR)/expander.c $(EXP_DIR)/expander_utils.c \
 		$(BI_DIR)/cd.c $(BI_DIR)/echo.c $(BI_DIR)/env.c $(BI_DIR)/exit.c $(BI_DIR)/export.c \
-		$(BI_DIR)/pwd.c $(BI_DIR)/unset.c
-
+		$(BI_DIR)/pwd.c $(BI_DIR)/unset.c \
+		$(EXEC_DIR)/execute.c
 
 OBJ = $(SRC:.c=.o)
 

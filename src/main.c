@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:19:16 by digulraj          #+#    #+#             */
-/*   Updated: 2026/02/17 10:29:19 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/18 19:25:50 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,30 +56,58 @@ int	main(void)
 }
 //*/
 
+void	free_shell(t_minishell *shell)
+{
+	int	i;
+
+	if (!shell)
+		return ;
+	if (shell->env)
+	{
+		i = 0;
+		while (shell->env[i])
+		{
+			free(shell->env[i]);
+			i++;
+		}
+		free(shell->env);
+	}
+	free(shell);
+}
+
 t_minishell *init_shell(char **envp)
 {
-	t_minishell *shell;
+	t_minishell	*shell;
 	int			i;
 
-	i = 0;
 	shell = malloc(sizeof(t_minishell));
 	if (!shell)
 		return (NULL);
+	i = 0;
 	while (envp[i])
 		i++;
-	shell->env = malloc(sizeof(char *) * i + 1);
+	shell->env = malloc(sizeof(char *) * (i + 1));
 	if (!shell->env)
+	{
+		free(shell);
 		return (NULL);
+	}
 	i = 0;
 	while (envp[i])
 	{
 		shell->env[i] = ft_strdup(envp[i]);
+		if (!shell->env[i])
+		{
+			while (--i >= 0)
+				free(shell->env[i]);
+			free_shell(shell);
+			return (NULL);
+		}
 		i++;
 	}
 	shell->env[i] = NULL;
-	shell->last_status = 0;
+	shell->last_exit_status = 0;
 	return (shell);
-	
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -88,12 +116,13 @@ int	main(int argc, char **argv, char **envp)
 	t_token	*tokens;
 	char	*input;
 	t_args	*cmds;
-	int		last_exit_status;
 	t_minishell	*shell;
 
 	(void)argc;
 	(void)argv;
-	last_exit_status = 0;
+	shell = init_shell(envp);
+	if (!shell)
+		return (1);
 	while (1)
 	{
 		input = readline("minishell> ");
@@ -108,11 +137,10 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		}
 		add_history(input);
-		shell = init_shell(envp);
 		tokens = tokenize(input, &error);
 		if (error)
 		{
-			printf("ERROR: Close your quotes!!\n");
+			printf("ERROR: Unclosed quote\n");
 			free(input);
 			continue ;
 		}
@@ -124,11 +152,14 @@ int	main(int argc, char **argv, char **envp)
 			free(input);
 			continue ;
 		}
-		expand_commands(cmds, last_exit_status);
+		expand_commands(cmds, shell);
 		print_list(cmds);
+		//execute
 		free_tokens(tokens);
+		//free cmds?
 		free(input);
 	}
-	return (last_exit_status);
+	free_shell(shell);
+	return (shell->last_exit_status);
 }
 

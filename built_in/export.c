@@ -40,7 +40,7 @@ static int	check_validity(char *export_value)
 }
 
 
-int	export(t_minishell *shell, char *export_value)
+int	ft_export(t_minishell *shell, char *export_value)
 {
     int		key_len;
     int		i;

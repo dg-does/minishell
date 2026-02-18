@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:44:12 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/02/03 16:32:33 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/18 19:37:29 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include "../src/minishell.h"
 
 typedef enum e_redir_type
 {
@@ -46,6 +47,8 @@ typedef struct s_args
 	struct s_args	*next;
 }	t_args;
 
+typedef struct s_minishell t_minishell;
+
 //parser_utils.c
 void			allocate_nodes_arg(t_token *token, t_args **args_head);
 int				count_pipes(t_token *token);
@@ -58,8 +61,8 @@ void			parse_redirections(t_token	**token, t_args *cmd);
 void			add_arg(t_args *cmd, char *value, t_quote quote_type);
 // expander
 char			*expand_vars(char *str, int last_exit_status);
-void			expand_commands(t_args *cmds, int last_exit_status);
-char			**args_to_argv(t_arg *args);
+void			expand_commands(t_args *cmds, t_minishell *shell);
+//char			**args_to_argv(t_arg *args);
 //debugging
 void			print_list(t_args *args_head);
 

@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:33:04 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/17 10:32:44 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/18 19:23:37 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	check_validity(char *export_value)
 	return (0);
 }
 
-int	unset(t_minishell *shell, char *unset_value)
+int	ft_unset(t_minishell *shell, char *unset_value)
 {
 	int		i;
 	int		j;

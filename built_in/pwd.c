@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 17:20:12 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/02/17 10:32:06 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/18 19:23:31 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "built_in.h"
 
-int	pwd(void)
+int	ft_pwd(void)
 {
 	char	*path;
 	size_t	size;
