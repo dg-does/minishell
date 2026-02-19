@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:33:04 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/18 19:23:37 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/19 13:03:32 by felixgreiff      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	check_validity(char *export_value)
     i = 1;
     if (!ft_isalpha(export_value[0]) && export_value[0] != '_')
         return (1);
-    while (export_value[i] != NULL)
+    while (export_value[i] != '\0')
 	{
 		if (!ft_isalnum(export_value[i] && export_value[i] != '_'))
 			return (1);
@@ -36,6 +36,7 @@ int	ft_unset(t_minishell *shell, char *unset_value)
 	int		value_len;
 	char	**temp_env;
 
+	env_len = 0;
 	if (check_validity(unset_value) != 0)
 	{
 		//print error

@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/03 15:45:38 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/19 12:46:56 by felixgreiff      ###   ########.fr       */
+/*   Created: 2026/02/19 12:21:11 by felixgreiff       #+#    #+#             */
+/*   Updated: 2026/02/19 12:46:41 by felixgreiff      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "parser.h"
-# include "lexer.h"
-# include "built_in.h"
+#include "minishell.h"
 
-typedef struct s_minishell
+void array_free(char **str)
 {
-	char	**env;
-	int		last_exit_status;
-}	t_minishell;
+	int	i;
 
-void array_free(char **str);
-
-#endif
+	i = 0;
+	if (!str || !str[i])
+		return ;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+	return ;
+}

@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 17:45:34 by digulraj          #+#    #+#             */
-/*   Updated: 2026/02/18 19:24:27 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/19 15:18:20 by felixgreiff      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "minishell.h"
 
 static char	**args_to_argv(t_arg *args)
 {

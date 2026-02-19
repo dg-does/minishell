@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:21:58 by felixgreiff       #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/02/17 12:43:50 by felixgreiff      ###   ########.fr       */
-=======
-/*   Updated: 2026/02/17 10:31:45 by digulraj         ###   ########.fr       */
->>>>>>> bd63addbb170540b489281cf36763fa93804578e
+/*   Updated: 2026/02/19 12:54:55 by felixgreiff      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +26,7 @@ static int	check_validity(char *export_value)
     i = 1;
     if (!ft_isalpha(export_value[0]) && export_value[0] != '_')
         return (1);
-    while (export_value[i] != NULL)
+    while (export_value[i] != '\0')
 	{
 		if (!ft_isalnum(export_value[i] && export_value[i] != '_'))
 			return (1);
@@ -53,9 +49,10 @@ int	ft_export(t_minishell *shell, char *export_value)
         //print error?
         return (1);
     }
-    while (export_value[key_len] != "=" || export_value[key_len] != '\0')
+    while (export_value[key_len] != '=' || export_value[key_len] != '\0')
         key_len++;
     key_len++;
+    i = 0;
     while (shell->env[i] != NULL)
     {
         if (ft_strncmp(shell->env[i], export_value, key_len) == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 17:20:12 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/02/18 19:23:31 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/19 13:00:50 by felixgreiff      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	ft_pwd(void)
 {
 	char	*path;
 	size_t	size;
-	int		i;
 
 	size = 256;
 	path = malloc(size);
@@ -27,7 +26,7 @@ int	ft_pwd(void)
 	{
 		if (errno != ERANGE)
 		{
-			perror(errno);
+			perror("minishell: pwd");
 			return (1);
 		}
 		else if (errno == ERANGE)
