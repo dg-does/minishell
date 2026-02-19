@@ -6,7 +6,7 @@
 /*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 14:55:28 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/17 15:07:22 by felixgreiff      ###   ########.fr       */
+/*   Updated: 2026/02/19 18:22:31 by felixgreiff      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,33 @@
 
 
 //misses redirections and changing of fds not finished yet!!!!!
-void execute_parent(t_minishell *shell, t_arg *cmd)
+int	execute_builtin(t_minishell *shell, char **argv)
 {
-    if (!cmd->value)
-        return ;
-    if (cmd->value == "cd")
-        cd(cmd->next->value);
-    if (cmd->value == "unset")
-       unset(shell, cmd->next->value);
-    if (cmd->value == "export")
-        export(shell, cmd->next->value);
-    if (cmd->value == "exit")
-        exit(shell);
-    return (0);
+	if (ft_strcmp(argv[0], "cd") == 0)
+		return (ft_cd(argv));
+	if (ft_strcmp(argv[0], "exit") == 0)
+		return (ft_exit(shell));
+	if (ft_strcmp(argv[0], "export") == 0)
+		return (ft_export(shell, argv[1]));
+	if (ft_strcmp(argv[0], "unset") == 0)
+		return (ft_unset(shell, argv[1]));
+	return (1);
+}
+
+void	execute_parent(t_minishell *shell, t_args *cmd, int *last_exit_status)
+{
+	int		tmp_stdin;
+	int		tmp_stdout;
+	char	**argv;
+
+	tmp_stdin = dup(STDIN_FILENO);
+	tmp_stdout = dup(STDOUT_FILENO);
+	if (cmd->redirs)
+		apply_redirection(cmd->redirs);
+	argv = args_to_argv(cmd->args);
+	*last_exit_status = execute_builtin(shell, argv);
+	dup2(tmp_stdin, STDIN_FILENO);
+	dup2(tmp_stdout, STDOUT_FILENO);
+	close(tmp_stdin);
+	close(tmp_stdout);
 }

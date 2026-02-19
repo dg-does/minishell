@@ -6,17 +6,35 @@
 /*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:23:41 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/17 14:26:06 by felixgreiff      ###   ########.fr       */
+/*   Updated: 2026/02/19 18:26:31 by felixgreiff      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_built_in(t_arg *cmd)
+char	**args_to_argv(t_arg *args)
 {
-	if (cmd->value == "cd" || cmd->value == "unset" || cmd->value == "export"
-		|| cmd->value == "exit")
-		return (1);
-	else 
-		return (0);
+	t_arg	*current;
+	char	**argv;
+	int		i;
+
+	i = 0;
+	current = args;
+	while (current)
+	{
+		i++;
+		current = current->next;
+	}
+	argv = malloc(sizeof(char *) * (i + 1));
+	if (!argv)
+		return (NULL);
+	i = 0;
+	current = args;
+	while (current)
+	{
+		argv[i++] = current->value;
+		current = current->next;
+	}
+	argv[i] = NULL;
+	return (argv);
 }
