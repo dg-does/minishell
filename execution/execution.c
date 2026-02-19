@@ -6,17 +6,18 @@
 /*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:05:55 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/17 13:16:37 by felixgreiff      ###   ########.fr       */
+/*   Updated: 2026/02/19 18:30:20 by felixgreiff      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int execution(t_minishell *shell, t_args *cmd)
+void	execute_cmds(t_minishell *shell, t_args *cmds, int *last_exit_status, char **envp)
 {
-    if (cmd->next == NULL)
-		execute_single(shell, cmd);
+	if (!cmds)
+		return ;
+	if (!cmds->next)
+		execute_simple(shell, cmds, last_exit_status, envp);
 	else
-		execute_multiple(shell, cmd);
-	
+		execute_complex(shell, cmds, last_exit_status, envp);
 }
