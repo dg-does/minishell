@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 17:21:35 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/02/18 19:29:59 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/24 12:46:48 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 # include "parser.h"
 # include <errno.h>
 # include <unistd.h>
-
-typedef struct s_minishell t_minishell;
+# include "structs.h"
 
 int		ft_cd(char **argv);
 int		ft_echo(char **argv);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: guesty <guesty@student.42.fr>              +#+  +:+       +#+         #
+#    By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 11:46:07 by digulraj          #+#    #+#              #
-#    Updated: 2026/02/19 17:38:16 by guesty           ###   ########.fr        #
+#    Updated: 2026/02/24 12:03:39 by fgreiff          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ BI_DIR = built_in
 EXEC_DIR = execution
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I$(SRC_DIR) -I$(LEX_DIR) -I$(PARSE_DIR) -I$(EXP_DIR) -I$(BI_DIR) -I -g
+CFLAGS = -Wall -Wextra -Werror -I$(SRC_DIR) -I$(LEX_DIR) -I$(PARSE_DIR) -I$(EXP_DIR) -I$(BI_DIR) -I$(EXEC_DIR) -I -g
 LDLIBS = -lreadline
 INCLUDES = -I. -I$(LIBFT_DIR)
 
@@ -33,7 +33,9 @@ SRC =	$(SRC_DIR)/main.c \
 		$(EXP_DIR)/expander.c $(EXP_DIR)/expander_utils.c \
 		$(BI_DIR)/cd.c $(BI_DIR)/echo.c $(BI_DIR)/env.c $(BI_DIR)/exit.c $(BI_DIR)/export.c \
 		$(BI_DIR)/pwd.c $(BI_DIR)/unset.c \
-		$(EXEC_DIR)/execute.c $(EXEC_DIR)/find_paths.c
+		$(EXEC_DIR)/execute.c $(EXEC_DIR)/find_paths.c $(EXEC_DIR)/single_execution.c \
+		$(EXEC_DIR)/multiple_execution.c $(EXEC_DIR)handle_redirection.c $(EXEC_DIR)/execution_utils.c \
+		$(EXEC_DIR)/execute_parent.c $(EXEC_DIR)/execute_child.c 
 
 OBJ = $(SRC:.c=.o)
 
