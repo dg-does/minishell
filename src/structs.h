@@ -1,23 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/13 18:44:12 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/02/24 12:45:51 by fgreiff          ###   ########.fr       */
+/*   Created: 2026/02/24 12:43:59 by fgreiff           #+#    #+#             */
+/*   Updated: 2026/02/24 12:44:52 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
-# include "structs.h"
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
-/*
+# define TOKEN_BUFFER_SIZE 4096
+
+typedef struct s_minishell
+{
+	char	**env;
+	int		last_exit_status;
+}	t_minishell;
+
+typedef enum e_token_type
+{
+	TOKEN_WORD,
+	TOKEN_PIPE,
+	TOKEN_REDIRECT_IN,
+	TOKEN_REDIRECT_OUT,
+	TOKEN_REDIRECT_APPEND,
+	TOKEN_HEREDOC
+}	t_type;
+
+typedef enum e_quote_type
+{
+	NO_QUOTE,
+	SINGLE_QUOTE,
+	DOUBLE_QUOTE
+}	t_quote;
+
+typedef struct s_token
+{
+	char			*value;
+	t_type			type;
+	t_quote			quote_type;
+	struct s_token	*next;
+}	t_token;
+
 typedef enum e_redir_type
 {
 	REDIR_IN,
@@ -46,24 +74,5 @@ typedef struct s_args
 	t_redir			*redirs;
 	struct s_args	*next;
 }	t_args;
-*/
-typedef struct s_minishell t_minishell;
-
-//parser_utils.c
-void			allocate_nodes_arg(t_token *token, t_args **args_head);
-int				count_pipes(t_token *token);
-int				is_redirection(t_type type);
-t_redir_type	token_to_redir_type(t_type type);
-
-//parser.c
-t_args			*parsing_tokens(t_token *token);
-void			parse_redirections(t_token	**token, t_args *cmd);
-void			add_arg(t_args *cmd, char *value, t_quote quote_type);
-// expander
-char			*expand_vars(char *str, int last_exit_status);
-void			expand_commands(t_args *cmds, t_minishell *shell);
-//char			**args_to_argv(t_arg *args);
-//debugging
-void			print_list(t_args *args_head);
 
 #endif

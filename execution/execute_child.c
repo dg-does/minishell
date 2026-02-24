@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   execute_child.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 14:55:34 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/20 15:35:54 by felixgreiff      ###   ########.fr       */
+/*   Updated: 2026/02/24 12:39:01 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "execution.h"
 
 void	execute_child(t_minishell *shell, t_args *cmd)
 {

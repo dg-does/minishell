@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 17:24:11 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/19 18:31:13 by felixgreiff      ###   ########.fr       */
+/*   Updated: 2026/02/24 12:48:28 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
 # define EXECUTION_H
 # include <fcntl.h>
+# include <sys/wait.h>
+# include <unistd.h>
+# include "structs.h"
 
 //execute parent
 int		execute_builtin(t_minishell *shell, char **argv);

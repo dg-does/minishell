@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 16:48:03 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/19 17:42:35 by felixgreiff      ###   ########.fr       */
+/*   Updated: 2026/02/24 12:48:49 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "execution.h"
 
 void	apply_redirection(t_redir *redirs)
 {
@@ -56,8 +57,8 @@ void	redirect_out(t_redir *redirs)
 
 void	redirect_append(t_redir *redirs)
 {
-	int fd;
-	
+	int	fd;
+
 	fd = open(redirs->target, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (fd < 0)
 	{

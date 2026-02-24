@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 11:44:07 by digulraj          #+#    #+#             */
-/*   Updated: 2026/02/03 16:25:03 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/24 12:46:15 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 # include "libft.h"
+# include "structs.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
-# define TOKEN_BUFFER_SIZE 4096
+/*# define TOKEN_BUFFER_SIZE 4096
 
 typedef enum e_token_type
 {
@@ -43,7 +44,7 @@ typedef struct s_token
 	t_type			type;
 	t_quote			quote_type;
 	struct s_token	*next;
-}	t_token;
+}	t_token;*/
 
 // need to figure out which ones can be static and not needed here
 
