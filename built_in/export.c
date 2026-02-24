@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:21:58 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/24 15:10:49 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/02/24 21:15:37 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static int	check_validity(char *export_value)
     i = 1;
     if (!ft_isalpha(export_value[0]) && export_value[0] != '_')
         return (1);
-    while (export_value[i] != '\0')
+    while (export_value[i] != '\0' && export_value[i] != '=')
 	{
-		if (!ft_isalnum(export_value[i] && export_value[i] != '_'))
+		if (!ft_isalnum(export_value[i]) && export_value[i] != '_')
 			return (1);
 		i++;
 	}
@@ -51,7 +51,7 @@ int	ft_export(t_minishell *shell, char *export_value)
         //print error?
         return (1);
     }
-    while (export_value[key_len] != '=' || export_value[key_len] != '\0')
+    while (export_value[key_len] != '=' && export_value[key_len] != '\0')
         key_len++;
     key_len++;
     i = 0;
@@ -74,13 +74,14 @@ int	ft_export(t_minishell *shell, char *export_value)
 		temp_env[j++] = NULL;
 		free(shell->env);
 		shell->env = temp_env;
-		array_free(temp_env);
 	}
     else
     {
 		free(shell->env[i]);
 		shell->env[i] = ft_strdup(export_value);
-	}    
+	}
+    printf("DEBUG export: added %s\n", export_value);
+    printf("DEBUG last env: %s\n", shell->env[i]);  
     return (0);
 }
 

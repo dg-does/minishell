@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 14:55:34 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/24 15:04:57 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/02/24 18:18:35 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,31 @@ void	execute_child(t_minishell *shell, t_args *cmd)
 {
 	char	**argv;
 	char	*path;
+	int		exit_code;
 
+	write(2, "child: applying redirs\n", 23);
 	if (cmd->redirs)
 		apply_redirection(cmd->redirs);
+	write(2, "child: building argv\n", 21);
 	argv = args_to_argv(cmd->args);
+	write(2, "child: checking builtin\n", 24);
 	if (is_builtin(cmd->args->value))
 	{
-		execute_builtin(shell, argv);
-		//how leave child procvess after built in exec
+		exit_code = execute_builtin(shell, argv);
+		array_free(argv);
+		exit(exit_code);
 	}
-	else
+	write(2, "child: finding path\n", 20);
+	path = parse_paths(shell, cmd);
+	if (!path)
 	{
-		path = parse_paths(shell, cmd);
-		execve(path, argv, shell->env);
+		ft_putstr_fd("minishell: command not found\n", 2);
+		exit(127);
 	}
+	write(2, "child: execve\n", 14);
+	execve(path, argv, shell->env);
+	perror("minishell: child");
 	array_free(argv);
 	free(path);
-	perror("minishell: child");
 	exit(127); //correct this way or call exit function
 }

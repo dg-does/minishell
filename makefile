@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+         #
+#    By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 11:46:07 by digulraj          #+#    #+#              #
-#    Updated: 2026/02/24 16:48:04 by digulraj         ###   ########.fr        #
+#    Updated: 2026/02/24 17:09:14 by fgreiff          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ BI_DIR = built_in
 EXEC_DIR = execution
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I$(SRC_DIR) -I$(LEX_DIR) -I$(PARSE_DIR) -I$(EXP_DIR) -I$(BI_DIR) -I$(EXEC_DIR) -I -g
+CFLAGS = -Wall -Wextra -Werror -I$(SRC_DIR) -I$(LEX_DIR) -I$(PARSE_DIR) -I$(EXP_DIR) -I$(BI_DIR) -I$(EXEC_DIR) -g3 -O0
 LDLIBS = -lreadline
 INCLUDES = -I. -I$(LIBFT_DIR)
 
