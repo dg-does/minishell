@@ -3,13 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:33:04 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/19 13:03:32 by felixgreiff      ###   ########.fr       */
+/*   Updated: 2026/02/24 15:11:06 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "structs.h"
+#include "built_in.h"
 #include "minishell.h"
 
 static int	check_validity(char *export_value)

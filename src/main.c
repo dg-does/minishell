@@ -6,12 +6,10 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:19:16 by digulraj          #+#    #+#             */
-/*   Updated: 2026/02/24 13:48:50 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/24 16:41:37 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
-#include "parser.h"
 #include "minishell.h"
 /*
 int	main(void)
@@ -158,7 +156,7 @@ int	main(int argc, char **argv, char **envp)
 		expand_commands(cmds, shell);
 		print_list(cmds);
 		g_sig = 1;
-		execute_commands(cmds, shell);
+		execute_cmds(shell, cmds);
 		g_sig = 0;
 		free_tokens(tokens);
 		//free cmds?

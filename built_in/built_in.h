@@ -6,12 +6,12 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 17:21:35 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/02/24 12:46:48 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/02/24 15:43:19 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIN_H
-# define BUILTIN_H
+#ifndef BUILT_IN_H
+# define BUILT_IN_H
 # include "parser.h"
 # include <errno.h>
 # include <unistd.h>
