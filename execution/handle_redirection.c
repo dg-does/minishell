@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 16:48:03 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/24 12:48:49 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/02/24 15:41:34 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	apply_redirection(t_redir *redirs)
 		redirect_out(redirs);
 	if (redirs->redir == REDIR_APPEND)
 		redirect_append(redirs);
-	if (redirs->redir == REDIR_HEREDOC)
-		redirect_heredoc(redirs);
+	/*if (redirs->redir == REDIR_HEREDOC)
+		redirect_heredoc(redirs);*/
 }
 
 void	redirect_in(t_redir *redirs)
@@ -70,7 +70,7 @@ void	redirect_append(t_redir *redirs)
 	return ;
 }
 
-void	redirect_heredoc(t_redir *redirs)
+/*void	redirect_heredoc(t_redir *redirs)
 {
 	
-}
+}*/

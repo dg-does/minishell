@@ -6,7 +6,7 @@
 #    By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 11:46:07 by digulraj          #+#    #+#              #
-#    Updated: 2026/02/24 12:03:39 by fgreiff          ###   ########.fr        #
+#    Updated: 2026/02/24 15:59:15 by fgreiff          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,14 +27,14 @@ CFLAGS = -Wall -Wextra -Werror -I$(SRC_DIR) -I$(LEX_DIR) -I$(PARSE_DIR) -I$(EXP_
 LDLIBS = -lreadline
 INCLUDES = -I. -I$(LIBFT_DIR)
 
-SRC =	$(SRC_DIR)/main.c \
+SRC =	$(SRC_DIR)/main.c $(SRC_DIR)/utils.c \
 		$(LEX_DIR)/lexer_utils.c $(LEX_DIR)/tokenizer.c $(LEX_DIR)/tokenizer_utils.c \
 		$(PARSE_DIR)/parser.c $(PARSE_DIR)/parser_utils.c \
 		$(EXP_DIR)/expander.c $(EXP_DIR)/expander_utils.c \
 		$(BI_DIR)/cd.c $(BI_DIR)/echo.c $(BI_DIR)/env.c $(BI_DIR)/exit.c $(BI_DIR)/export.c \
 		$(BI_DIR)/pwd.c $(BI_DIR)/unset.c \
-		$(EXEC_DIR)/execute.c $(EXEC_DIR)/find_paths.c $(EXEC_DIR)/single_execution.c \
-		$(EXEC_DIR)/multiple_execution.c $(EXEC_DIR)handle_redirection.c $(EXEC_DIR)/execution_utils.c \
+		$(EXEC_DIR)/execution.c $(EXEC_DIR)/find_paths.c $(EXEC_DIR)/single_execution.c \
+		$(EXEC_DIR)/multiple_execution.c $(EXEC_DIR)/handle_redirection.c $(EXEC_DIR)/execution_utils.c \
 		$(EXEC_DIR)/execute_parent.c $(EXEC_DIR)/execute_child.c 
 
 OBJ = $(SRC:.c=.o)

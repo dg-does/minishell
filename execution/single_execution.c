@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:17:04 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/24 12:39:41 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/02/24 15:33:45 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	is_builtin(char *cmd)
 		return (1);
 	if (ft_strcmp(cmd, "unset") == 0)
 		return (1);
+	else
+		return (0);
 }
 
 static int	is_parent_builtin(char *cmd)
@@ -45,7 +47,7 @@ static int	is_parent_builtin(char *cmd)
 		return (0);
 }
 
-void	execute_simple(t_minishell *shell, t_args *cmd, char **envp)
+void	execute_simple(t_minishell *shell, t_args *cmd)
 {
 	pid_t	pid1;
 
@@ -54,14 +56,14 @@ void	execute_simple(t_minishell *shell, t_args *cmd, char **envp)
 		//some kind of exit code?
 		return ;
 	}
-	if (is_parent_built_in(cmd->args->value))
-		execute_parent(shell, cmd->args, shell->last_exit_status);
+	if (is_parent_builtin(cmd->args->value))
+		execute_parent(shell, cmd, &shell->last_exit_status);
 	else
 	{
 		pid1 = fork();
 		if (pid1 == 0)
 			execute_child(shell, cmd);
-		waitpid(pid1, shell->last_exit_status, 0);
+		waitpid(pid1, &shell->last_exit_status, 0);
 	}
 	//execute_other?
 	//free(argv);
