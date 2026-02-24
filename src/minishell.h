@@ -6,13 +6,16 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid Date        by              +#+  #+#    #+#             */
-/*   Updated: 2026/02/24 14:49:40 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/24 14:51:58 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# include <signal.h>
+# include "structs.h"
 
 //Global variable used for passing signals
 extern volatile sig_atomic_t	g_sig;
