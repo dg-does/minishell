@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:19:16 by digulraj          #+#    #+#             */
-/*   Updated: 2026/02/18 19:25:50 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/24 13:48:50 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,10 @@ t_minishell *init_shell(char **envp)
 
 int	main(int argc, char **argv, char **envp)
 {
-	int		error;
-	t_token	*tokens;
-	char	*input;
-	t_args	*cmds;
+	int			error;
+	t_token		*tokens;
+	char		*input;
+	t_args		*cmds;
 	t_minishell	*shell;
 
 	(void)argc;
@@ -123,12 +123,15 @@ int	main(int argc, char **argv, char **envp)
 	shell = init_shell(envp);
 	if (!shell)
 		return (1);
+	setup_signals();
 	while (1)
 	{
+		g_sig = 0;
 		input = readline("minishell> ");
 		if (!input || ft_strncmp(input, "exit", 4) == 0)
 		{
-			free (input);
+			printf("exit\n");
+			free(input);
 			break ;
 		}
 		if (input[0] == '\0')
@@ -154,7 +157,9 @@ int	main(int argc, char **argv, char **envp)
 		}
 		expand_commands(cmds, shell);
 		print_list(cmds);
-		//execute
+		g_sig = 1;
+		execute_commands(cmds, shell);
+		g_sig = 0;
 		free_tokens(tokens);
 		//free cmds?
 		free(input);
