@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:19:16 by digulraj          #+#    #+#             */
-/*   Updated: 2026/02/26 11:10:28 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/26 15:04:17 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,6 @@ int	main(int argc, char **argv, char **envp)
 			free(input);
 			continue ;
 		}
-		expand_commands(cmds, shell);
 		g_sig = 1;
 		execute_cmds(shell, cmds);
 		g_sig = 0;

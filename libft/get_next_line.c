@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:14:08 by digulraj          #+#    #+#             */
-/*   Updated: 2025/11/16 16:04:26 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/26 16:45:57 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
 char	*fill_stash(int fd, char *stash)
 {
@@ -99,12 +99,3 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-# include <stdio.h>
-
-int	main(void)
-{
-	int		fd;
-
-	fd = open("test.txt", O_RDONLY);
-	printf("%s", get_next_line(fd));
-}

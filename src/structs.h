@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 12:43:59 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/02/24 12:44:52 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/02/26 14:25:22 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ typedef struct s_redir
 {
 	char			*target;
 	t_redir_type	redir;
+	int				expand;
+	int				heredoc_fd;
 	struct s_redir	*next;
 }	t_redir;
 

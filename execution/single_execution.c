@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_execution.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:17:04 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/26 10:43:01 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/26 16:13:25 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,38 @@ static int	is_parent_builtin(char *cmd)
 		return (1);
 	else 
 		return (0);
+}
+
+void	execute_child(t_minishell *shell, t_args *cmd)
+{
+	char	**argv;
+	char	*path;
+
+	write(2, "child: applying redirs\n", 23);
+	if (cmd->redirs)
+		apply_redirection(cmd->redirs);
+	write(2, "child: building argv\n", 21);
+	argv = args_to_argv(cmd->args);
+	write(2, "child: checking builtin\n", 24);
+	if (is_builtin(cmd->args->value))
+	{
+		shell->last_exit_status = execute_builtin(shell, argv);
+		array_free(argv);
+		exit(shell->last_exit_status);
+	}
+	write(2, "child: finding path\n", 20);
+	path = parse_paths(shell, cmd);
+	if (!path)
+	{
+		ft_putstr_fd("minishell: command not found\n", 2);
+		exit(127);
+	}
+	write(2, "child: execve\n", 14);
+	execve(path, argv, shell->env);
+	perror("minishell: child");
+	array_free(argv);
+	free(path);
+	exit(127); //correct this way or call exit function
 }
 
 void	execute_simple(t_minishell *shell, t_args *cmd)

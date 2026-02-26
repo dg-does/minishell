@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+         #
+#    By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/20 13:29:21 by fgreiff           #+#    #+#              #
-#    Updated: 2026/02/26 11:54:49 by digulraj         ###   ########.fr        #
+#    Updated: 2026/02/26 16:47:10 by fgreiff          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,10 @@ SRCS = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 	  ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strcmp.c ft_strnstr.c \
 	  ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c ft_isspace.c \
 	  ft_printf.c ft_puthex_low.c ft_puthex_upp.c \
-	  ft_putnbr.c ft_putptr.c ft_putunsigned.c ft_putstr.c
+	  ft_putnbr.c ft_putptr.c ft_putunsigned.c ft_putstr.c get_next_line.c
 
 BONUS_SRCS = ft_lstmap.c ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c \
-			ft_lstiter.c ft_lstlast.c ft_lstnew.c ft_lstsize.c get_next_line.c
+			ft_lstiter.c ft_lstlast.c ft_lstnew.c ft_lstsize.c 
 
 NAME = libft.a
 OBJ_DIR = objects
