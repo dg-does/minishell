@@ -1,41 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/03 11:39:57 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/26 11:03:36 by digulraj         ###   ########.fr       */
+/*   Created: 2025/05/28 17:39:47 by digulraj          #+#    #+#             */
+/*   Updated: 2026/02/26 11:02:37 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "built_in.h"
+#include "libft.h"
 
-int	ft_echo(char **argv)
+int	ft_putnbr(int n)
 {
-	int	n;
-	int	i;
+	char	*str;
+	int		len;
 
-	n = 0;
-	if (!argv[1])
-		return (1);
-	if (ft_strcmp(argv[1], "-n") == 0)
-	{
-		n = 1;
-		i = 2;
-	}
-	else
-	{
-		n = 0;
-		i = 1;
-	}
-	while (argv[i])
-	{
-		ft_printf("%s ", argv[i]);
-		i++;
-	}
-	if (n == 0)
-		write (1, "\n", 1);
-	return (0);
+	ft_putnbr_fd(n, 1);
+	str = ft_itoa(n);
+	if (!str)
+		return (0);
+	len = ft_strlen(str);
+	free(str);
+	return (len);
 }
