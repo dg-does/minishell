@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 11:41:31 by digulraj          #+#    #+#             */
-/*   Updated: 2026/02/24 16:50:15 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/24 17:00:55 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	handle_sigint(int sig)
 	}
 }
 
-// Handler for Ctrl+\ (SIGQUIT) - deleted since it does nothing at the prompt
-// Handler for Crtl+D is main because it exits the shell
+// Ctrl+\ (SIGQUIT) does nothing at the prompt
+// Handler for Crtl+D is in main because it exits the shell
 
 // Setup signal handlers for interactive mode
 void	setup_signals(void)
