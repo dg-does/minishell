@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:21:58 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/24 21:15:37 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/02/26 11:08:03 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ int	ft_export(t_minishell *shell, char *export_value)
 		free(shell->env[i]);
 		shell->env[i] = ft_strdup(export_value);
 	}
-    printf("DEBUG export: added %s\n", export_value);
-    printf("DEBUG last env: %s\n", shell->env[i]);  
+    ft_printf("DEBUG export: added %s\n", export_value);
+    ft_printf("DEBUG last env: %s\n", shell->env[i]);  
     return (0);
 }
 

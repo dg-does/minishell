@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 11:43:33 by digulraj          #+#    #+#             */
-/*   Updated: 2026/02/03 12:26:01 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/26 11:08:42 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_token	*tokenize(char *input, int *error)
 	}
 	return (head);
 }
-// Printing functions just for testing:
+/* Printing functions just for testing:
 
 const char	*token_type(t_type type)
 {
@@ -115,3 +115,4 @@ void	print_tokens(t_token *head)
 		current = current->next;
 	}
 }
+//*/

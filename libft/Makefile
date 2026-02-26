@@ -6,7 +6,7 @@
 #    By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/20 13:29:21 by fgreiff           #+#    #+#              #
-#    Updated: 2026/02/26 11:01:17 by digulraj         ###   ########.fr        #
+#    Updated: 2026/02/26 11:54:49 by digulraj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,28 +21,30 @@ SRCS = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 	  ft_putnbr.c ft_putptr.c ft_putunsigned.c ft_putstr.c
 
 BONUS_SRCS = ft_lstmap.c ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c \
-			ft_lstiter.c ft_lstlast.c ft_lstnew.c ft_lstsize.c 
+			ft_lstiter.c ft_lstlast.c ft_lstnew.c ft_lstsize.c get_next_line.c
 
 NAME = libft.a
-OBJS = $(SRCS:.c=.o)
-BONUS_OBJS = $(BONUS_SRCS:.c=.o)
+OBJ_DIR = objects
+OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
+BONUS_OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(BONUS_SRCS))
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I.
+CFLAGS = -Wall -Wextra -Werror -I. -fPIC
 AR = ar rcs
 
 all: $(NAME)
 
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
 $(NAME): $(OBJS)
 	$(AR) $(NAME) $(OBJS)
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
 
 bonus: $(NAME) $(BONUS_OBJS)
 	$(AR) $(NAME) $(BONUS_OBJS)
 
 clean:
-	rm -f $(OBJS) $(BONUS_OBJS)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -f $(NAME)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+         #
+#    By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 11:46:07 by digulraj          #+#    #+#              #
-#    Updated: 2026/02/24 17:09:14 by fgreiff          ###   ########.fr        #
+#    Updated: 2026/02/26 11:58:48 by digulraj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@
 NAME = minishell
 
 SRC_DIR = src
+OBJ_DIR = objects
 LEX_DIR = lexer
 PARSE_DIR = parser
 LIBFT_DIR = libft
@@ -37,29 +38,30 @@ SRC =	$(SRC_DIR)/main.c $(SRC_DIR)/utils.c $(SRC_DIR)/signalling.c \
 		$(EXEC_DIR)/multiple_execution.c $(EXEC_DIR)/handle_redirection.c $(EXEC_DIR)/execution_utils.c \
 		$(EXEC_DIR)/execute_parent.c $(EXEC_DIR)/execute_child.c 
 
-OBJ = $(SRC:.c=.o)
+OBJ = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC))
 
 all: $(NAME)
 
 $(LIBFT_LIB):
 	@$(MAKE) -s -C $(LIBFT_DIR)
+
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 	
 $(NAME): $(OBJ) $(LIBFT_LIB)
 	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJ) $(LIBFT_LIB) -o $(NAME) $(LDLIBS)
 	@echo "Executable called $(NAME) created. Run with ./minishell"
 
-%.o: %.c
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
 clean:
-	@rm -f $(OBJ)
+	@rm -rf $(OBJ_DIR)
 	@make clean -s -C $(LIBFT_DIR)
 	@echo "Object files deleted"
 
 fclean: clean
 	@rm -f $(NAME)
 	@make fclean -s -C $(LIBFT_DIR)
-	@echo "Executable and object files deleted"
+	@echo "Executable deleted"
 
 re: fclean all
 

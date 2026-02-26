@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:19:16 by digulraj          #+#    #+#             */
-/*   Updated: 2026/02/26 10:24:18 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/26 11:10:28 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int	main(int argc, char **argv, char **envp)
 		input = readline("minishell> ");
 		if (!input || ft_strncmp(input, "exit", 4) == 0)
 		{
-			printf("exit\n");
+			ft_printf("exit\n");
 			free(input);
 			break ;
 		}
@@ -141,11 +141,10 @@ int	main(int argc, char **argv, char **envp)
 		tokens = tokenize(input, &error);
 		if (error)
 		{
-			printf("ERROR: Unclosed quote\n");
+			ft_printf("ERROR: Unclosed quote\n");
 			free(input);
 			continue ;
 		}
-		//print_tokens(tokens);
 		cmds = parsing_tokens(tokens);
 		if (!cmds)
 		{
@@ -154,7 +153,6 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		}
 		expand_commands(cmds, shell);
-		print_list(cmds);
 		g_sig = 1;
 		execute_cmds(shell, cmds);
 		g_sig = 0;

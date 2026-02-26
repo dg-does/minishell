@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 12:42:21 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/18 19:23:21 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/26 11:07:48 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_env(char **envp)
 	i = 0;
 	while (envp[i] != NULL)
 	{
-		printf("%s\n", envp[i]);
+		ft_printf("%s\n", envp[i]);
 		i++;
 	}
 	return (0);
