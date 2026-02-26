@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:19:16 by digulraj          #+#    #+#             */
-/*   Updated: 2026/02/24 17:02:13 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/26 10:24:18 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ int	main(int argc, char **argv, char **envp)
 			free(input);
 			continue ;
 		}
-		print_tokens(tokens);
+		//print_tokens(tokens);
 		cmds = parsing_tokens(tokens);
 		if (!cmds)
 		{

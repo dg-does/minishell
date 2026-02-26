@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 11:06:29 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/18 19:23:11 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/24 17:58:31 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_cd(char **argv)
 			return (1);
 		}
 	}
-	if (argv[1] && argv[2])
+	else if (argv[2])
 	{
 		ft_putstr_fd("cd: too many arguments\n", 2);
 		return (1);
