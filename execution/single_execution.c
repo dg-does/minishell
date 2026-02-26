@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_execution.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:17:04 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/24 15:33:45 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/02/26 10:43:01 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,11 @@ void	execute_simple(t_minishell *shell, t_args *cmd)
 	{
 		pid1 = fork();
 		if (pid1 == 0)
+		{
+			reset_signals();
 			execute_child(shell, cmd);
+		}
 		waitpid(pid1, &shell->last_exit_status, 0);
 	}
-	//execute_other?
 	//free(argv);
 }
