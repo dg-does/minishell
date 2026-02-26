@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 14:55:34 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/24 18:18:35 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/02/26 10:36:41 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	execute_child(t_minishell *shell, t_args *cmd)
 {
 	char	**argv;
 	char	*path;
-	int		exit_code;
 
 	write(2, "child: applying redirs\n", 23);
 	if (cmd->redirs)
@@ -27,9 +26,9 @@ void	execute_child(t_minishell *shell, t_args *cmd)
 	write(2, "child: checking builtin\n", 24);
 	if (is_builtin(cmd->args->value))
 	{
-		exit_code = execute_builtin(shell, argv);
+		shell->last_exit_status = execute_builtin(shell, argv);
 		array_free(argv);
-		exit(exit_code);
+		exit(shell->last_exit_status);
 	}
 	write(2, "child: finding path\n", 20);
 	path = parse_paths(shell, cmd);
