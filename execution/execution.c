@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:05:55 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/24 16:39:09 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/26 11:32:28 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 
 void	execute_cmds(t_minishell *shell, t_args *cmds)
 {
-	if (!cmds)
-		return ;
-	if (!cmds->next)
+	int	cmd_count;
+
+	cmd_count = count_cmds(cmds);
+
+	if (cmd_count == 1)
 		execute_simple(shell, cmds);
-	/*else
-		execute_complex(shell, cmds, last_exit_status, envp);*/
+	else
+		execute_multiple(shell, cmds, cmd_count);
 }

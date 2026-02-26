@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:21:58 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/26 13:50:08 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/26 14:05:30 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ static int	check_validity(char *export_value)
 	if (!ft_isalpha(export_value[0]) && export_value[0] != '_')
 		return (1);
 	while (export_value[i] != '\0' && export_value[i] != '=')
+	i = 1;
+	if (!ft_isalpha(export_value[0]) && export_value[0] != '_')
+		return (1);
+	while (export_value[i] != '\0' && export_value[i] != '=')
 	{
 		if (!ft_isalnum(export_value[i]) && export_value[i] != '_')
 			return (1);
@@ -41,29 +45,29 @@ static int	check_validity(char *export_value)
 
 int	ft_export(t_minishell *shell, char *export_value)
 {
-    int		key_len;
-    int		i;
-    int 	j;
+	int		key_len;
+	int		i;
+	int		j;
 	char	**temp_env;
 
-    key_len = 0;
-    if (check_validity(export_value))
-    {
-        //print error?
-        return (1);
-    }
-    while (export_value[key_len] != '=' && export_value[key_len] != '\0')
-        key_len++;
-    key_len++;
-    i = 0;
-    while (shell->env[i] != NULL)
-    {
-        if (ft_strncmp(shell->env[i], export_value, key_len) == 0)
-            break ;
-        i++;
-    }
-    if (shell->env[i] == NULL)
-    {
+	key_len = 0;
+	if (check_validity(export_value))
+	{
+		//print error?
+		return (1);
+	}
+	while (export_value[key_len] != '=' && export_value[key_len] != '\0')
+		key_len++;
+	key_len++;
+	i = 0;
+	while (shell->env[i] != NULL)
+	{
+		if (ft_strncmp(shell->env[i], export_value, key_len) == 0)
+			break ;
+		i++;
+	}
+	if (shell->env[i] == NULL)
+	{
 		j = 0;
 		temp_env = malloc(sizeof(char *) * (i + 2));
 		while (shell->env[j] != NULL)
@@ -76,14 +80,14 @@ int	ft_export(t_minishell *shell, char *export_value)
 		free(shell->env);
 		shell->env = temp_env;
 	}
-    else
-    {
+	else
+	{
 		free(shell->env[i]);
 		shell->env[i] = ft_strdup(export_value);
 	}
-    ft_printf("DEBUG export: added %s\n", export_value);
-    ft_printf("DEBUG last env: %s\n", shell->env[i]);  
-    return (0);
+	printf("DEBUG export: added %s\n", export_value);
+	printf("DEBUG last env: %s\n", shell->env[i]);
+	return (0);
 }
 
 
