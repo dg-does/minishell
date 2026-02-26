@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:21:58 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/26 11:08:03 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/02/26 13:50:08 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,17 @@
 //for this use strncmp with the i from the first loop
 //if "KEY="already exists just replace VALUE
 //if thats the case free the poionter and strdup export value
-//if not at the end of ENV allocate strlen(export_value) new array and strdup with "KEY=VALUE"
+//if not at the end of ENV allocate strlen(export_value) 
+//new array and strdup with "KEY=VALUE"
 
 static int	check_validity(char *export_value)
 {
-    int i;
+	int	i;
 
-    i = 1;
-    if (!ft_isalpha(export_value[0]) && export_value[0] != '_')
-        return (1);
-    while (export_value[i] != '\0' && export_value[i] != '=')
+	i = 1;
+	if (!ft_isalpha(export_value[0]) && export_value[0] != '_')
+		return (1);
+	while (export_value[i] != '\0' && export_value[i] != '=')
 	{
 		if (!ft_isalnum(export_value[i]) && export_value[i] != '_')
 			return (1);

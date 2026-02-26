@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:33:04 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/24 15:11:06 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/02/26 14:02:41 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 
 static int	check_validity(char *export_value)
 {
-    int i;
+	int	i;
 
-    i = 1;
-    if (!ft_isalpha(export_value[0]) && export_value[0] != '_')
-        return (1);
-    while (export_value[i] != '\0')
+	i = 1;
+	if (!ft_isalpha(export_value[0]) && export_value[0] != '_')
+		return (1);
+	while (export_value[i] != '\0')
 	{
 		if (!ft_isalnum(export_value[i] && export_value[i] != '_'))
 			return (1);
