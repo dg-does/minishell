@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: felixgreiff <felixgreiff@student.42.fr>    +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 12:21:11 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/19 12:46:41 by felixgreiff      ###   ########.fr       */
+/*   Updated: 2026/03/02 12:41:57 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void array_free(char **str)
+void	array_free(char **str)
 {
 	int	i;
 

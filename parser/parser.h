@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:44:12 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/02/24 15:06:03 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/02 12:41:42 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_args
 	struct s_args	*next;
 }	t_args;
 */
-typedef struct s_minishell t_minishell;
+typedef struct s_minishell	t_minishell;
 
 //parser_utils.c
 void			allocate_nodes_arg(t_token *token, t_args **args_head);

@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 16:37:06 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/26 11:07:53 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/02 13:59:58 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,3 @@ void	ft_exit(t_minishell *shell)
 	free_shell(shell);
 	exit(shell->last_exit_status);
 }
-

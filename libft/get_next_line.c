@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:14:08 by digulraj          #+#    #+#             */
-/*   Updated: 2026/02/26 16:45:57 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/02 13:59:37 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,3 @@ char	*get_next_line(int fd)
 	stash = trim_stash(stash);
 	return (line);
 }
-

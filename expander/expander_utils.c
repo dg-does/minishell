@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:00:55 by digulraj          #+#    #+#             */
-/*   Updated: 2026/02/03 16:12:59 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/02 13:58:09 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static char	*get_var_name(char *str, int *index)
 		*index = start + 1;
 		return (ft_strdup("?"));
 	}
-
 	while (str[start + len] 
 		&& ((ft_isalnum(str[start + len])) || str[start + len] == '_'))
 		len++;

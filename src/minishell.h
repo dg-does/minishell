@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid Date        by                   #+#    #+#             */
-/*   Updated: 2026/02/24 16:44:41 by digulraj         ###   ########.fr       */
+/*   Created: 2026/01/14 14:19:16 by digulraj          #+#    #+#             */
+/*   Updated: 2026/03/02 12:43:15 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H

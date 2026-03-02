@@ -6,19 +6,18 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 11:41:31 by digulraj          #+#    #+#             */
-/*   Updated: 2026/02/24 17:00:55 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/02 13:57:30 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-volatile sig_atomic_t g_sig = 0;
+volatile sig_atomic_t	g_sig = 0;
 
 // Handler for SIGINT (Ctrl+C) - display newline and new prompt
 void	handle_sigint(int sig)
 {
 	(void)sig;
-
 	if (!g_sig)
 	{
 		write(STDOUT_FILENO, "\n", 1);

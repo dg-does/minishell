@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 17:38:55 by digulraj          #+#    #+#             */
-/*   Updated: 2026/02/26 11:02:17 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/02 13:59:04 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,3 @@ int	ft_printf(const char *str, ...)
 	va_end(args);
 	return (count);
 }
-

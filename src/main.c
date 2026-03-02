@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:19:16 by digulraj          #+#    #+#             */
-/*   Updated: 2026/02/26 15:04:17 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/02 13:56:52 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	free_shell(t_minishell *shell)
 	free(shell);
 }
 
-t_minishell *init_shell(char **envp)
+t_minishell	*init_shell(char **envp)
 {
 	t_minishell	*shell;
 	int			i;
@@ -162,4 +162,3 @@ int	main(int argc, char **argv, char **envp)
 	free_shell(shell);
 	return (shell->last_exit_status);
 }
-
