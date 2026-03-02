@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:21:58 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/26 14:05:30 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/02 10:58:29 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,13 @@ static int	check_validity(char *export_value)
 	i = 1;
 	if (!ft_isalpha(export_value[0]) && export_value[0] != '_')
 		return (1);
-	while (export_value[i] != '\0' && export_value[i] != '=')
 	i = 1;
-	if (!ft_isalpha(export_value[0]) && export_value[0] != '_')
-		return (1);
+	while (export_value[i] != '\0' && export_value[i] != '=')
+	{
+		if (!ft_isalpha(export_value[0]) && export_value[0] != '_')
+			return (1);
+		i++;
+	}
 	while (export_value[i] != '\0' && export_value[i] != '=')
 	{
 		if (!ft_isalnum(export_value[i]) && export_value[i] != '_')
@@ -58,7 +61,8 @@ int	ft_export(t_minishell *shell, char *export_value)
 	}
 	while (export_value[key_len] != '=' && export_value[key_len] != '\0')
 		key_len++;
-	key_len++;
+	if (export_value[key_len] == '=')
+		key_len++;
 	i = 0;
 	while (shell->env[i] != NULL)
 	{

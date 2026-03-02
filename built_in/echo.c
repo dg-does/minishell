@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 11:39:57 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/26 11:03:36 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/02 10:51:56 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_echo(char **argv)
 	}
 	while (argv[i])
 	{
-		ft_printf("%s ", argv[i]);
+		ft_printf("%s", argv[i]);
 		i++;
 	}
 	if (n == 0)
