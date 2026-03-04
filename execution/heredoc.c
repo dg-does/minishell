@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 14:30:25 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/02/26 16:44:20 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/03 12:07:00 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ void	prepare_heredocs(t_minishell *shell, t_args *cmds)
 	}
 }
 
+static int	is_limiter(char *line, char *limiter)
+{
+	return (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0
+		&& line[ft_strlen(limiter)] == '\n');
+}
+
 int	exec_heredoc(t_minishell *shell, char *limiter, int expand)
 {
 	int		hd_pipe[2];
@@ -46,14 +52,8 @@ int	exec_heredoc(t_minishell *shell, char *limiter, int expand)
 	{
 		ft_putstr_fd("> ", STDOUT_FILENO);
 		line = get_next_line(STDIN_FILENO);
-		if (!line)
-			break ;
-		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0
-			&& line[ft_strlen(limiter)] == '\n')
-		{
-			free(line);
-			break ;
-		}
+		if (!line || is_limiter(line, limiter))
+			return (free(line), close(hd_pipe[1]), hd_pipe[0]);
 		if (expand)
 		{
 			expanded = expand_vars(line, shell->last_exit_status);

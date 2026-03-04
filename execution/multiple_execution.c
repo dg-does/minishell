@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:17:21 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/26 16:29:45 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/03 12:44:14 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 #include "execution.h"
 #include "minishell.h"
 
-static void	child_process(t_minishell *shell, t_args *cmd,
-	int **pipes, int i, int cmd_count)
+static void	child_process(t_minishell *shell, t_args *cmds,
+	int **pipes, int i)
 {
 	char	**argv;
 	char	*path;
+	int		cmd_count;
 
+
+	cmd_count = shell->cmd_count;
 	if (i == 0)
 		dup2(pipes[0][1], STDOUT_FILENO);
 	else if (i == cmd_count - 1)
@@ -29,12 +32,12 @@ static void	child_process(t_minishell *shell, t_args *cmd,
 		dup2(pipes[i - 1][0], STDIN_FILENO);
 		dup2(pipes[i][1], STDOUT_FILENO);
 	}
-	apply_redirection(cmd->redirs);
+	apply_redirection(cmds->redirs);
 	close_all_pipes(pipes, cmd_count - 1);
-	argv = args_to_argv(cmd->args);
+	argv = args_to_argv(cmds->args);
 	if (is_builtin(argv[0]))
 		exit(execute_builtin(shell, argv));
-	path = parse_paths(shell, cmd);
+	path = parse_paths(shell, cmds);
 	execve(path, argv, shell->env);
 	perror("minishell: execve");
 	exit(127);
@@ -80,15 +83,15 @@ int	**create_pipes(int count)
 	return (pipes);
 }
 
-void	execute_multiple(t_minishell *shell, t_args *cmds, int cmd_count)
+void	execute_multiple(t_minishell *shell, t_args *cmds)
 {
 	int		i;
 	pid_t	*pids;
 	int		**pipes;
 	t_args	*cur;
 
-	pipes = create_pipes(cmd_count - 1);
-	pids = malloc(sizeof(pid_t) * cmd_count);
+	pipes = create_pipes(shell->cmd_count - 1);
+	pids = malloc(sizeof(pid_t) * shell->cmd_count);
 	cur = cmds;
 	i = 0;
 	while (cur)
@@ -97,10 +100,10 @@ void	execute_multiple(t_minishell *shell, t_args *cmds, int cmd_count)
 		if (pids[i] == -1)
 			perror("minishell: fork");
 		if (pids[i] == 0)
-			child_process(shell, cur, pipes, i, cmd_count);
+			child_process(shell, cur, pipes, i);
 		cur = cur->next;
 		i++;
 	}
-	close_all_pipes(pipes, cmd_count - 1);
-	collect_status(shell, pids, cmd_count);
+	close_all_pipes(pipes, shell->cmd_count - 1);
+	collect_status(shell, pids, shell->cmd_count);
 }

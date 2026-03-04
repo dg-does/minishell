@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 12:43:59 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/02/26 14:25:22 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/03 12:39:51 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_minishell
 {
 	char	**env;
 	int		last_exit_status;
+	int		cmd_count;
 }	t_minishell;
 
 typedef enum e_token_type

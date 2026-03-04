@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 17:24:11 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/26 16:26:38 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/03 12:42:15 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	redirect_out(t_redir *redirs);
 void	redirect_append(t_redir *redirs);
 void	redirect_heredoc(t_redir *redirs);
 
-
 //here_doc
 int		exec_heredoc(t_minishell *shell, char *limiter, int expand);
 void	prepare_heredocs(t_minishell *shell, t_args *cmds);
@@ -49,7 +48,7 @@ int		is_builtin(char *cmd);
 void	execute_simple(t_minishell *shell, t_args *cmd);
 
 //multiple-cmds
-void	execute_multiple(t_minishell *shell, t_args *cmds, int cmd_count);
+void	execute_multiple(t_minishell *shell, t_args *cmds);
 int		**create_pipes(int count);
 
 //path parsing
