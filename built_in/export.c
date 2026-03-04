@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:21:58 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/02 14:00:50 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/04 12:04:22 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,7 @@
 #include "built_in.h"
 #include "minishell.h"
 
-//Input in format "KEY=VALUE"
-//need to check if already has been added a "KEY="
-//for this use strncmp with the i from the first loop
-//if "KEY="already exists just replace VALUE
-//if thats the case free the poionter and strdup export value
-//if not at the end of ENV allocate strlen(export_value) 
-//new array and strdup with "KEY=VALUE"
-
-static int	check_validity(char *export_value)
+static int	is_valid(char *export_value)
 {
 	int	i;
 
