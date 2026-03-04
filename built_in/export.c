@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:21:58 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/04 12:04:22 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/04 12:14:14 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,5 @@ int	ft_export(t_minishell *shell, char *export_value)
 		free(shell->env[i]);
 		shell->env[i] = ft_strdup(export_value);
 	}
-	printf("DEBUG export: added %s\n", export_value);
-	printf("DEBUG last env: %s\n", shell->env[i]);
 	return (0);
 }

@@ -6,11 +6,18 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 11:39:57 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/02 10:51:56 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/03 12:00:13 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built_in.h"
+
+static int	get_start(char **argv)
+{
+	if (ft_strcmp(argv[1], "-n") == 0)
+		return (2);
+	return (1);
+}
 
 int	ft_echo(char **argv)
 {
@@ -18,21 +25,15 @@ int	ft_echo(char **argv)
 	int	i;
 
 	n = 0;
+	i = get_start(argv);
+	n = (i == 2);
 	if (!argv[1])
-		return (1);
-	if (ft_strcmp(argv[1], "-n") == 0)
-	{
-		n = 1;
-		i = 2;
-	}
-	else
-	{
-		n = 0;
-		i = 1;
-	}
+		return (write(1, "\n", 1), 0);
 	while (argv[i])
 	{
-		ft_printf("%s", argv[i]);
+		ft_putstr_fd(argv[i], 1);
+		if (argv[i + 1])
+			ft_putstr_fd(" ", 1);
 		i++;
 	}
 	if (n == 0)
