@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multiple_execution.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:17:21 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/03 12:44:14 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/04 14:15:59 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void	child_process(t_minishell *shell, t_args *cmds,
 	char	**argv;
 	char	*path;
 	int		cmd_count;
-
 
 	cmd_count = shell->cmd_count;
 	if (i == 0)
