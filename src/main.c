@@ -6,53 +6,11 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:19:16 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/06 17:43:24 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/06 18:24:34 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
-int	main(void)
-{
-	char	*tests[] = {
-		"echo hello world",
-        "echo \"hello world\"",
-        "echo 'hello world'",
-        "cat file.txt > output.txt",
-        "cat file.txt >> output.txt",
-        "cat << EOF",
-        "grep pattern < input.txt | sort",
-        "echo \"$USER is logged in\"",
-        "echo '$USER will not expand'",
-        "echo \"Price is $5\"",
-        "echo hello\"world\"test",
-        "echo 'single'\"double\"mixed",
-        "ls -la | grep txt | wc -l",
-        "echo \"unclosed",
-        NULL
-	};
-	int		i;
-	int		error;
-	t_token	*tokens;
-
-	i = 0;
-	while (tests[i])
-	{
-		printf("\n\nInput: %s\n", tests[i]);
-		tokens = tokenize(tests[i], &error);
-		if (error)
-			printf("ERROR: Close your quotes!!\n");
-		else
-		{
-			print_tokens(tokens);
-			parsing_tokens(tokens);
-			free_tokens(tokens);
-		}
-		i++;
-	}
-	return (0);
-}
-//*/
 
 void	free_shell(t_minishell *shell)
 {
@@ -86,22 +44,13 @@ t_minishell	*init_shell(char **envp)
 		i++;
 	shell->env = malloc(sizeof(char *) * (i + 1));
 	if (!shell->env)
-	{
-		free(shell);
-		return (NULL);
-	}
+		return (free(shell), NULL);
 	i = 0;
 	while (envp[i])
 	{
 		shell->env[i] = ft_strdup(envp[i]);
 		if (!shell->env[i])
-		{
-			while (--i >= 0)
-				free(shell->env[i]);
-			free(shell->env);
-			free(shell);
-			return (NULL);
-		}
+			return (free(shell), NULL);
 		i++;
 	}
 	shell->env[i] = NULL;
@@ -109,14 +58,43 @@ t_minishell	*init_shell(char **envp)
 	return (shell);
 }
 
-int	main(int argc, char **argv, char **envp)
+static int	exit_shell(t_minishell *shell)
+{
+	int	exit_status;
+
+	ft_printf("exit\n");
+	exit_status = shell->last_exit_status;
+	free_shell(shell);
+	return (exit_status);
+}
+
+static void	loop_shell(t_minishell *shell, char *input)
 {
 	int			error;
 	t_token		*tokens;
-	char		*input;
 	t_args		*cmds;
+
+	add_history(input);
+	tokens = tokenize(input, &error);
+	if (error)
+	{
+		ft_printf("ERROR: Unclosed quote\n");
+		return ;
+	}
+	cmds = parsing_tokens(tokens);
+	if (!cmds)
+		return ;
+	g_sig = 1;
+	execute_cmds(shell, cmds);
+	g_sig = 0;
+	rl_clear_history();
+	gc_free_all();
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	char		*input;
 	t_minishell	*shell;
-	int			exit_status;
 
 	(void)argc;
 	(void)argv;
@@ -129,38 +107,8 @@ int	main(int argc, char **argv, char **envp)
 		g_sig = 0;
 		input = readline("minishell> ");
 		if (!input || ft_strncmp(input, "exit", 4) == 0)
-		{
-			ft_printf("exit\n");
-		//	free(input);
-			break ;
-		}
-		if (input[0] == '\0')
-		{
-		//	free(input);
-			continue ;
-		}
-		add_history(input);
-		tokens = tokenize(input, &error);
-		if (error)
-		{
-			ft_printf("ERROR: Unclosed quote\n");
-		//	free(input);
-			continue ;
-		}
-		cmds = parsing_tokens(tokens);
-		if (!cmds)
-		{
-		//	free_tokens(tokens);
-		//	free(input);
-			continue ;
-		}
-		g_sig = 1;
-		execute_cmds(shell, cmds);
-		g_sig = 0;
-		rl_clear_history();
-		gc_free_all();
+			return (exit_shell(shell));
+		if (input[0] != '\0')
+			loop_shell(shell, input);
 	}
-	exit_status = shell->last_exit_status;
-	free_shell(shell);
-	return (exit_status);
 }
