@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 14:23:33 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/06 17:36:56 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/06 18:13:35 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,38 @@ static void	expand_redirs(t_redir *redirs, int last_exit_status)
 	}
 }
 
+static t_arg	*remove_empty_arg(t_args *cmds, t_arg *arg, t_arg *prev)
+{
+	t_arg	*next;
+
+	next = arg->next;
+	if (prev)
+		prev->next = next;
+	else
+		cmds->args = next;
+	return (next);
+}
+
 void	expand_commands(t_args *cmds, t_minishell *shell)
 {
 	t_arg	*arg;
+	t_arg	*prev;
 
 	while (cmds)
 	{
 		arg = cmds->args;
+		prev = NULL;
 		while (arg)
 		{
 			if (arg->quote_type != SINGLE_QUOTE && ft_strchr(arg->value, '$'))
 				arg->value = expand_vars(arg->value, shell->last_exit_status);
-			arg = arg->next;
+			if (arg->quote_type == NO_QUOTE && ft_strlen(arg->value) == 0)
+				arg = remove_empty_arg(cmds, arg, prev);
+			else
+			{
+				prev = arg;
+				arg = arg->next;
+			}
 		}
 		expand_redirs(cmds->redirs, shell->last_exit_status);
 		cmds = cmds->next;
