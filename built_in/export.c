@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:21:58 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/04 14:16:40 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/06 11:44:22 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ static int	get_key_len(char *export_value)
 	int	i;
 
 	i = 0;
-	while (export_value[i] != '\0' && export[i] != '=')
+	while (export_value[i] != '\0' && export_value[i] != '=')
 		i++;
 	if (export_value[i] == '=')
 		i++;
 	return (i);
 }
 
-static char	**append_to_env(char **env, char *export_value, int len)
+static char	**append_to_env(char **env, char *export_value)
 {
 	char	**new_env;
 	int		i;
@@ -69,14 +69,19 @@ int	ft_export(t_minishell *shell, char *export_value)
 	int		i;
 
 	if (!is_valid(export_value))
+	{
+		ft_putstr_fd("export: '", 2);
+		ft_putstr_fd(export_value, 2);
+		ft_putstr_fd("': not a valid identifier\n", 2);
 		return (1);
+	}
 	key_len = get_key_len(export_value);
 	i = 0;
 	while (shell->env[i] != NULL 
 		&& ft_strncmp(shell->env[i], export_value, key_len) != 0)
 		i++;
 	if (shell->env[i] == NULL)
-		shell->env = append_to_env(shell->env, export_value, key_len);
+		shell->env = append_to_env(shell->env, export_value);
 	else
 	{
 		free(shell->env[i]);

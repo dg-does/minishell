@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 11:39:57 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/03 12:00:13 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/06 11:34:24 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	ft_echo(char **argv)
 	int	i;
 
 	n = 0;
-	i = get_start(argv);
-	n = (i == 2);
 	if (!argv[1])
 		return (write(1, "\n", 1), 0);
+	i = get_start(argv);
+	n = (i == 2);
 	while (argv[i])
 	{
 		ft_putstr_fd(argv[i], 1);

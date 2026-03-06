@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:00:55 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/02 13:58:09 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/06 11:22:14 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,10 @@ char	*expand_vars(char *str, int last_exit_status)
 		{
 			var_name = get_var_name(str, &i);
 			if (!var_name)
+			{
 				buffer[j++] = '$';
+				i++;
+			}
 			else
 			{
 				j = copy2buf(buffer, var_name, j, last_exit_status);

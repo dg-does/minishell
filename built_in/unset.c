@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:33:04 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/04 11:51:25 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/06 11:58:33 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,33 @@ static int	find_env_index(char **env, char *unset_value, int len)
 	return (-1);
 }
 
+static char	**build_new_env(char **env, int skip, int len)
+{
+	char	**new_env;
+	int		j;
+	int		k;
+
+	new_env = malloc(sizeof(char *) * len);
+	j = 0;
+	k = 0;
+	while (env[j])
+	{
+		if (j != skip)
+			new_env[k++] = env[j];
+		j++;
+	}
+	new_env[k] = NULL;
+	return (new_env);
+}
+
 int	ft_unset(t_minishell *shell, char *unset_value)
 {
 	int		i;
 	int		j;
 	char	**new_env;
 
+	if (!unset_value)
+		return (0);
 	if (!is_valid(unset_value))
 		return (1);
 	i = find_env_index(shell->env, unset_value, ft_strlen(unset_value));
@@ -58,18 +79,9 @@ int	ft_unset(t_minishell *shell, char *unset_value)
 	j = 0;
 	while (shell->env[j])
 		j++;
-	new_env = malloc(sizeof(char *) * j);
-	while (shell->env[j + (j >= i)])
-		new_env[j++] = shell->env[j + (j >= i)];
-	new_env[j] = NULL;
+	new_env = build_new_env(shell->env, i, j);
 	free(shell->env[i]);
 	free(shell->env);
 	shell->env = new_env;
 	return (0);
 }
-
-/*
-The j + (j >= i) trick in the copy loop skips index i 
---- (j >= i) evaluates to 1 when we've passed the deleted entry, 
-so it naturally offsets the source index by 1
-*/
