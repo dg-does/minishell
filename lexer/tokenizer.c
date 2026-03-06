@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 11:43:33 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/06 14:13:41 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/06 17:35:49 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	add_token(t_token **head, char *value, t_type type, t_quote quote_type)
 	new_token->value = gc_strdup(value);
 	if (!new_token->value)
 	{
-		free(new_token);
+		//free(new_token);
 		return ;
 	}
 	new_token->type = type;
@@ -39,7 +39,7 @@ void	add_token(t_token **head, char *value, t_type type, t_quote quote_type)
 		current->next = new_token;
 	}
 }
-
+/*
 void	free_tokens(t_token *head)
 {
 	t_token	*current;
@@ -51,7 +51,7 @@ void	free_tokens(t_token *head)
 		free(current);
 		current = current->next;
 	}
-}
+}*/
 
 t_token	*tokenize(char *input, int *error)
 {
@@ -74,7 +74,8 @@ t_token	*tokenize(char *input, int *error)
 		{
 			j = process_word(input, i, &head, error);
 			if (j == -1)
-				return (free_tokens(head), NULL);
+			//	return (free_tokens(head), NULL);
+				return (NULL);
 			i = j;
 		}
 	}

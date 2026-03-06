@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 14:01:55 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/06 14:10:23 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/06 17:40:30 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,3 +53,5 @@ char	**gc_split(char const *s, char c)
 	}
 	return (result);
 }
+
+// strjoin

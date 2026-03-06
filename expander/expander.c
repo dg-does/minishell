@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 14:23:33 by digulraj          #+#    #+#             */
-/*   Updated: 2026/02/18 19:29:30 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/06 17:36:56 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	expand_redirs(t_redir *redirs, int last_exit_status)
 			if (current->target && ft_strchr(current->target, '$'))
 			{
 				expanded = expand_vars(current->target, last_exit_status);
-				free(current->target);
+			//	free(current->target);
 				current->target = expanded;
 			}
 		}

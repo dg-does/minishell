@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:19:16 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/06 14:14:49 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/06 17:43:24 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,13 @@ t_minishell	*init_shell(char **envp)
 	t_minishell	*shell;
 	int			i;
 
-	shell = gc_malloc(sizeof(t_minishell));
+	shell = malloc(sizeof(t_minishell));
 	if (!shell)
 		return (NULL);
 	i = 0;
 	while (envp[i])
 		i++;
-	shell->env = gc_malloc(sizeof(char *) * (i + 1));
+	shell->env = malloc(sizeof(char *) * (i + 1));
 	if (!shell->env)
 	{
 		free(shell);
@@ -98,7 +98,8 @@ t_minishell	*init_shell(char **envp)
 		{
 			while (--i >= 0)
 				free(shell->env[i]);
-			free_shell(shell);
+			free(shell->env);
+			free(shell);
 			return (NULL);
 		}
 		i++;
@@ -115,6 +116,7 @@ int	main(int argc, char **argv, char **envp)
 	char		*input;
 	t_args		*cmds;
 	t_minishell	*shell;
+	int			exit_status;
 
 	(void)argc;
 	(void)argv;
@@ -129,12 +131,12 @@ int	main(int argc, char **argv, char **envp)
 		if (!input || ft_strncmp(input, "exit", 4) == 0)
 		{
 			ft_printf("exit\n");
-			free(input);
+		//	free(input);
 			break ;
 		}
 		if (input[0] == '\0')
 		{
-			free(input);
+		//	free(input);
 			continue ;
 		}
 		add_history(input);
@@ -142,14 +144,14 @@ int	main(int argc, char **argv, char **envp)
 		if (error)
 		{
 			ft_printf("ERROR: Unclosed quote\n");
-			free(input);
+		//	free(input);
 			continue ;
 		}
 		cmds = parsing_tokens(tokens);
 		if (!cmds)
 		{
-			free_tokens(tokens);
-			free(input);
+		//	free_tokens(tokens);
+		//	free(input);
 			continue ;
 		}
 		g_sig = 1;
@@ -158,6 +160,7 @@ int	main(int argc, char **argv, char **envp)
 		rl_clear_history();
 		gc_free_all();
 	}
+	exit_status = shell->last_exit_status;
 	free_shell(shell);
-	return (shell->last_exit_status);
+	return (exit_status);
 }

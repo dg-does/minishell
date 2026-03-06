@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:23:41 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/06 13:47:40 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/06 17:39:49 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,5 @@ void	collect_status(t_minishell *shell, pid_t *pids, int cmd_count)
 			shell->last_exit_status = WEXITSTATUS(status);
 		i++;
 	}
-	free(pids);
+//	free(pids);
 }

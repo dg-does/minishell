@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:00:55 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/06 14:13:48 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/06 17:37:59 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	copy2buf(char *buffer, char *var_name, int j, int last_exit_status)
 	i = 0;
 	while (var_value[i] && j < TOKEN_BUFFER_SIZE - 1)
 		buffer[j++] = var_value[i++];
-	free(var_value);
+	//free(var_value);
 	return (j);
 }
 
@@ -87,7 +87,7 @@ char	*expand_vars(char *str, int last_exit_status)
 			else
 			{
 				j = copy2buf(buffer, var_name, j, last_exit_status);
-				free(var_name);
+			//	free(var_name);
 			}
 		}
 		else
