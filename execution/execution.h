@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 17:24:11 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/03 12:42:15 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/06 13:41:51 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define EXECUTION_H
 # include <fcntl.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include <unistd.h>
 # include <stdio.h>
 # include "structs.h"
@@ -21,7 +22,7 @@
 
 //execute parent
 int		execute_builtin(t_minishell *shell, char **argv);
-void	execute_parent(t_minishell *shell, t_args *cmd, int *last_exit_status);
+int		execute_parent(t_minishell *shell, t_args *cmd, int *last_exit_status);
 
 //execution utils
 char	**args_to_argv(t_arg *args);
@@ -33,10 +34,10 @@ int		count_cmds(t_args *cmds);
 void	execute_cmds(t_minishell *shell, t_args *cmds);
 
 //handle redirections
-void	apply_redirection(t_redir *redirs);
-void	redirect_in(t_redir *redirs);
-void	redirect_out(t_redir *redirs);
-void	redirect_append(t_redir *redirs);
+int		apply_redirection(t_redir *redirs);
+int		redirect_in(t_redir *redirs);
+int		redirect_out(t_redir *redirs);
+int		redirect_append(t_redir *redirs);
 void	redirect_heredoc(t_redir *redirs);
 
 //here_doc

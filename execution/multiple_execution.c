@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:17:21 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/06 13:47:58 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/06 14:19:06 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static void	child_process(t_minishell *shell, t_args *cmds,
 		dup2(pipes[i - 1][0], STDIN_FILENO);
 		dup2(pipes[i][1], STDOUT_FILENO);
 	}
-	apply_redirection(cmds->redirs);
+	if (apply_redirection(cmds->redirs))
+		exit(1);
 	close_all_pipes(pipes, cmd_count - 1);
 	argv = args_to_argv(cmds->args);
 	if (is_builtin(argv[0]))
