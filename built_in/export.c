@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:21:58 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/04 12:14:14 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/04 14:16:40 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,64 +18,65 @@ static int	is_valid(char *export_value)
 {
 	int	i;
 
-	i = 1;
 	if (!ft_isalpha(export_value[0]) && export_value[0] != '_')
-		return (1);
+		return (0);
 	i = 1;
-	while (export_value[i] != '\0' && export_value[i] != '=')
-	{
-		if (!ft_isalpha(export_value[0]) && export_value[0] != '_')
-			return (1);
-		i++;
-	}
 	while (export_value[i] != '\0' && export_value[i] != '=')
 	{
 		if (!ft_isalnum(export_value[i]) && export_value[i] != '_')
-			return (1);
+			return (0);
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
+static int	get_key_len(char *export_value)
+{
+	int	i;
+
+	i = 0;
+	while (export_value[i] != '\0' && export[i] != '=')
+		i++;
+	if (export_value[i] == '=')
+		i++;
+	return (i);
+}
+
+static char	**append_to_env(char **env, char *export_value, int len)
+{
+	char	**new_env;
+	int		i;
+
+	i = 0;
+	while (env[i])
+		i++;
+	new_env = malloc(sizeof(char *) * (i + 2));
+	i = 0;
+	while (env[i])
+	{
+		new_env[i] = env[i];
+		i++;
+	}
+	new_env[i++] = ft_strdup(export_value);
+	new_env[i] = NULL;
+	free(env);
+	return (new_env);
+}
 
 int	ft_export(t_minishell *shell, char *export_value)
 {
 	int		key_len;
 	int		i;
-	int		j;
-	char	**temp_env;
 
-	key_len = 0;
-	if (check_validity(export_value))
-	{
-		//print error?
+	if (!is_valid(export_value))
 		return (1);
-	}
-	while (export_value[key_len] != '=' && export_value[key_len] != '\0')
-		key_len++;
-	if (export_value[key_len] == '=')
-		key_len++;
+	key_len = get_key_len(export_value);
 	i = 0;
-	while (shell->env[i] != NULL)
-	{
-		if (ft_strncmp(shell->env[i], export_value, key_len) == 0)
-			break ;
+	while (shell->env[i] != NULL 
+		&& ft_strncmp(shell->env[i], export_value, key_len) != 0)
 		i++;
-	}
 	if (shell->env[i] == NULL)
-	{
-		j = 0;
-		temp_env = malloc(sizeof(char *) * (i + 2));
-		while (shell->env[j] != NULL)
-		{
-			temp_env[j] = shell->env[j];
-			j++;
-		}
-		temp_env[j++] = ft_strdup(export_value);
-		temp_env[j++] = NULL;
-		free(shell->env);
-		shell->env = temp_env;
-	}
+		shell->env = append_to_env(shell->env, export_value, key_len);
 	else
 	{
 		free(shell->env[i]);
