@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 17:20:12 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/02/26 14:02:06 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/06 13:53:58 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_pwd(void)
 	size = 256;
 	while (1)
 	{
-		buf = malloc(size);
+		buf = gc_malloc(size);
 		if (!buf)
 			return (1);
 		if (getcwd(buf, size))

@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:19:16 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/02 13:56:52 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/06 14:14:49 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,13 @@ t_minishell	*init_shell(char **envp)
 	t_minishell	*shell;
 	int			i;
 
-	shell = malloc(sizeof(t_minishell));
+	shell = gc_malloc(sizeof(t_minishell));
 	if (!shell)
 		return (NULL);
 	i = 0;
 	while (envp[i])
 		i++;
-	shell->env = malloc(sizeof(char *) * (i + 1));
+	shell->env = gc_malloc(sizeof(char *) * (i + 1));
 	if (!shell->env)
 	{
 		free(shell);
@@ -155,9 +155,8 @@ int	main(int argc, char **argv, char **envp)
 		g_sig = 1;
 		execute_cmds(shell, cmds);
 		g_sig = 0;
-		free_tokens(tokens);
-		//free cmds?
-		free(input);
+		rl_clear_history();
+		gc_free_all();
 	}
 	free_shell(shell);
 	return (shell->last_exit_status);

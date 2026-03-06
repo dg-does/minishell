@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 16:30:16 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/02/26 11:09:35 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/06 13:48:42 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	allocate_nodes_arg(t_token *token, t_args **args_head)
 
 	i = 0;
 	num_cmnds = count_pipes(token);
-	*args_head = malloc(sizeof(t_args));
+	*args_head = gc_malloc(sizeof(t_args));
 	if (!*args_head)
 		return ;
 	(*args_head)->args = NULL;
@@ -50,7 +50,7 @@ void	allocate_nodes_arg(t_token *token, t_args **args_head)
 	current_args = *args_head;
 	while (i < num_cmnds)
 	{
-		current_args->next = malloc(sizeof(t_args));
+		current_args->next = gc_malloc(sizeof(t_args));
 		if (!current_args->next)
 			return ;
 		current_args = current_args->next;

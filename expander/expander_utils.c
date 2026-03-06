@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:00:55 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/06 11:22:14 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/06 14:13:48 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ static char	*get_var_name(char *str, int *index)
 	if (str[start] == '?')
 	{
 		*index = start + 1;
-		return (ft_strdup("?"));
+		return (gc_strdup("?"));
 	}
 	while (str[start + len] 
 		&& ((ft_isalnum(str[start + len])) || str[start + len] == '_'))
 		len++;
 	if (len == 0)
 		return (NULL);
-	var_name = malloc(len + 1);
+	var_name = gc_malloc(len + 1);
 	if (!var_name)
 		return (NULL);
 	ft_strlcpy(var_name, &str[start], len + 1);
@@ -46,8 +46,8 @@ static char	*get_var_value(char *var_name, int last_exit_status)
 		return (ft_itoa(last_exit_status));
 	var_value = getenv(var_name);
 	if (!var_value)
-		return (ft_strdup(""));
-	return (ft_strdup(var_value));
+		return (gc_strdup(""));
+	return (gc_strdup(var_value));
 }
 
 static int	copy2buf(char *buffer, char *var_name, int j, int last_exit_status)
@@ -94,5 +94,5 @@ char	*expand_vars(char *str, int last_exit_status)
 			buffer[j++] = str[i++];
 	}
 	buffer[j] = '\0';
-	return (ft_strdup(buffer));
+	return (gc_strdup(buffer));
 }

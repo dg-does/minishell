@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:23:41 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/26 13:28:42 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/06 13:47:40 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	**args_to_argv(t_arg *args)
 		i++;
 		current = current->next;
 	}
-	argv = malloc(sizeof(char *) * (i + 1));
+	argv = gc_malloc(sizeof(char *) * (i + 1));
 	if (!argv)
 		return (NULL);
 	i = 0;

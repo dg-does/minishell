@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 15:57:21 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/02/26 14:26:58 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/06 13:49:01 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	add_arg(t_args *cmd, char *value, t_quote quote_type)
 	t_arg	*new;
 	t_arg	*tmp;
 
-	new = malloc(sizeof(t_arg));
+	new = gc_malloc(sizeof(t_arg));
 	if (!new)
 		return ;
 	new->value = value;
@@ -58,7 +58,7 @@ void	parse_redirections(t_token	**token, t_args *cmd)
 	t_token	*next;
 	t_redir	*tmp;
 
-	redir = malloc(sizeof(t_redir));
+	redir = gc_malloc(sizeof(t_redir));
 	if (!redir)
 		return ;
 	redir->redir = token_to_redir_type((*token)->type);

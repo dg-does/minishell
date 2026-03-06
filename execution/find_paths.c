@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_paths.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:59:42 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/02/24 15:14:47 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/06 14:10:50 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char	**get_paths(t_minishell *shell)
 		return (NULL);
 	}
 	path_str = shell->env[i] + 5;
-	poss_paths = ft_split(path_str, ':');
+	poss_paths = gc_split(path_str, ':');
 	return (poss_paths); //misses free
 }
 

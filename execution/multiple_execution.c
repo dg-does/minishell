@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multiple_execution.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:17:21 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/06 10:27:25 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/06 13:47:58 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ int	**create_pipes(int count)
 
 	if (count <= 0)
 		return (NULL);
-	pipes = malloc(sizeof(int *) * count);
+	pipes = gc_malloc(sizeof(int *) * count);
 	if (!pipes)
 		return (NULL);
 	i = 0;
 	while (i < count)
 	{
-		pipes[i] = malloc(sizeof(int) * 2);
+		pipes[i] = gc_malloc(sizeof(int) * 2);
 		if (!pipes[i])
 		{
 			free_pipes(pipes, i);
@@ -90,7 +90,7 @@ void	execute_multiple(t_minishell *shell, t_args *cmds)
 	t_args	*cur;
 
 	pipes = create_pipes(shell->cmd_count - 1);
-	pids = malloc(sizeof(pid_t) * shell->cmd_count);
+	pids = gc_malloc(sizeof(pid_t) * shell->cmd_count);
 	cur = cmds;
 	i = 0;
 	while (cur)

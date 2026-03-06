@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 12:43:59 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/03/03 12:39:51 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/06 14:16:00 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+# include <stddef.h>
 
 # define TOKEN_BUFFER_SIZE 4096
 
@@ -77,5 +78,23 @@ typedef struct s_args
 	t_redir			*redirs;
 	struct s_args	*next;
 }	t_args;
+
+typedef struct s_gc_node
+{
+	void				*ptr;
+	struct s_gc_node	*next;
+}	t_gc_node;
+
+typedef struct s_gc
+{
+	t_gc_node	*head;
+}	t_gc;
+
+// Garbage Collection
+t_gc	*gc_get(void);
+void	*gc_malloc(size_t size);
+void	gc_free_all(void);
+char	**gc_split(char const *s, char c);
+char	*gc_strdup(char const *s);
 
 #endif

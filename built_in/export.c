@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:21:58 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/06 11:44:22 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/06 14:13:20 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ static char	**append_to_env(char **env, char *export_value)
 	i = 0;
 	while (env[i])
 		i++;
-	new_env = malloc(sizeof(char *) * (i + 2));
+	new_env = gc_malloc(sizeof(char *) * (i + 2));
 	i = 0;
 	while (env[i])
 	{
 		new_env[i] = env[i];
 		i++;
 	}
-	new_env[i++] = ft_strdup(export_value);
+	new_env[i++] = gc_strdup(export_value);
 	new_env[i] = NULL;
 	free(env);
 	return (new_env);
@@ -85,7 +85,7 @@ int	ft_export(t_minishell *shell, char *export_value)
 	else
 	{
 		free(shell->env[i]);
-		shell->env[i] = ft_strdup(export_value);
+		shell->env[i] = gc_strdup(export_value);
 	}
 	return (0);
 }

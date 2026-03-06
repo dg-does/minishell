@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 11:43:33 by digulraj          #+#    #+#             */
-/*   Updated: 2026/02/26 11:08:42 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/06 14:13:41 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	add_token(t_token **head, char *value, t_type type, t_quote quote_type)
 	t_token	*new_token;
 	t_token	*current;
 
-	new_token = malloc(sizeof(t_token));
+	new_token = gc_malloc(sizeof(t_token));
 	if (!new_token)
 		return ;
-	new_token->value = ft_strdup(value);
+	new_token->value = gc_strdup(value);
 	if (!new_token->value)
 	{
 		free(new_token);

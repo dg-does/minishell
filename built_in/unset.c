@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:33:04 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/06 11:58:33 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/06 13:47:20 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static char	**build_new_env(char **env, int skip, int len)
 	int		j;
 	int		k;
 
-	new_env = malloc(sizeof(char *) * len);
+	new_env = gc_malloc(sizeof(char *) * len);
 	j = 0;
 	k = 0;
 	while (env[j])
