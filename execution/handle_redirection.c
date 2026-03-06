@@ -6,30 +6,31 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 16:48:03 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/26 15:06:31 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/06 12:23:00 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "execution.h"
 
-void	apply_redirection(t_redir *redirs)
+int	apply_redirection(t_redir *redirs)
 {
 	while (redirs)
 	{
-		if (redirs->redir == REDIR_IN)
-			redirect_in(redirs);
-		if (redirs->redir == REDIR_OUT)
-			redirect_out(redirs);
-		if (redirs->redir == REDIR_APPEND)
-			redirect_append(redirs);
+		if (redirs->redir == REDIR_IN && redirect_in(redirs))
+			return (1);
+		if (redirs->redir == REDIR_OUT && redirect_out(redirs))
+			return (1);
+		if (redirs->redir == REDIR_APPEND && redirect_append(redirs))
+			return (1);
 		if (redirs->redir == REDIR_HEREDOC)
 			redirect_heredoc(redirs);
 		redirs = redirs->next;
 	}
+	return (0);
 }
 
-void	redirect_in(t_redir *redirs)
+int	redirect_in(t_redir *redirs)
 {
 	int	fd;
 
@@ -37,14 +38,14 @@ void	redirect_in(t_redir *redirs)
 	if (fd < 0)
 	{
 		perror("minishell: open");
-		return ;
+		return (1);
 	}
 	dup2(fd, STDIN_FILENO);
 	close(fd);
-	return ;
+	return (0);
 }
 
-void	redirect_out(t_redir *redirs)
+int	redirect_out(t_redir *redirs)
 {
 	int	fd;
 
@@ -52,14 +53,14 @@ void	redirect_out(t_redir *redirs)
 	if (fd < 0)
 	{
 		perror("minishell: open");
-		return ;
+		return (1);
 	}
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
-	return ;
+	return (0);
 }
 
-void	redirect_append(t_redir *redirs)
+int	redirect_append(t_redir *redirs)
 {
 	int	fd;
 
@@ -67,11 +68,11 @@ void	redirect_append(t_redir *redirs)
 	if (fd < 0)
 	{
 		perror("minishell: open");
-		return ;
+		return (1);
 	}
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
-	return ;
+	return (0);
 }
 
 void	redirect_heredoc(t_redir *redirs)

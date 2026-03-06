@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_parent.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 14:55:28 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/26 10:38:36 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/06 13:33:09 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	execute_builtin(t_minishell *shell, char **argv)
 	return (1);
 }
 
-void	execute_parent(t_minishell *shell, t_args *cmd, int *last_exit_status)
+int	execute_parent(t_minishell *shell, t_args *cmd, int *last_exit_status)
 {
 	int		tmp_stdin;
 	int		tmp_stdout;
@@ -41,12 +41,13 @@ void	execute_parent(t_minishell *shell, t_args *cmd, int *last_exit_status)
 
 	tmp_stdin = dup(STDIN_FILENO);
 	tmp_stdout = dup(STDOUT_FILENO);
-	if (cmd->redirs)
-		apply_redirection(cmd->redirs);
+	if (cmd->redirs && apply_redirection(cmd->redirs))
+		return (*last_exit_status = 1);
 	argv = args_to_argv(cmd->args);
 	*last_exit_status = execute_builtin(shell, argv);
 	dup2(tmp_stdin, STDIN_FILENO);
 	dup2(tmp_stdout, STDOUT_FILENO);
 	close(tmp_stdin);
 	close(tmp_stdout);
+	return (0);
 }
