@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 17:21:35 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/02/24 15:43:19 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/07 12:16:31 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int		ft_env(char **envp);
 int		ft_export(t_minishell *shell, char *export_value);
 int		ft_pwd(void);
 int		ft_unset(t_minishell *shell, char *unset_value);
-void	ft_exit(t_minishell *shell);
+int		ft_exit(char **argv, t_minishell *shell);
 
 #endif

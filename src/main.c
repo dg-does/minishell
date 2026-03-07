@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:19:16 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/06 18:24:34 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/07 15:09:53 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,14 @@ t_minishell	*init_shell(char **envp)
 	return (shell);
 }
 
-static int	exit_shell(t_minishell *shell)
+static void	exit_shell(t_minishell *shell)
 {
 	int	exit_status;
 
 	ft_printf("exit\n");
 	exit_status = shell->last_exit_status;
 	free_shell(shell);
-	return (exit_status);
+	exit(exit_status);
 }
 
 static void	loop_shell(t_minishell *shell, char *input)
@@ -106,8 +106,11 @@ int	main(int argc, char **argv, char **envp)
 	{
 		g_sig = 0;
 		input = readline("minishell> ");
-		if (!input || ft_strncmp(input, "exit", 4) == 0)
-			return (exit_shell(shell));
+		if (!input)
+		{
+			free(input);
+			exit_shell(shell);
+		}
 		if (input[0] != '\0')
 			loop_shell(shell, input);
 	}

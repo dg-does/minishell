@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 14:55:28 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/06 13:33:09 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/07 12:46:51 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	execute_builtin(t_minishell *shell, char **argv)
 	if (ft_strcmp(argv[0], "cd") == 0)
 		return (ft_cd(argv));
 	if (ft_strcmp(argv[0], "exit") == 0)
-		ft_exit(shell);
+		ft_exit(argv, shell);
 	if (ft_strcmp(argv[0], "export") == 0)
 		return (ft_export(shell, argv[1]));
 	if (ft_strcmp(argv[0], "unset") == 0)
