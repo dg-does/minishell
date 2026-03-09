@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multiple_execution.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:17:21 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/06 17:42:23 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/09 12:34:02 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	child_process(t_minishell *shell, t_args *cmds,
 		exit(execute_builtin(shell, argv));
 	path = parse_paths(shell, cmds);
 	execve(path, argv, shell->env);
-	perror("minishell: execve");
+	//perror("minishell: execve");
 	exit(127);
 }
 

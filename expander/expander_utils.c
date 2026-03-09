@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:00:55 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/09 09:10:18 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/09 09:30:21 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,16 @@ static char	*get_var_name(char *str, int *index)
 static char	*get_var_value(char *var_name, int last_exit_status)
 {
 	char	*var_value;
+	char	*tmp;
+	char	*registered;
 
 	if (ft_strncmp(var_name, "?", 1) == 0)
-		return (ft_itoa(last_exit_status));
+	{
+		tmp = ft_itoa(last_exit_status);
+		registered = gc_strdup(tmp);
+		free(tmp);
+		return (registered);
+	}
 	var_value = getenv(var_name);
 	if (!var_value)
 		return (gc_strdup(""));
