@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_execution.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:17:04 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/09 09:07:31 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/09 15:35:08 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	execute_simple(t_minishell *shell, t_args *cmd)
 
 	if (!cmd->args || !cmd->args->value)
 	{
-		//some kind of exit code?
+		shell->last_exit_status = 1;
 		return ;
 	}
 	if (is_parent_builtin(cmd->args->value))
@@ -67,10 +67,16 @@ void	execute_simple(t_minishell *shell, t_args *cmd)
 			reset_signals();
 			execute_child(shell, cmd);
 		}
+		set_parent_signals();
 		waitpid(pid1, &status, 0);
+		setup_signals();
 		if (WIFEXITED(status))
 			shell->last_exit_status = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
+		{
 			shell->last_exit_status = 128 + WTERMSIG(status);
+			if (WTERMSIG(status) == SIGINT)
+				write(STDOUT_FILENO, "\n", 1);
+		}
 	}
 }

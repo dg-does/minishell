@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:19:16 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/07 15:09:53 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/09 15:46:39 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ static void	loop_shell(t_minishell *shell, char *input)
 	t_token		*tokens;
 	t_args		*cmds;
 
-	add_history(input);
 	tokens = tokenize(input, &error);
 	if (error)
 	{
@@ -87,7 +86,6 @@ static void	loop_shell(t_minishell *shell, char *input)
 	g_sig = 1;
 	execute_cmds(shell, cmds);
 	g_sig = 0;
-	rl_clear_history();
 	gc_free_all();
 }
 
@@ -112,6 +110,10 @@ int	main(int argc, char **argv, char **envp)
 			exit_shell(shell);
 		}
 		if (input[0] != '\0')
+		{
+			add_history(input);
 			loop_shell(shell, input);
+		}
+		free(input);
 	}
 }
