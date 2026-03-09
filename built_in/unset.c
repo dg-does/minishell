@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:33:04 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/06 13:47:20 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/09 17:14:41 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static char	**build_new_env(char **env, int skip, int len)
 	int		j;
 	int		k;
 
-	new_env = gc_malloc(sizeof(char *) * len);
+	new_env = malloc(sizeof(char *) * len);
 	j = 0;
 	k = 0;
 	while (env[j])
@@ -80,6 +80,8 @@ int	ft_unset(t_minishell *shell, char *unset_value)
 	while (shell->env[j])
 		j++;
 	new_env = build_new_env(shell->env, i, j);
+	if (!new_env)
+		return (1);
 	free(shell->env[i]);
 	free(shell->env);
 	shell->env = new_env;
