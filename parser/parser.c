@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 15:57:21 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/03/06 17:36:14 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/09 09:09:33 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	parse_redirections(t_token	**token, t_args *cmd)
 	redir->next = NULL;
 	next = (*token)->next;
 	if (!next || next->type != TOKEN_WORD)
-		return ;//(free(redir));
+		return ;
 	redir->target = next->value;
 	if (!cmd->redirs)
 		cmd->redirs = redir;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:00:55 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/06 17:37:59 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/09 09:10:18 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,7 @@ char	*expand_vars(char *str, int last_exit_status)
 				i++;
 			}
 			else
-			{
 				j = copy2buf(buffer, var_name, j, last_exit_status);
-			//	free(var_name);
-			}
 		}
 		else
 			buffer[j++] = str[i++];
