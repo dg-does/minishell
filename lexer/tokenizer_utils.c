@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:33:29 by digulraj          #+#    #+#             */
-/*   Updated: 2026/02/26 13:47:25 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/09 16:41:29 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	process_word(char *input, int i, t_token **head, int *error)
 		*error = 1;
 		return (-1);
 	}
-	if (buffer[0] != '\0')
+	if (buffer[0] != '\0' || quote_type != NO_QUOTE)
 		add_token(head, buffer, TOKEN_WORD, quote_type);
 	return (new_i);
 }
