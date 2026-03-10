@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:33:29 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/09 16:41:29 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/10 15:06:42 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@ int	handle_quote_string(char *input, int i, char *buffer, int *j)
 {
 	char	quote_char;
 
-	quote_char = input[i++];
+	quote_char = input[i];
+	buffer[(*j)++] = input[i++];
 	while (input[i] && input[i] != quote_char)
 		buffer[(*j)++] = input[i++];
 	if (input[i] != quote_char)
 		return (-1);
-	return (i + 1);
+	buffer[(*j)++] = input[i++];
+	return (i);
 }
 
 int	collect_word(char *input, int i, char *buffer, t_quote *quote_type)
@@ -34,13 +36,6 @@ int	collect_word(char *input, int i, char *buffer, t_quote *quote_type)
 	{
 		if (is_quote(input[i]))
 		{
-			if (*quote_type == NO_QUOTE)
-			{
-				if (input[i] == '\'')
-					*quote_type = SINGLE_QUOTE;
-				else if (input[i] == '"')
-					*quote_type = DOUBLE_QUOTE;
-			}
 			i = handle_quote_string(input, i, buffer, &j);
 			if (i == -1)
 				return (-1);

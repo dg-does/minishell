@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:00:55 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/10 12:18:14 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/10 16:34:38 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	*get_var_name(char *str, int *index)
 	int		start;
 	int		len;
 
-	start = *index + 1;
+	start = *index;
 	len = 0;
 	if (str[start] == '?')
 	{
@@ -38,31 +38,38 @@ static char	*get_var_name(char *str, int *index)
 	return (var_name);
 }
 
-static char	*get_var_value(char *var_name, int last_exit_status)
+static char	*get_var_value(char *var_name, t_minishell *shell)
 {
-	char	*var_value;
 	char	*tmp;
 	char	*registered;
+	int		i;
+	int		len;
 
 	if (ft_strncmp(var_name, "?", 1) == 0)
 	{
-		tmp = ft_itoa(last_exit_status);
+		tmp = ft_itoa(shell->last_exit_status);
 		registered = gc_strdup(tmp);
 		free(tmp);
 		return (registered);
 	}
-	var_value = getenv(var_name);
-	if (!var_value)
-		return (gc_strdup(""));
-	return (gc_strdup(var_value));
+	i = 0;
+	len = ft_strlen(var_name);
+	while (shell->env[i])
+	{
+		if (ft_strncmp(shell->env[i], var_name, len) == 0
+			&& shell->env[i][len] == '=')
+			return (gc_strdup(shell->env[i] + len + 1));
+		i++;
+	}
+	return (gc_strdup(""));
 }
 
-static int	copy2buf(char *buffer, char *var_name, int j, int last_exit_status)
+static int	copy2buf(char *buffer, char *var_name, int j, t_minishell *shell)
 {
 	char	*var_value;
 	int		i;
 
-	var_value = get_var_value(var_name, last_exit_status);
+	var_value = get_var_value(var_name, shell);
 	if (!var_value)
 		return (j);
 	i = 0;
@@ -71,31 +78,50 @@ static int	copy2buf(char *buffer, char *var_name, int j, int last_exit_status)
 	return (j);
 }
 
-char	*expand_vars(char *str, int last_exit_status)
+static int	process_char(char *str, char *buf, int *i, t_minishell *shell)
 {
-	char	buffer[TOKEN_BUFFER_SIZE];
 	char	*var_name;
+	int		c;
+
+	c = str[(*i)++];
+	if (c == '\'' && shell->expand_state != 2)
+		return (shell->expand_state = !shell->expand_state, -1);
+	if (c == '"' && shell->expand_state != 1)
+	{
+		if (shell->expand_state == 0)
+			shell->expand_state = 2;
+		else
+			shell->expand_state = 0;
+		return (-1);
+	}
+	if (c == '$' && shell->expand_state != 1)
+	{
+		var_name = get_var_name(str, i);
+		if (var_name)
+			return (copy2buf(buf, var_name, 0, shell));
+		buf[0] = '$';
+		return (1);
+	}
+	buf[0] = c;
+	return (1);
+}
+
+char	*expand_vars(char *str, t_minishell *shell)
+{
+	char	buf[TOKEN_BUFFER_SIZE];
 	int		i;
 	int		j;
+	int		result;
 
 	i = 0;
 	j = 0;
+	shell->expand_state = 0;
 	while (str[i])
 	{
-		if (str[i] == '$')
-		{
-			var_name = get_var_name(str, &i);
-			if (!var_name)
-			{
-				buffer[j++] = '$';
-				i++;
-			}
-			else
-				j = copy2buf(buffer, var_name, j, last_exit_status);
-		}
-		else
-			buffer[j++] = str[i++];
+		result = process_char(str, &buf[j], &i, shell);
+		if (result != -1)
+			j += result;
 	}
-	buffer[j] = '\0';
-	return (gc_strdup(buffer));
+	buf[j] = '\0';
+	return (gc_strdup(buf));
 }

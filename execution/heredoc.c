@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 14:30:25 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/03/09 18:06:33 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/10 15:50:19 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	heredoc_child(t_minishell *shell, char *lim, int exp, int write_fd)
 		}
 		if (exp)
 		{
-			expanded = expand_vars(line, shell->last_exit_status);
+			expanded = expand_vars(line, shell);
 			free(line);
 			line = expanded;
 		}
