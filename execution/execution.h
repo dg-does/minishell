@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 17:24:11 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/10 10:15:34 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/10 15:08:19 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ void	close_all_pipes(int **pipes, int count);
 int		count_cmds(t_args *cmds);
 
 //execution_utils2
-void	check_direct_path(char *cmd);
-void	check_path_erorr(char *cmd);
+void	check_direct_path(t_minishell *shell, char *cmd);
+void	check_path_erorr(t_minishell *shell, char *cmd);
+void	child_exit(t_minishell *shell, int status);
 
 //execution main file
 void	execute_cmds(t_minishell *shell, t_args *cmds);

@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 09:05:07 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/03/10 10:18:16 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/10 15:11:06 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@ void	execute_child(t_minishell *shell, t_args *cmd)
 	}
 	path = parse_paths(shell, cmd);
 	if (!path)
-		check_path_erorr(argv[0]);
+		check_path_erorr(shell, argv[0]);
 	execve(path, argv, shell->env);
 	perror("minishell: child");
-	array_free(argv);
-	free(path);
+	child_exit(shell, 127);
 }
