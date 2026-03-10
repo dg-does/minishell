@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:17:21 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/09 12:34:02 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/10 10:32:45 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,25 @@
 #include "execution.h"
 #include "minishell.h"
 
+static void	exec_cmd(t_minishell *shell, t_args *cmds, char **argv)
+{
+	char	*path;
+
+	if (!argv || !argv[0])
+		exit(127);
+	if (is_builtin(argv[0]))
+		exit(execute_builtin(shell, argv));
+	path = parse_paths(shell, cmds);
+	if (!path)
+		check_path_erorr(argv[0]);
+	execve(path, argv, shell->env);
+	perror("minishell: execve");
+	exit(127);
+}
+
 static void	child_process(t_minishell *shell, t_args *cmds,
 	int **pipes, int i)
 {
-	char	**argv;
-	char	*path;
 	int		cmd_count;
 
 	cmd_count = shell->cmd_count;
@@ -34,13 +48,7 @@ static void	child_process(t_minishell *shell, t_args *cmds,
 	if (apply_redirection(cmds->redirs))
 		exit(1);
 	close_all_pipes(pipes, cmd_count - 1);
-	argv = args_to_argv(cmds->args);
-	if (is_builtin(argv[0]))
-		exit(execute_builtin(shell, argv));
-	path = parse_paths(shell, cmds);
-	execve(path, argv, shell->env);
-	//perror("minishell: execve");
-	exit(127);
+	exec_cmd(shell, cmds, args_to_argv(cmds->args));
 }
 
 static void	free_pipes(int **pipes, int count)

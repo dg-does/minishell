@@ -6,46 +6,12 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 09:05:07 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/03/09 09:08:54 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/10 10:18:16 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "execution.h"
-
-static void	check_direct_path(char *cmd)
-{
-	struct stat	st;
-
-	if (stat(cmd, &st) != 0)
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(cmd, 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
-		exit(127);
-	}
-	if (S_ISDIR(st.st_mode))
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(cmd, 2);
-		ft_putstr_fd(": Is a directory\n", 2);
-		exit(126);
-	}
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(cmd, 2);
-	ft_putstr_fd(": Permission denied\n", 2);
-	exit(126);
-}
-
-static void	check_path_erorr(char *cmd)
-{
-	if (cmd[0] == '/' || (cmd[0] == '.' && cmd[1] == '/'))
-		check_direct_path(cmd);
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(cmd, 2);
-	ft_putstr_fd(": command not found\n", 2);
-	exit(127);
-}
 
 void	execute_child(t_minishell *shell, t_args *cmd)
 {

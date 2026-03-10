@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:23:41 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/06 17:39:49 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/10 10:18:38 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

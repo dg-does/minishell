@@ -6,7 +6,7 @@
 #    By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 11:46:07 by digulraj          #+#    #+#              #
-#    Updated: 2026/03/09 09:08:06 by fgreiff          ###   ########.fr        #
+#    Updated: 2026/03/10 10:16:17 by fgreiff          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ SRC =	$(SRC_DIR)/main.c $(SRC_DIR)/gc_utils.c $(SRC_DIR)/gc_wrappers.c $(SRC_DIR
 		$(BI_DIR)/pwd.c $(BI_DIR)/unset.c \
 		$(EXEC_DIR)/execution.c $(EXEC_DIR)/find_paths.c $(EXEC_DIR)/single_execution.c \
 		$(EXEC_DIR)/multiple_execution.c $(EXEC_DIR)/handle_redirection.c $(EXEC_DIR)/execution_utils.c \
-		$(EXEC_DIR)/execute_parent.c $(EXEC_DIR)/heredoc.c $(EXEC_DIR)/single_child_exec.c
+		$(EXEC_DIR)/execute_parent.c $(EXEC_DIR)/heredoc.c $(EXEC_DIR)/single_child_exec.c \
+		$(EXEC_DIR)/execution_utils2.c
 
 OBJ = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC))
 
