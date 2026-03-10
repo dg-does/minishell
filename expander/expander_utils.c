@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:00:55 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/10 16:13:03 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/10 16:34:38 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,31 +38,38 @@ static char	*get_var_name(char *str, int *index)
 	return (var_name);
 }
 
-static char	*get_var_value(char *var_name, int last_exit_status)
+static char	*get_var_value(char *var_name, t_minishell *shell)
 {
-	char	*var_value;
 	char	*tmp;
 	char	*registered;
+	int		i;
+	int		len;
 
 	if (ft_strncmp(var_name, "?", 1) == 0)
 	{
-		tmp = ft_itoa(last_exit_status);
+		tmp = ft_itoa(shell->last_exit_status);
 		registered = gc_strdup(tmp);
 		free(tmp);
 		return (registered);
 	}
-	var_value = getenv(var_name);
-	if (!var_value)
-		return (gc_strdup(""));
-	return (gc_strdup(var_value));
+	i = 0;
+	len = ft_strlen(var_name);
+	while (shell->env[i])
+	{
+		if (ft_strncmp(shell->env[i], var_name, len) == 0
+			&& shell->env[i][len] == '=')
+			return (gc_strdup(shell->env[i] + len + 1));
+		i++;
+	}
+	return (gc_strdup(""));
 }
 
-static int	copy2buf(char *buffer, char *var_name, int j, int last_exit_status)
+static int	copy2buf(char *buffer, char *var_name, int j, t_minishell *shell)
 {
 	char	*var_value;
 	int		i;
 
-	var_value = get_var_value(var_name, last_exit_status);
+	var_value = get_var_value(var_name, shell);
 	if (!var_value)
 		return (j);
 	i = 0;
@@ -91,7 +98,7 @@ static int	process_char(char *str, char *buf, int *i, t_minishell *shell)
 	{
 		var_name = get_var_name(str, i);
 		if (var_name)
-			return (copy2buf(buf, var_name, 0, shell->last_exit_status));
+			return (copy2buf(buf, var_name, 0, shell));
 		buf[0] = '$';
 		return (1);
 	}
