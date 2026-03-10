@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:44:12 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/03/02 12:41:42 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/10 15:46:58 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_args			*parsing_tokens(t_token *token);
 void			parse_redirections(t_token	**token, t_args *cmd);
 void			add_arg(t_args *cmd, char *value, t_quote quote_type);
 // expander
-char			*expand_vars(char *str, int last_exit_status);
+char			*expand_vars(char *str, t_minishell *shell);
 void			expand_commands(t_args *cmds, t_minishell *shell);
 //char			**args_to_argv(t_arg *args);
 //debugging

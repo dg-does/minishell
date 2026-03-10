@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:00:55 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/10 12:18:14 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/10 16:13:03 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	*get_var_name(char *str, int *index)
 	int		start;
 	int		len;
 
-	start = *index + 1;
+	start = *index;
 	len = 0;
 	if (str[start] == '?')
 	{
@@ -71,31 +71,50 @@ static int	copy2buf(char *buffer, char *var_name, int j, int last_exit_status)
 	return (j);
 }
 
-char	*expand_vars(char *str, int last_exit_status)
+static int	process_char(char *str, char *buf, int *i, t_minishell *shell)
 {
-	char	buffer[TOKEN_BUFFER_SIZE];
 	char	*var_name;
+	int		c;
+
+	c = str[(*i)++];
+	if (c == '\'' && shell->expand_state != 2)
+		return (shell->expand_state = !shell->expand_state, -1);
+	if (c == '"' && shell->expand_state != 1)
+	{
+		if (shell->expand_state == 0)
+			shell->expand_state = 2;
+		else
+			shell->expand_state = 0;
+		return (-1);
+	}
+	if (c == '$' && shell->expand_state != 1)
+	{
+		var_name = get_var_name(str, i);
+		if (var_name)
+			return (copy2buf(buf, var_name, 0, shell->last_exit_status));
+		buf[0] = '$';
+		return (1);
+	}
+	buf[0] = c;
+	return (1);
+}
+
+char	*expand_vars(char *str, t_minishell *shell)
+{
+	char	buf[TOKEN_BUFFER_SIZE];
 	int		i;
 	int		j;
+	int		result;
 
 	i = 0;
 	j = 0;
+	shell->expand_state = 0;
 	while (str[i])
 	{
-		if (str[i] == '$')
-		{
-			var_name = get_var_name(str, &i);
-			if (!var_name)
-			{
-				buffer[j++] = '$';
-				i++;
-			}
-			else
-				j = copy2buf(buffer, var_name, j, last_exit_status);
-		}
-		else
-			buffer[j++] = str[i++];
+		result = process_char(str, &buf[j], &i, shell);
+		if (result != -1)
+			j += result;
 	}
-	buffer[j] = '\0';
-	return (gc_strdup(buffer));
+	buf[j] = '\0';
+	return (gc_strdup(buf));
 }

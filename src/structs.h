@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 12:43:59 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/03/06 14:16:00 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/10 15:29:54 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 # include <stddef.h>
 
 # define TOKEN_BUFFER_SIZE 4096
-
+// expand_state -> 0 = unquoted, 1 = single-quoted, 2=double-quoted
 typedef struct s_minishell
 {
 	char	**env;
 	int		last_exit_status;
 	int		cmd_count;
+	int		expand_state;
 }	t_minishell;
 
 typedef enum e_token_type

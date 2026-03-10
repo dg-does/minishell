@@ -6,13 +6,13 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 14:23:33 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/10 12:18:31 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/10 15:48:26 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static void	expand_redirs(t_redir *redirs, int last_exit_status)
+static void	expand_redirs(t_redir *redirs, t_minishell *shell)
 {
 	t_redir		*current;
 	char		*expanded;
@@ -24,7 +24,7 @@ static void	expand_redirs(t_redir *redirs, int last_exit_status)
 		{
 			if (current->target && ft_strchr(current->target, '$'))
 			{
-				expanded = expand_vars(current->target, last_exit_status);
+				expanded = expand_vars(current->target, shell);
 				current->target = expanded;
 			}
 		}
@@ -56,7 +56,7 @@ void	expand_commands(t_args *cmds, t_minishell *shell)
 		while (arg)
 		{
 			if (arg->quote_type != SINGLE_QUOTE && ft_strchr(arg->value, '$'))
-				arg->value = expand_vars(arg->value, shell->last_exit_status);
+				arg->value = expand_vars(arg->value, shell);
 			if (arg->quote_type == NO_QUOTE && ft_strlen(arg->value) == 0)
 				arg = remove_empty_arg(cmds, arg, prev);
 			else
@@ -65,7 +65,7 @@ void	expand_commands(t_args *cmds, t_minishell *shell)
 				arg = arg->next;
 			}
 		}
-		expand_redirs(cmds->redirs, shell->last_exit_status);
+		expand_redirs(cmds->redirs, shell);
 		cmds = cmds->next;
 	}
 }
