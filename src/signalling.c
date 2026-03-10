@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signalling.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 11:41:31 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/10 12:09:44 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/10 16:17:21 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,14 @@ volatile sig_atomic_t	g_sig = 0;
 // Handler for SIGINT (Ctrl+C) - display newline and new prompt
 static void	handle_sigint(int sig)
 {
-	g_sig = sig;
 	write(STDOUT_FILENO, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	if (g_sig == 0)
+	{
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+	g_sig = sig;
 }
 // Ctrl+\ (SIGQUIT) does nothing at the prompt
 // Handler for Crtl+D is in main because it exits the shell

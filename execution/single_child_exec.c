@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 09:05:07 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/03/10 15:11:06 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/10 16:26:16 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,12 @@ void	execute_child(t_minishell *shell, t_args *cmd)
 	char	*path;
 
 	if (cmd->redirs && apply_redirection(cmd->redirs))
-		exit (1);
+		child_exit(shell, 1);
 	argv = args_to_argv(cmd->args);
 	if (is_builtin(cmd->args->value))
 	{
 		shell->last_exit_status = execute_builtin(shell, argv);
-		array_free(argv);
-		exit(shell->last_exit_status);
+		child_exit(shell, shell->last_exit_status);
 	}
 	path = parse_paths(shell, cmd);
 	if (!path)
