@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:17:04 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/09 15:35:08 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/10 12:13:38 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,32 @@ static int	is_parent_builtin(char *cmd)
 		return (0);
 }
 
-void	execute_simple(t_minishell *shell, t_args *cmd)
+void	fork_and_exec(t_minishell *shell, t_args *cmd)
 {
 	pid_t	pid1;
 	int		status;
 
+	pid1 = fork();
+	if (pid1 == 0)
+	{
+		reset_signals();
+		execute_child(shell, cmd);
+	}
+	set_parent_signals();
+	waitpid(pid1, &status, 0);
+	setup_signals();
+	if (WIFEXITED(status))
+		shell->last_exit_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+	{
+		shell->last_exit_status = 128 + WTERMSIG(status);
+		if (WTERMSIG(status) == SIGINT)
+			write(STDOUT_FILENO, "\n", 1);
+	}
+}
+
+void	execute_simple(t_minishell *shell, t_args *cmd)
+{
 	if (!cmd->args || !cmd->args->value)
 	{
 		shell->last_exit_status = 1;
@@ -60,23 +81,5 @@ void	execute_simple(t_minishell *shell, t_args *cmd)
 	if (is_parent_builtin(cmd->args->value))
 		execute_parent(shell, cmd, &shell->last_exit_status);
 	else
-	{
-		pid1 = fork();
-		if (pid1 == 0)
-		{
-			reset_signals();
-			execute_child(shell, cmd);
-		}
-		set_parent_signals();
-		waitpid(pid1, &status, 0);
-		setup_signals();
-		if (WIFEXITED(status))
-			shell->last_exit_status = WEXITSTATUS(status);
-		else if (WIFSIGNALED(status))
-		{
-			shell->last_exit_status = 128 + WTERMSIG(status);
-			if (WTERMSIG(status) == SIGINT)
-				write(STDOUT_FILENO, "\n", 1);
-		}
-	}
+		fork_and_exec(shell, cmd);
 }

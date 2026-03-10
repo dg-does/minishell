@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+         #
+#    By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 11:46:07 by digulraj          #+#    #+#              #
-#    Updated: 2026/03/10 10:16:17 by fgreiff          ###   ########.fr        #
+#    Updated: 2026/03/10 12:14:58 by digulraj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ CFLAGS = -Wall -Wextra -Werror -I$(SRC_DIR) -I$(LEX_DIR) -I$(PARSE_DIR) -I$(EXP_
 LDLIBS = -lreadline
 INCLUDES = -I. -I$(LIBFT_DIR)
 
-SRC =	$(SRC_DIR)/main.c $(SRC_DIR)/gc_utils.c $(SRC_DIR)/gc_wrappers.c $(SRC_DIR)/signalling.c \
+SRC =	$(SRC_DIR)/main.c $(SRC_DIR)/gc_utils.c $(SRC_DIR)/gc_wrappers.c $(SRC_DIR)/signalling.c $(SRC_DIR)/signal_heredoc.c \
 		$(LEX_DIR)/lexer_utils.c $(LEX_DIR)/tokenizer.c $(LEX_DIR)/tokenizer_utils.c \
 		$(PARSE_DIR)/parser.c $(PARSE_DIR)/parser_utils.c \
 		$(EXP_DIR)/expander.c $(EXP_DIR)/expander_utils.c \

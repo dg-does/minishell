@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 11:43:33 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/06 17:35:49 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/10 12:17:43 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ void	add_token(t_token **head, char *value, t_type type, t_quote quote_type)
 		return ;
 	new_token->value = gc_strdup(value);
 	if (!new_token->value)
-	{
-		//free(new_token);
 		return ;
-	}
 	new_token->type = type;
 	new_token->quote_type = quote_type;
 	new_token->next = NULL;
@@ -39,19 +36,6 @@ void	add_token(t_token **head, char *value, t_type type, t_quote quote_type)
 		current->next = new_token;
 	}
 }
-/*
-void	free_tokens(t_token *head)
-{
-	t_token	*current;
-
-	current = head;
-	while (current)
-	{
-		free(current->value);
-		free(current);
-		current = current->next;
-	}
-}*/
 
 t_token	*tokenize(char *input, int *error)
 {
@@ -74,46 +58,9 @@ t_token	*tokenize(char *input, int *error)
 		{
 			j = process_word(input, i, &head, error);
 			if (j == -1)
-			//	return (free_tokens(head), NULL);
 				return (NULL);
 			i = j;
 		}
 	}
 	return (head);
 }
-/* Printing functions just for testing:
-
-const char	*token_type(t_type type)
-{
-	if (type == TOKEN_WORD)
-		return ("WORD");
-	if (type == TOKEN_PIPE)
-		return ("PIPE");
-	if (type == TOKEN_REDIRECT_IN)
-		return ("REDIR_IN");
-	if (type == TOKEN_REDIRECT_OUT)
-		return ("REDIR_OUT");
-	if (type == TOKEN_REDIRECT_APPEND)
-		return ("REDIR_APPEND");
-	if (type == TOKEN_HEREDOC)
-		return ("HEREDOC");
-	return ("UNKNOWN TYPE");
-}
-
-void	print_tokens(t_token *head)
-{
-	t_token	*current;
-	int		i;
-
-	current = head;
-	i = 0;
-	printf("\n--- TOKENS before parsing ---\n");
-	while (current)
-	{
-		printf("[%d] %s | %s | Quote Type: %d\n", 
-			i++, current->value, token_type(current->type), 
-			current->quote_type);
-		current = current->next;
-	}
-}
-//*/

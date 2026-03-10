@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 14:23:33 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/06 18:13:35 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/10 12:18:31 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void	expand_redirs(t_redir *redirs, int last_exit_status)
 			if (current->target && ft_strchr(current->target, '$'))
 			{
 				expanded = expand_vars(current->target, last_exit_status);
-			//	free(current->target);
 				current->target = expanded;
 			}
 		}
