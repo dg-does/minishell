@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:19:16 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/09 15:46:39 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/10 12:41:28 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_minishell	*init_shell(char **envp)
 	{
 		shell->env[i] = ft_strdup(envp[i]);
 		if (!shell->env[i])
-			return (free(shell), NULL);
+			return (free_shell(shell), NULL);
 		i++;
 	}
 	shell->env[i] = NULL;
@@ -65,6 +65,7 @@ static void	exit_shell(t_minishell *shell)
 	ft_printf("exit\n");
 	exit_status = shell->last_exit_status;
 	free_shell(shell);
+	rl_clear_history();
 	exit(exit_status);
 }
 

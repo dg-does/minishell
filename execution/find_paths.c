@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:59:42 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/03/06 17:41:13 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/10 12:21:21 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ static char	**get_paths(t_minishell *shell)
 		i++;
 	if (!shell->env[i])
 	{
-		//error handeling;
+		shell->last_exit_status = 127;
 		return (NULL);
 	}
 	path_str = shell->env[i] + 5;
 	poss_paths = gc_split(path_str, ':');
-	return (poss_paths); //misses free
+	return (poss_paths);
 }
 
 static char	*find_correct_path(t_arg *args, char **poss_paths)
