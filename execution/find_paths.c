@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:59:42 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/03/10 12:21:21 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/12 14:32:32 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*find_correct_path(t_arg *args, char **poss_paths)
 
 	current = args;
 	i = 0;
-	if (!current->value || current->value == NULL)
+	if (!current->value || !poss_paths)
 		return (NULL);
 	while (poss_paths[i])
 	{
