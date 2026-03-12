@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:59:42 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/03/12 12:59:17 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/12 14:37:57 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*find_correct_path(t_arg *args, char **poss_paths)
 
 	current = args;
 	i = 0;
-	if (!current->value || current->value == NULL)
+	if (!current->value || !poss_paths)
 		return (NULL);
 	while (poss_paths[i])
 	{

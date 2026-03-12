@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_child_exec.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 09:05:07 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/03/10 16:26:16 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/12 13:22:32 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ void	execute_child(t_minishell *shell, t_args *cmd)
 	}
 	path = parse_paths(shell, cmd);
 	if (!path)
+	{
 		check_path_erorr(shell, argv[0]);
+		child_exit(shell, 127);
+	}
 	execve(path, argv, shell->env);
 	perror("minishell: child");
 	child_exit(shell, 127);

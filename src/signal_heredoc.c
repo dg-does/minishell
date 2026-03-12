@@ -6,13 +6,13 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 12:09:31 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/10 12:10:11 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/12 13:06:49 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	handle_sigint_heredoc(int sig)
+void	handle_sigint_heredoc(int sig)
 {
 	(void)sig;
 	write(STDOUT_FILENO, "\n", 1);

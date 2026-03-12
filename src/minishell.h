@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:19:16 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/12 13:22:31 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/12 14:37:52 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ extern volatile sig_atomic_t	g_sig;
 
 void	reset_signals(void);
 void	setup_signals(void);
-void	set_parent_signals(void);
 void	set_heredoc_signals(void);
+void	handle_sigint_child(int sig);
+void	handle_sigint_parent(int sig);
+void	handle_sigint_heredoc(int sig);
 void	array_free(char **str);
 void	free_shell(t_minishell *shell);
 void	gc_free(void *ptr);

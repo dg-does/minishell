@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:17:04 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/10 12:13:38 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/12 13:16:39 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,14 @@ void	fork_and_exec(t_minishell *shell, t_args *cmd)
 	pid_t	pid1;
 	int		status;
 
+	signal(SIGINT, handle_sigint_child);
+	signal(SIGQUIT, SIG_IGN);
 	pid1 = fork();
 	if (pid1 == 0)
 	{
 		reset_signals();
 		execute_child(shell, cmd);
 	}
-	set_parent_signals();
 	waitpid(pid1, &status, 0);
 	setup_signals();
 	if (WIFEXITED(status))
@@ -68,6 +69,8 @@ void	fork_and_exec(t_minishell *shell, t_args *cmd)
 		shell->last_exit_status = 128 + WTERMSIG(status);
 		if (WTERMSIG(status) == SIGINT)
 			write(STDOUT_FILENO, "\n", 1);
+		if (WTERMSIG(status) == SIGQUIT)
+			write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
 	}
 }
 
