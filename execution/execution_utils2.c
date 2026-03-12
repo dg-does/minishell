@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:14:16 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/03/10 15:58:49 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/12 15:41:12 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	check_direct_path(t_minishell *shell, char *cmd)
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(cmd, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
-		child_exit(shell, 127);
+		child_exit(shell, 126);
 	}
 	if (S_ISDIR(st.st_mode))
 	{

@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 14:55:28 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/12 13:12:06 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/12 15:26:46 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,14 @@ int	execute_parent(t_minishell *shell, t_args *cmd, int *last_exit_status)
 	tmp_stdin = dup(STDIN_FILENO);
 	tmp_stdout = dup(STDOUT_FILENO);
 	if (cmd->redirs && apply_redirection(cmd->redirs))
-		return (*last_exit_status = 1);
+	{
+		dup2(tmp_stdin, STDIN_FILENO);
+		dup2(tmp_stdout, STDOUT_FILENO);
+		close(tmp_stdin);
+		close(tmp_stdout);
+		*last_exit_status = 1;
+		return (1);
+	}
 	argv = args_to_argv(cmd->args);
 	*last_exit_status = execute_builtin(shell, argv);
 	dup2(tmp_stdin, STDIN_FILENO);
