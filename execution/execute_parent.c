@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 14:55:28 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/07 12:46:51 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/12 13:12:06 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 //misses redirections and changing of fds not finished yet!!!!!
 int	execute_builtin(t_minishell *shell, char **argv)
 {
+	if (!argv || !argv[0])
+		return (1);
 	if (ft_strcmp(argv[0], "cd") == 0)
 		return (ft_cd(argv));
 	if (ft_strcmp(argv[0], "exit") == 0)

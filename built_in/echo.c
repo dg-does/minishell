@@ -6,17 +6,39 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 11:39:57 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/06 11:34:24 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/12 14:28:31 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built_in.h"
 
-static int	get_start(char **argv)
+static int	is_n_flag(char *argv)
 {
-	if (ft_strcmp(argv[1], "-n") == 0)
-		return (2);
+	int	i;
+
+	if (!argv || argv[0] != '-' || argv[1] == '\0')
+		return (0);
+	i = 1;
+	while (argv[i])
+	{
+		if (argv[i] != 'n')
+			return (0);
+		i++;
+	}
 	return (1);
+}
+
+static int	get_start(char **argv, int *n)
+{
+	int	i;
+
+	i = 1;
+	while (argv[i] && is_n_flag(argv[i]))
+	{
+		*n = 1;
+		i++;
+	}
+	return (i);
 }
 
 int	ft_echo(char **argv)
@@ -27,8 +49,7 @@ int	ft_echo(char **argv)
 	n = 0;
 	if (!argv[1])
 		return (write(1, "\n", 1), 0);
-	i = get_start(argv);
-	n = (i == 2);
+	i = get_start(argv, &n);
 	while (argv[i])
 	{
 		ft_putstr_fd(argv[i], 1);

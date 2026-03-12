@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_paths.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:59:42 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/03/10 12:21:21 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/12 12:59:17 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,20 @@ char	*parse_paths(t_minishell *shell, t_args *cmd)
 {
 	char	**poss_paths;
 	char	*path;
+	char	*cmd_str;
 
+	if (!cmd->args || !cmd->args->value)
+		return (NULL);
+	cmd_str = cmd->args->value;
+	if (cmd_str[0] == '/' || (cmd_str [0] == '.' && cmd_str[1] == '/'))
+	{
+		if (access(cmd_str, X_OK) == 0)
+			return (cmd_str);
+		return (NULL);
+	}
 	poss_paths = get_paths(shell);
+	if (!poss_paths)
+		return (NULL);
 	path = find_correct_path(cmd->args, poss_paths);
 	return (path);
 }

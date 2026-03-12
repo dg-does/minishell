@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 17:20:12 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/03/06 13:53:58 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/12 13:23:12 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #include "built_in.h"
 #include "structs.h"
+#include "minishell.h"
 
 int	ft_pwd(void)
 {
@@ -28,7 +29,7 @@ int	ft_pwd(void)
 			return (1);
 		if (getcwd(buf, size))
 			break ;
-		free(buf);
+		gc_free(buf);
 		if (errno != ERANGE)
 		{
 			perror("minishell: pwd");
@@ -38,6 +39,5 @@ int	ft_pwd(void)
 	}
 	write (1, buf, ft_strlen(buf));
 	write(1, "\n", 1);
-	free(buf);
 	return (0);
 }

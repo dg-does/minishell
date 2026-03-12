@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 16:30:16 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/03/09 12:00:11 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/12 13:15:31 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int	count_pipes(t_token *token)
 {
 	int		pipe_counter;
 
+	if (!token)
+		return (0);
 	pipe_counter = 0;
 	while (token->next)
 	{
