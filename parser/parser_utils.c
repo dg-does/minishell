@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 16:30:16 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/03/12 13:15:31 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/12 16:33:30 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,62 +76,3 @@ int	count_pipes(t_token *token)
 	}
 	return (pipe_counter);
 }
-
-/* print functions to delete later
-
-const char	*quote_type_str(t_quote quote)
-{
-	if (quote == NO_QUOTE)
-		return ("NO_QUOTE");
-	if (quote == SINGLE_QUOTE)
-		return ("SINGLE_QUOTE");
-	if (quote == DOUBLE_QUOTE)
-		return ("DOUBLE_QUOTE");
-	return ("UNKNOWN_QUOTE");
-}
-
-const char *redir_type_str(t_redir_type type)
-{
-	if (type == REDIR_IN)
-		return ("REDIR_IN");
-	if (type == REDIR_OUT)
-		return ("REDIR_OUT");
-	if (type == REDIR_APPEND)
-		return ("REDIR_APPEND");
-	if (type == REDIR_HEREDOC)
-		return ("REDIR_HEREDOC");
-	return ("UNKNOWN_REDIR");
-}
-
-void	print_list(t_args *cmds)
-{
-	t_arg	*arg;
-	t_redir	*redir;
-	int		i;
-
-	while (cmds)
-	{
-		arg = cmds->args;
-		i = 0;
-		if (arg)
-			printf("\n--- ARGS ---\n");
-		while (arg)
-		{
-			printf("[%d] %s | WORD | Quote Type: %s\n", i++, arg->value,
-				quote_type_str(arg->quote_type));
-			arg = arg->next;
-		}
-		redir = cmds->redirs;
-		if (redir)
-			printf("--- REDIRECTONS ---\n");
-		while (redir)
-		{
-			printf("[%s] %s\n", redir_type_str(redir->redir), redir->target);
-			redir = redir->next;
-		}
-		printf("===============\n");
-		cmds = cmds->next;
-	}
-}
-
-//*/

@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 11:44:07 by digulraj          #+#    #+#             */
-/*   Updated: 2026/02/24 12:46:15 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/12 16:33:06 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,35 +18,6 @@
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-
-/*# define TOKEN_BUFFER_SIZE 4096
-
-typedef enum e_token_type
-{
-	TOKEN_WORD,
-	TOKEN_PIPE,
-	TOKEN_REDIRECT_IN,
-	TOKEN_REDIRECT_OUT,
-	TOKEN_REDIRECT_APPEND,
-	TOKEN_HEREDOC
-}	t_type;
-
-typedef enum e_quote_type
-{
-	NO_QUOTE,
-	SINGLE_QUOTE,
-	DOUBLE_QUOTE
-}	t_quote;
-
-typedef struct s_token
-{
-	char			*value;
-	t_type			type;
-	t_quote			quote_type;
-	struct s_token	*next;
-}	t_token;*/
-
-// need to figure out which ones can be static and not needed here
 
 //lexer_utils.c
 int			is_quote(char c);

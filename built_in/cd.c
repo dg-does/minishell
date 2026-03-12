@@ -6,11 +6,9 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 11:06:29 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/24 17:58:31 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/12 16:32:40 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//never execute in fork always in parent process 
 
 #include "built_in.h"
 

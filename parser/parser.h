@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:44:12 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/03/10 15:46:58 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/12 16:34:00 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,36 +18,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-/*
-typedef enum e_redir_type
-{
-	REDIR_IN,
-	REDIR_OUT,
-	REDIR_APPEND,
-	REDIR_HEREDOC
-}	t_redir_type;
-
-typedef struct s_redir
-{
-	char			*target;
-	t_redir_type	redir;
-	struct s_redir	*next;
-}	t_redir;
-
-typedef struct s_arg
-{
-	char			*value;
-	t_quote			quote_type;
-	struct s_arg	*next;
-}	t_arg;
-
-typedef struct s_args
-{
-	t_arg			*args;
-	t_redir			*redirs;
-	struct s_args	*next;
-}	t_args;
-*/
 typedef struct s_minishell	t_minishell;
 
 //parser_utils.c
@@ -63,8 +33,5 @@ void			add_arg(t_args *cmd, char *value, t_quote quote_type);
 // expander
 char			*expand_vars(char *str, t_minishell *shell);
 void			expand_commands(t_args *cmds, t_minishell *shell);
-//char			**args_to_argv(t_arg *args);
-//debugging
-void			print_list(t_args *args_head);
 
 #endif

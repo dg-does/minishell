@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 12:42:21 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/02/26 11:07:48 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/12 16:32:46 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//create shell struct to save envp
 
 #include "built_in.h"
 
