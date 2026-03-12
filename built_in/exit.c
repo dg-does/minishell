@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
+/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 16:37:06 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/07 15:12:56 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/12 15:37:10 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	exit_error_numeric(char **args, t_minishell *shell)
 	ft_putstr_fd(args[1], STDERR_FILENO);
 	ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
 	gc_free_all();
+	rl_clear_history();
 	free_shell(shell);
 	exit(2);
 }
@@ -68,6 +69,7 @@ int	ft_exit(char **argv, t_minishell *shell)
 	{
 		code = shell->last_exit_status;
 		gc_free_all();
+		rl_clear_history();
 		free_shell(shell);
 		exit(code);
 	}
@@ -80,6 +82,7 @@ int	ft_exit(char **argv, t_minishell *shell)
 		exit_error_numeric(argv, shell);
 	code = normalize_code(ft_atoi(argv[1]));
 	gc_free_all();
+	rl_clear_history();
 	free_shell(shell);
 	exit(code);
 }

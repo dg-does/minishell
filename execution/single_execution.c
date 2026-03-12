@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:17:04 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/12 13:16:39 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/12 15:59:28 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ void	fork_and_exec(t_minishell *shell, t_args *cmd)
 	else if (WIFSIGNALED(status))
 	{
 		shell->last_exit_status = 128 + WTERMSIG(status);
-		if (WTERMSIG(status) == SIGINT)
-			write(STDOUT_FILENO, "\n", 1);
 		if (WTERMSIG(status) == SIGQUIT)
 			write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
 	}
