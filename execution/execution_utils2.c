@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:14:16 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/03/10 15:09:51 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/10 15:58:49 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ void	child_exit(t_minishell *shell, int status)
 {
 	free_shell(shell);
 	gc_free_all();
+	rl_clear_history();
 	exit(status);
 }

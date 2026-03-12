@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:23:41 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/10 12:10:48 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/10 16:21:38 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,13 @@ void	collect_status(t_minishell *shell, pid_t *pids, int cmd_count)
 	while (i < cmd_count)
 	{
 		waitpid(pids[i], &status, 0);
-		if (i == cmd_count - 1 && WIFEXITED(status))
-			shell->last_exit_status = WEXITSTATUS(status);
+		if (i == cmd_count - 1)
+		{
+			if (WIFEXITED(status))
+				shell->last_exit_status = WEXITSTATUS(status);
+			else if (WIFSIGNALED(status))
+				shell->last_exit_status = 128 + WTERMSIG(status);
+		}
 		i++;
 	}
 }
