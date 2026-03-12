@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 14:30:25 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/03/12 13:08:53 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/12 16:04:04 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	is_limiter(char *line, char *limiter)
 static void	heredoc_child(t_minishell *shell, char *lim, int exp, int write_fd)
 {
 	char	*line;
-	char	*expanded;
+	char	*tmp;
 
 	set_heredoc_signals();
 	while (1)
@@ -58,17 +58,19 @@ static void	heredoc_child(t_minishell *shell, char *lim, int exp, int write_fd)
 		if (!line || is_limiter(line, lim))
 		{
 			free(line);
+			get_next_line(-1);
 			close(write_fd);
-			exit(0);
+			child_exit(shell, 0);
 		}
 		if (exp)
 		{
-			expanded = expand_vars(line, shell);
+			tmp = expand_vars(line, shell);
 			free(line);
-			line = expanded;
+			line = tmp;
 		}
 		write(write_fd, line, ft_strlen(line));
-		free(line);
+		if (!exp)
+			free(line);
 	}
 }
 

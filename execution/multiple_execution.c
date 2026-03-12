@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:17:21 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/10 15:11:16 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/12 15:36:30 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static void	exec_cmd(t_minishell *shell, t_args *cmds, char **argv)
 	char	*path;
 
 	if (!argv || !argv[0])
-		exit(127);
+		child_exit(shell, 127);
 	if (is_builtin(argv[0]))
-		exit(execute_builtin(shell, argv));
+		child_exit(shell, execute_builtin(shell, argv));
 	path = parse_paths(shell, cmds);
 	if (!path)
 		check_path_erorr(shell, argv[0]);
@@ -46,7 +46,7 @@ static void	child_process(t_minishell *shell, t_args *cmds,
 		dup2(pipes[i][1], STDOUT_FILENO);
 	}
 	if (apply_redirection(cmds->redirs))
-		exit(1);
+		child_exit(shell, 1);
 	close_all_pipes(pipes, cmd_count - 1);
 	exec_cmd(shell, cmds, args_to_argv(cmds->args));
 }
