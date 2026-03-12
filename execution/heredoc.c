@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 14:30:25 by fgreiff           #+#    #+#             */
-/*   Updated: 2026/03/10 15:50:19 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/12 13:08:53 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ int	exec_heredoc(t_minishell *shell, char *limiter, int expand)
 		heredoc_child(shell, limiter, expand, hd_pipe[1]);
 	}
 	close(hd_pipe[1]);
-	set_parent_signals();
+	signal(SIGINT, handle_sigint_child);
+	signal(SIGQUIT, SIG_IGN);
 	waitpid(pid, &status, 0);
 	setup_signals();
 	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)

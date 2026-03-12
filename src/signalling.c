@@ -6,7 +6,7 @@
 /*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 11:41:31 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/10 12:09:44 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/12 13:06:05 by digulraj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,19 @@
 volatile sig_atomic_t	g_sig = 0;
 
 // Handler for SIGINT (Ctrl+C) - display newline and new prompt
-static void	handle_sigint(int sig)
+void	handle_sigint_parent(int sig)
 {
 	g_sig = sig;
 	write(STDOUT_FILENO, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
+}
+
+void	handle_sigint_child(int sig)
+{
+	g_sig = sig;
+	write(STDOUT_FILENO, "\n", 1);
 }
 // Ctrl+\ (SIGQUIT) does nothing at the prompt
 // Handler for Crtl+D is in main because it exits the shell
@@ -31,23 +37,13 @@ void	setup_signals(void)
 {
 	struct sigaction	sa;
 
-	sa.sa_handler = handle_sigint;
+	sa.sa_handler = handle_sigint_parent;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_RESTART;
 	sigaction(SIGINT, &sa, NULL);
 	sa.sa_handler = SIG_IGN;
 	sa.sa_flags = 0;
 	sigaction(SIGQUIT, &sa, NULL);
-}
-
-// Quit the child and return to the parent rather than exit shell
-// Called in the parent after fork() but before waitpid(), 
-// then call setup_signals() again after waitpid() returns
-//  to restore interactive mode.
-void	set_parent_signals(void)
-{
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
 }
 
 // Reset signals to default (to be used in child processes)
