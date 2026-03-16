@@ -6,7 +6,7 @@
 /*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:21:58 by felixgreiff       #+#    #+#             */
-/*   Updated: 2026/03/09 17:11:49 by fgreiff          ###   ########.fr       */
+/*   Updated: 2026/03/16 09:41:32 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ int	ft_export(t_minishell *shell, char *export_value)
 	int		key_len;
 	int		i;
 
+	if (!export_value)
+		return (ft_env(shell->env));
 	if (!is_valid(export_value))
 	{
 		ft_putstr_fd("export: '", 2);

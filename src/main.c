@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: digulraj <digulraj@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fgreiff <fgreiff@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:19:16 by digulraj          #+#    #+#             */
-/*   Updated: 2026/03/10 12:41:28 by digulraj         ###   ########.fr       */
+/*   Updated: 2026/03/16 10:48:20 by fgreiff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static void	exit_shell(t_minishell *shell)
 
 	ft_printf("exit\n");
 	exit_status = shell->last_exit_status;
+	gc_free_all();
 	free_shell(shell);
 	rl_clear_history();
 	exit(exit_status);
@@ -79,11 +80,15 @@ static void	loop_shell(t_minishell *shell, char *input)
 	if (error)
 	{
 		ft_printf("ERROR: Unclosed quote\n");
+		gc_free_all();
 		return ;
 	}
 	cmds = parsing_tokens(tokens);
 	if (!cmds)
+	{
+		gc_free_all();
 		return ;
+	}
 	g_sig = 1;
 	execute_cmds(shell, cmds);
 	g_sig = 0;
